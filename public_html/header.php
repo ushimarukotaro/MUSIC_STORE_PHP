@@ -1,6 +1,5 @@
 <?php
 require_once(__DIR__ . '/../config/config.php');
-//var_dump($_SESSION['me']->authority);
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -11,7 +10,7 @@ require_once(__DIR__ . '/../config/config.php');
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Cache-Control" content="no-cache">
-  <title>My Shopping Appli</title>
+  <title>My Shopping Site</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
   <link href="https://fonts.googleapis.com/css?family=Charm|M+PLUS+Rounded+1c&amp;subset=latin-ext,thai,vietnamese" rel="stylesheet">
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -26,8 +25,7 @@ require_once(__DIR__ . '/../config/config.php');
     <div class="header__inner">
       <nav>
         <ul>
-          <?php
-          if (isset($_SESSION['me'])) : ?>
+          <?php if (isset($_SESSION['me'])) : ?>
             <li><a href="<?= SITE_URL; ?>/product_all.php">商品一覧</a></li>
             <?php if (isset($_SESSION['me']->authority) === '99') : ?>
               <li class="dd_last_li"><a href="<?= SITE_URL; ?>/user_manage.php">管理者ページ</a></li>
@@ -66,12 +64,12 @@ require_once(__DIR__ . '/../config/config.php');
         <?php  } else { ?>
           <div class="prof-show">
             <ul class="name">
-              <li>ようこそゲスト様</li>
-                <li>
-                  <a href="login.php" class="name">ログイン</a>
-                </li>
-            </ul>
-          </div>
+                <li class="welcome_guest">ようこそゲスト様</li>
+                  <li class="">
+                    <a href="login.php" class="name">ログイン</a>
+                  </li>
+              </ul>
+            </div>
         <?php } ?>
       </div>
     </div>

@@ -1,7 +1,5 @@
 <?php
 require_once(__DIR__ . '/header.php');
-$LoginCon = new Bbs\Controller\Login();
-$LoginCon->run();
 ?>
 <div class="title index">
   <h1 class="page__ttl">オリジナルショップ</h1>

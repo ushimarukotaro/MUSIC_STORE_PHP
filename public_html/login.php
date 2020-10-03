@@ -1,7 +1,6 @@
 <?php
 require_once(__DIR__ . '/header.php');
-$LoginCon = new Bbs\Controller\Login();
-$LoginCon->run();
+
 ?>
 <div class="title">
   <h1 class="page__ttl">ログイン</h1>
@@ -9,7 +8,7 @@ $LoginCon->run();
   <form action="" method="post" id="login" class="form">
     <div class="form-group">
       <label>メールアドレス</label>
-      <input type="text" name="email" value="<?= isset($LoginCon->getValues()->email) ? h($LoginCon->getValues()->email) : ''; ?>" class="form-control">
+      <input type="text" name="email" value="" class="form-control">
     </div>
     <div class="form-group">
       <label>パスワード</label>
@@ -17,7 +16,7 @@ $LoginCon->run();
     </div>
     <p class="err"></p>
     <button class="btn btn-primary signup-btn" onclick="document.getElementById('login').submit();">ログイン</button>
-    <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
+    <input type="hidden" name="token" value="">
   </form>
 <p class="fs12 signup-p"><a href="signup.php">ユーザー登録</a></p>
 <?php require_once(__DIR__ . '/footer.php'); ?>
