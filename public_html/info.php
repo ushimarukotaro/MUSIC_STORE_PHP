@@ -18,6 +18,11 @@ require_once(__DIR__ . '/header.php');
       <p class="err"></p>
     </div>
     <div class="form-group">
+      <label>件名</label>
+      <input type="title" value="" class="form-control" placeholder="件名">
+      <p class="err"></p>
+    </div>
+    <div class="form-group">
       <label>問合せ内容</label>
       <textarea name="review" class="form-control" placeholder="問合せ内容" rows="10"></textarea>
       <p class="err"></p>
