@@ -1,8 +1,8 @@
 <?php
 
-namespace Bbs\Controller;
+namespace Shop\Controller;
 
-class UserManage extends \Bbs\Controller {
+class UserManage extends \Shop\Controller {
   public function run() {
     if($this->isAdminLoggedIn()) {
       if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -15,7 +15,7 @@ class UserManage extends \Bbs\Controller {
   }
 
   public function adminShow() {
-    $userModel = new \Bbs\Model\User();
+    $userModel = new \Shop\Model\User();
     $users = $userModel->adminShow();
     return $users;
   }
@@ -24,14 +24,14 @@ class UserManage extends \Bbs\Controller {
     if(isset($_POST['update']) || isset($_POST['delete'])) {
       try {
         $this->validate();
-      } catch (\Bbs\Exception\EmptyPost $e) {
+      } catch (\Shop\Exception\EmptyPost $e) {
           $this->setErrors('id', $e->getMessage());
       }
       $this->setValues('id', $_POST['id']);
       if ($this->hasError()) {
         return;
       } else {
-        $userModel = new \Bbs\Model\User();
+        $userModel = new \Shop\Model\User();
       }
     }
 
@@ -68,10 +68,10 @@ class UserManage extends \Bbs\Controller {
   }
 
   private function validate() {
-    $validate = new \Bbs\Controller\Validate();
+    $validate = new \Shop\Controller\Validate();
     $validate->tokenCheck($_POST['token']);
     if (is_null($_POST['id'])) {
-      throw new \Bbs\Exception\EmptyPost("ユーザーを選択してください");
+      throw new \Shop\Exception\EmptyPost("ユーザーを選択してください");
     }
 
   }

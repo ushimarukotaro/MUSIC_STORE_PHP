@@ -1,6 +1,6 @@
 <?php
-namespace Bbs\Model;
-class Thread extends \Bbs\Model {
+namespace Shop\Model;
+class Thread extends \Shop\Model {
   public function createThread($values) {
     try {
       $this->db->beginTransaction();

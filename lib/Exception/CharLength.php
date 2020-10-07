@@ -1,4 +1,4 @@
 <?php
-namespace Bbs\Exception;
+namespace Shop\Exception;
 class CharLength extends \Exception {
 }

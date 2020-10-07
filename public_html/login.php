@@ -1,6 +1,7 @@
 <?php
 require_once(__DIR__ . '/header.php');
-
+$LoginCon = new Shop\Controller\Login();
+$LoginCon->run();
 ?>
 <div class="title">
   <h1 class="page__ttl">ログイン</h1>
@@ -16,7 +17,7 @@ require_once(__DIR__ . '/header.php');
     </div>
     <p class="err"></p>
     <button class="btn btn-primary signup-btn" onclick="document.getElementById('login').submit();">ログイン</button>
-    <input type="hidden" name="token" value="">
+    <input type="hidden" name="token" value="<?= h($_SESSION['token']) ?>">
   </form>
 <p class="fs12 signup-p"><a href="signup.php">ユーザー登録</a></p>
 <?php require_once(__DIR__ . '/footer.php'); ?>

@@ -1,6 +1,6 @@
 <?php
-namespace Bbs\Model;
-class Favorite extends \Bbs\Model {
+namespace Shop\Model;
+class Favorite extends \Shop\Model {
 
   public function changeFavorite($values) {
     try {

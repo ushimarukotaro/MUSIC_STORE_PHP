@@ -1,7 +1,7 @@
 <?php
-namespace Bbs\Controller;
+namespace Shop\Controller;
 
-class ThreadSearch extends \Bbs\Controller {
+class ProductSearch extends \Shop\Controller {
 
   public function run() {
     if($_SERVER['REQUEST_METHOD'] === 'GET' && $_GET['type'] === 'searchthread') {
@@ -13,9 +13,9 @@ class ThreadSearch extends \Bbs\Controller {
   public function searchThread(){
     try {
       $this->validate();
-    } catch (\Bbs\Exception\EmptyPost $e) {
+    } catch (\Shop\Exception\EmptyPost $e) {
       $this->setErrors('keyword', $e->getMessage());
-    } catch (\Bbs\Exception\CharLength $e) {
+    } catch (\Shop\Exception\CharLength $e) {
       $this->setErrors('keyword', $e->getMessage());
     }
 
@@ -24,7 +24,7 @@ class ThreadSearch extends \Bbs\Controller {
     if ($this->hasError()) {
       return;
     } else {
-      $threadModel = new \Bbs\Model\Thread();
+      $threadModel = new \Shop\Model\Thread();
       $threadData = $threadModel->searchThread($keyword);
       return $threadData;
     }
@@ -33,10 +33,10 @@ class ThreadSearch extends \Bbs\Controller {
   private function validate() {
     $validate = new \Bbs\Controller\Validate();
     if($validate->emptyCheck([$_GET['keyword']])) {
-      throw new \Bbs\Exception\EmptyPost("キーワードが入力されていません！");
+      throw new \Shop\Exception\EmptyPost("キーワードが入力されていません！");
     }
     if($validate->charLenghtCheck($_GET['keyword'],20)) {
-      throw new \Bbs\Exception\CharLength("キーワードは20文字以内で入力してください。");
+      throw new \Shop\Exception\CharLength("キーワードは20文字以内で入力してください。");
     }
   }
 }

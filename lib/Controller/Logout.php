@@ -1,6 +1,6 @@
 <?php
-namespace Bbs\Controller;
-class Logout extends \Bbs\Controller {
+namespace Shop\Controller;
+class Logout extends \Shop\Controller {
   public function run() {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       if (!isset($_POST['token']) || $_POST['token'] !== $_SESSION['token']) {

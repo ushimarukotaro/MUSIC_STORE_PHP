@@ -1,17 +1,20 @@
 <?php
-namespace Bbs\Model;
-class User extends \Bbs\Model {
+namespace Shop\Model;
+class User extends \Shop\Model {
   public function create($values) {
-    $stmt = $this->db->prepare("INSERT INTO users (username,email,password,created,modified) VALUES (:username,:email,:password,now(),now())");
+    $stmt = $this->db->prepare("INSERT INTO users (username,email,zip1,zip2,address,password,created,modified) VALUES (:username,:email,:zip1,:zip2,:address,:password,now(),now())");
     $res = $stmt->execute([
       ':username' => $values['username'],
       ':email' => $values['email'],
+      ':zip1' => $values['zip1'],
+      ':zip2' => $values['zip2'],
+      ':address' => $values['address'],
       // パスワードのハッシュ化
-      ':password' => password_hash($values['password'],PASSWORD_DEFAULT)
+      ':password' => password_hash($values['password'],PASSWORD_DEFAULT),
     ]);
     // メールアドレスがユニークでなければfalseを返す
     if ($res === false) {
-      throw new \Bbs\Exception\DuplicateEmail();
+      throw new \Shop\Exception\DuplicateEmail();
     }
   }
 
@@ -23,13 +26,13 @@ class User extends \Bbs\Model {
     $stmt->setFetchMode(\PDO::FETCH_CLASS, 'stdClass');
     $user = $stmt->fetch();
     if (empty($user)) {
-      throw new \Bbs\Exception\UnmatchEmailOrPassword();
+      throw new \Shop\Exception\UnmatchEmailOrPassword();
     }
     if (!password_verify($values['password'], $user->password)) {
-      throw new \Bbs\Exception\UnmatchEmailOrPassword();
+      throw new \Shop\Exception\UnmatchEmailOrPassword();
     }
     if ($user->delflag == 1) {
-      throw new \Bbs\Exception\DeleteUser();
+      throw new \Shop\Exception\DeleteUser();
     }
     return $user;
   }
@@ -52,7 +55,7 @@ class User extends \Bbs\Model {
       ':id' => $_SESSION['me']->id,
     ]);
     if ($res === false) {
-      throw new \Bbs\Exception\DuplicateEmail();
+      throw new \Shop\Exception\DuplicateEmail();
     }
   }
 
@@ -88,7 +91,7 @@ class User extends \Bbs\Model {
       ':delflag' => $values['delflag'],
     ]);
     if ($res === false) {
-      throw new \Bbs\Exception\DuplicateEmail();
+      throw new \Shop\Exception\DuplicateEmail();
     }
   }
 

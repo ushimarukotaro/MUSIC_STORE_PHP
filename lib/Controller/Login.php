@@ -1,7 +1,7 @@
 <?php
-namespace Bbs\Controller;
+namespace Shop\Controller;
 
-class Login extends \Bbs\Controller {
+class Login extends \Shop\Controller {
   public function run() {
     // ログインしていればトップページへ移動
     if ($this->isLoggedIn()) {
@@ -15,7 +15,7 @@ class Login extends \Bbs\Controller {
   protected function postProcess() {
     try {
       $this->validate();
-    } catch (\Bbs\Exception\EmptyPost $e) {
+    } catch (\Shop\Exception\EmptyPost $e) {
         $this->setErrors('login', $e->getMessage());
     }
     $this->setValues('email', $_POST['email']);
@@ -23,17 +23,17 @@ class Login extends \Bbs\Controller {
       return;
     } else {
       try {
-        $userModel = new \Bbs\Model\User();
+        $userModel = new \Shop\Model\User();
         $user = $userModel->login([
           'email' => $_POST['email'],
           'password' => $_POST['password']
         ]);
       }
-      catch (\Bbs\Exception\UnmatchEmailOrPassword $e) {
+      catch (\Shop\Exception\UnmatchEmailOrPassword $e) {
         $this->setErrors('login', $e->getMessage());
         return;
       }
-      catch (\Bbs\Exception\DeleteUser $e) {
+      catch (\Shop\Exception\DeleteUser $e) {
         $this->setErrors('login', $e->getMessage());
         return;
       }
@@ -48,13 +48,13 @@ class Login extends \Bbs\Controller {
     }
   }
   private function validate() {
-    $validate = new \Bbs\Controller\Validate();
+    $validate = new \Shop\Controller\Validate();
     // トークンが空またはPOST送信とセッションに格納された値が異なるとエラー
     $validate->tokenCheck($_POST['token']);
     // emailとpasswordのキーがなかった場合、強制終了
     $validate->unauthorizedCheck([$_POST['email'],$_POST['password']]);
     if($validate->emptyCheck([$_POST['email'],$_POST['password']])) {
-      throw new \Bbs\Exception\EmptyPost("メールアドレスまたはパスワードを入力してください。");
+      throw new \Shop\Exception\EmptyPost("メールアドレスまたはパスワードを入力してください。");
     }
   }
 }

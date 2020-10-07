@@ -1,6 +1,6 @@
 <?php
 
-namespace Bbs\Exception;
+namespace Shop\Exception;
 
 class DeleteUser extends \Exception {
   protected $message = '既に退会済みのユーザーです！';

@@ -1,10 +1,10 @@
 <?php
 
-namespace Bbs\Controller;
+namespace Shop\Controller;
 
-class UserDelete extends \Bbs\Controller {
+class UserDelete extends \Shop\Controller {
   public function run() {
-    $user = new \Bbs\Model\User();
+    $user = new \Shop\Model\User();
     $userData = $user->find($_SESSION['me']->id);
     $this->setValues('username', $userData->username);
     $this->setValues('email', $userData->email);
@@ -15,7 +15,7 @@ class UserDelete extends \Bbs\Controller {
         exit;
       }
 
-    $userModel = new \Bbs\Model\User();
+    $userModel = new \Shop\Model\User();
     $userModel->delete();
 
     $_SESSION = [];

@@ -1,6 +1,6 @@
 <?php
-namespace Bbs\Controller;
-class UserUpdate extends \Bbs\Controller {
+namespace Shop\Controller;
+class UserUpdate extends \Shop\Controller {
   public function run() {
     $this->showUser();
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['type'] === 'userupdate') {
@@ -11,7 +11,7 @@ class UserUpdate extends \Bbs\Controller {
   }
 
   protected function showUser() {
-    $user = new \Bbs\Model\User();
+    $user = new \Shop\Model\User();
     $userData = $user->find($_SESSION['me']->id);
     $this->setValues('username', $userData->username);
     $this->setValues('email', $userData->email);
@@ -21,9 +21,9 @@ class UserUpdate extends \Bbs\Controller {
   protected function updateUser() {
     try {
       $this->validate();
-    } catch (\Bbs\Exception\InvalidEmail $e) {
+    } catch (\Shop\Exception\InvalidEmail $e) {
       $this->setErrors('email', $e->getMessage());
-    } catch (\Bbs\Exception\EmptyPost $e) {
+    } catch (\Shop\Exception\EmptyPost $e) {
       $this->setErrors('username', $e->getMessage());
     }
     $this->setValues('username', $_POST['username']);
@@ -39,7 +39,7 @@ class UserUpdate extends \Bbs\Controller {
         $old_img = NULL;
       }
       try {
-        $userModel = new \Bbs\Model\User();
+        $userModel = new \Shop\Model\User();
         if($user_img['size'] > 0) {
           unlink('./gazou/' .$old_img);
           move_uploaded_file($user_img['tmp_name'],'./gazou/'.$user_img['name']);
@@ -58,7 +58,7 @@ class UserUpdate extends \Bbs\Controller {
           $_SESSION['me']->image = $old_img;
         }
       }
-      catch (\Bbs\Exception\DuplicateEmail $e) {
+      catch (\Shop\Exception\DuplicateEmail $e) {
         $this->setErrors('email', $e->getMessage());
         return;
       }
@@ -71,7 +71,7 @@ class UserUpdate extends \Bbs\Controller {
   protected function imgDelete() {
     $old_img = $_POST['old_image'];
     if($old_img !== '') {
-      $userModel = new \Bbs\Model\User();
+      $userModel = new \Shop\Model\User();
       $userModel->imgDelete();
       unlink('./gazou/'.$old_img);
       $_SESSION['me']->image = NULL;
@@ -81,14 +81,14 @@ class UserUpdate extends \Bbs\Controller {
   }
 
   private function validate() {
-    $validate = new \Bbs\Controller\Validate();
+    $validate = new \Shop\Controller\Validate();
     $validate->tokenCheck($_POST['token']);
     $validate->unauthorizedCheck([$_POST['email'],$_POST['username']]);
     if ($validate->mailCheck($_POST['email'])) {
-      throw new \Bbs\Exception\InvalidEmail("メールアドレスの形式が不正です!");
+      throw new \Shop\Exception\InvalidEmail("メールアドレスの形式が不正です!");
     }
     if($validate->emptyCheck([$_POST['username']])) {
-      throw new \Bbs\Exception\EmptyPost("ユーザー名が入力されていません");
+      throw new \Shop\Exception\EmptyPost("ユーザー名が入力されていません");
     }
   }
 }

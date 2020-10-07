@@ -1,5 +1,5 @@
 <?php
-namespace Bbs;
+namespace Shop;
 class Controller {
   private $errors;
   private $values;

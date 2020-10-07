@@ -1,6 +1,6 @@
 <?php
-namespace Bbs\Model;
-class Comment extends \Bbs\Model {
+namespace Shop\Model;
+class Comment extends \Shop\Model {
 
   // コメント取得
   public function getComment($thread_id){
@@ -10,11 +10,11 @@ class Comment extends \Bbs\Model {
   }
 
   // CSV出力
-  public function getCommentCsv($thread_id){
-    $stmt = $this->db->prepare("SELECT comment_num,username,content,comments.created FROM (threads INNER JOIN comments on threads.id = comments.thread_id) INNER JOIN  users ON comments.user_id = users.id WHERE threads.id =:thread_id AND comments.delflag = 0 ORDER BY comment_num ASC;");
-    $stmt->execute([':thread_id' => $thread_id]);
-    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
-  }
+  // public function getCommentCsv($thread_id){
+  //   $stmt = $this->db->prepare("SELECT comment_num,username,content,comments.created FROM (threads INNER JOIN comments on threads.id = comments.thread_id) INNER JOIN  users ON comments.user_id = users.id WHERE threads.id =:thread_id AND comments.delflag = 0 ORDER BY comment_num ASC;");
+  //   $stmt->execute([':thread_id' => $thread_id]);
+  //   return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+  // }
 
   // コメント数取得
   public function getCommentCount($thread_id) {

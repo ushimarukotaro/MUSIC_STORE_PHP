@@ -42,6 +42,11 @@ require_once(__DIR__ . "/header.php");
         <p class="err"></p>
       </div>
       <div class="form-group">
+      <label>商品説明</label>
+      <textarea name="details" class="form-control" placeholder="商品説明" rows="14"></textarea>
+      <p class="err"></p>
+    </div>
+      <div class="form-group">
         <div class="imgarea ">
           <label>
           <span class="btn-gray file-btn">

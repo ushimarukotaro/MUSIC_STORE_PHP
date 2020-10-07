@@ -1,5 +1,5 @@
 <?php
-namespace Bbs\Controller;
+namespace Shop\Controller;
 
 class Validate {
   public function tokenCheck($value) {
@@ -29,7 +29,7 @@ class Validate {
     return $errFlag;
   }
 
-  public function charLenghtCheck($value,$num) {
+  public function charLengthCheck($value,$num) {
     if (mb_strlen($value) > $num) {
       return true;
     }

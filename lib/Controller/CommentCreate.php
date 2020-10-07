@@ -1,6 +1,6 @@
 <?php
-namespace Bbs\Controller;
-class CommentCreate extends \Bbs\Controller {
+namespace Shop\Controller;
+class CommentCreate extends \Shop\Controller {
   public function run() {
     if($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['type']  === 'createcomment') {
       $this->createComment();
@@ -10,9 +10,9 @@ class CommentCreate extends \Bbs\Controller {
   private function createComment() {
   try {
       $this->validate();
-    } catch (\Bbs\Exception\EmptyPost $e) {
+    } catch (\Shop\Exception\EmptyPost $e) {
         $this->setErrors('content', $e->getMessage());
-    } catch (\Bbs\Exception\CharLength $e) {
+    } catch (\Shop\Exception\CharLength $e) {
         $this->setErrors('content', $e->getMessage());
     }
     $this->setValues('content', $_POST['content']);
@@ -31,14 +31,14 @@ class CommentCreate extends \Bbs\Controller {
   }
 
   private function validate() {
-    $validate = new \Bbs\Controller\Validate();
+    $validate = new \Shop\Controller\Validate();
     $validate->tokenCheck($_POST['token']);
     $validate->unauthorizedCheck([$_POST['content']]);
     if($validate->emptyCheck([$_POST['content']])) {
-      throw new \Bbs\Exception\EmptyPost("コメントが入力されていません！");
+      throw new \Shop\Exception\EmptyPost("コメントが入力されていません！");
     }
     if($validate->charLenghtCheck($_POST['content'],200)) {
-      throw new \Bbs\Exception\CharLength("コメントは200文字以内で入力してください。");
+      throw new \Shop\Exception\CharLength("コメントは200文字以内で入力してください。");
     }
   }
 }

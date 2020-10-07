@@ -17,6 +17,7 @@ require_once(__DIR__ . '/../config/config.php');
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   <script src="https://kit.fontawesome.com/8bc1904d08.js"></script>
+  <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
   <link rel="stylesheet" href="./css/styles.css">
 </head>
 
@@ -48,10 +49,10 @@ require_once(__DIR__ . '/../config/config.php');
                   <li><a href="<?= SITE_URL; ?>/cart_list.php" class="name">カート</a></li>
                   <form action="logout.php" method="post" id="logout">
                     <li><label>
-                      <span class="name">ログアウト</span>
-                      <input type="submit" value="" style="display: none;">
-                    </label>
-                  </li>
+                        <span class="name">ログアウト</span>
+                        <input type="submit" value="" style="display: none;">
+                      </label>
+                    </li>
                     <?php if ($_SESSION['me']->authority === '99') : ?>
                       <li><a href="<?= SITE_URL; ?>/product_manage.php" class="name">管理者ページ</a></li>
                     <?php endif; ?>
@@ -64,12 +65,12 @@ require_once(__DIR__ . '/../config/config.php');
         <?php  } else { ?>
           <div class="prof-show">
             <ul class="name">
-                <li class="welcome_guest">ようこそゲスト様</li>
-                  <li class="">
-                    <a href="login.php" class="name">ログイン</a>
-                  </li>
-              </ul>
-            </div>
+              <li class="welcome_guest">ようこそゲスト様</li>
+              <li class="">
+                <a href="<?= SITE_URL; ?>/login.php" class="name">ログイン</a>
+              </li>
+            </ul>
+          </div>
         <?php } ?>
       </div>
     </div>

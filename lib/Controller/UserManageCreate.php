@@ -1,7 +1,7 @@
 <?php
-namespace Bbs\Controller;
+namespace Shop\Controller;
 
-class UserManageCreate extends \Bbs\Controller {
+class UserManageCreate extends \Shop\Controller {
   public function run() {
     if($this->isAdminLoggedIn()) {
       if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -18,9 +18,9 @@ class UserManageCreate extends \Bbs\Controller {
       $this->validate();
     } catch (\Bbs\Exception\InvalidEmail $e) {
         $this->setErrors('email', $e->getMessage());
-    } catch (\Bbs\Exception\InvalidName $e) {
+    } catch (\Shop\Exception\InvalidName $e) {
         $this->setErrors('username', $e->getMessage());
-    } catch (\Bbs\Exception\InvalidPassword $e) {
+    } catch (\Shop\Exception\InvalidPassword $e) {
         $this->setErrors('password', $e->getMessage());
     }
     $this->setValues('email', $_POST['email']);
@@ -29,7 +29,7 @@ class UserManageCreate extends \Bbs\Controller {
       return;
     } else {
       try {
-        $userModel = new \Bbs\Model\User();
+        $userModel = new \Shop\Model\User();
         $user = $userModel->create([
           'email' => $_POST['email'],
           'username' => $_POST['username'],
@@ -39,7 +39,7 @@ class UserManageCreate extends \Bbs\Controller {
           'delflag' => $_POST['delflag'],
         ]);
       }
-      catch (\Bbs\Exception\DuplicateEmail $e) {
+      catch (\Shop\Exception\DuplicateEmail $e) {
         $this->setErrors('email', $e->getMessage());
         return;
       }
@@ -50,16 +50,16 @@ class UserManageCreate extends \Bbs\Controller {
   }
 
   private function validate() {
-    $validate = new \Bbs\Controller\Validate();
+    $validate = new \Shop\Controller\Validate();
     $validate->tokenCheck($_POST['token']);
     if ($validate->mailCheck($_POST['email'])) {
-      throw new \Bbs\Exception\InvalidEmail("メールアドレスの形式が不正です!");
+      throw new \Shop\Exception\InvalidEmail("メールアドレスの形式が不正です!");
     }
     if($validate->emptyCheck([$_POST['username']])) {
-      throw new \Bbs\Exception\EmptyPost("ユーザー名が入力されていません");
+      throw new \Shop\Exception\EmptyPost("ユーザー名が入力されていません");
     }
     if($validate->passwordCheck([$_POST['password']])) {
-      throw new \Bbs\Exception\InvalidPassword("パスワードは半角英数字で入力してください。");
+      throw new \Shop\Exception\InvalidPassword("パスワードは半角英数字で入力してください。");
     }
   }
 }
