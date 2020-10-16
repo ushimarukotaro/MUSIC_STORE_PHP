@@ -2,7 +2,7 @@
 require_once(__DIR__ . '/header.php');
 ?>
 <div class="title index">
-  <h1 class="page__ttl">オリジナルショップ</h1>
+  <h1 class="page__ttl">牛丸楽器</h1>
   <form action="product_search.php" method="get" class="form-group form-search">
     <div class="form-group">
       <input type="text" name="keyword" placeholder="　検索したい商品名">
@@ -13,10 +13,16 @@ require_once(__DIR__ . '/header.php');
     </div>
   </form>
 </div>
-<div class="index-nav">
-  <p><a href="product_all.php" class="name">商品一覧ページへ</a></p>
-  <p><a href="login.php" class="name">ログインページへ</a></p>
-  <p><a href="signup.php" class="name">会員登録ページへ</a></p>
+<div class="row">
+  <div class="index-nav col-md-6">
+    <p><a href="product_all.php" class="name">商品一覧ページへ</a></p>
+    <p><a href="login.php" class="name">ログインページへ</a></p>
+    <p><a href="signup.php" class="name">会員登録ページへ</a></p>
+  </div>
+  <div class="col-md-6 img_area">
+    <img src="./asset/img/music_guitar_syuuri.png">
+  </div>
 </div>
+
 <?php
 require_once(__DIR__ . '/footer.php');

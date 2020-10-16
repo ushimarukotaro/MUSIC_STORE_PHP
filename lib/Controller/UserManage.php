@@ -16,8 +16,17 @@ class UserManage extends \Shop\Controller {
 
   public function adminShow() {
     $userModel = new \Shop\Model\User();
-    $users = $userModel->adminShow();
-    return $users;
+    $products = $userModel->adminShow();
+    return $products;
+  }
+
+  public function adminDispShow() {
+    $userModel = new \Shop\Model\User();
+    $product = $userModel->adminDispShow([
+      'id' => $_POST['id'],
+      'product_name' => $_POST['product_name'],
+    ]);
+    return $product;
   }
 
   private function postProcess() {
@@ -36,33 +45,35 @@ class UserManage extends \Shop\Controller {
     }
 
     if(isset($_POST['update'])) {
-      $user_id = $_POST['id'];
-      $username = $_POST['username' . $_POST['id']];
-      $email = $_POST['email' . $_POST['id']];
+      $id = $_POST['id'];
+      $product_name = $_POST['product_name' . $_POST['id']];
+      $maker = $_POST['maker' . $_POST['id']];
+      $category_id = $_POST['category_id' . $_POST['id']];
       $image = $_POST['image' . $_POST['id']];
-      $authority = $_POST['authority' . $_POST['id']];
-      $delflag = $_POST['delflag' . $_POST['id']];
+      $price = $_POST['price' . $_POST['id']];
+      $details = $_POST['details' . $_POST['id']];
 
       if(empty($image)) {
         $image = NULL;
       }
 
       $userModel->adminUpdate([
-        'id' => $user_id,
-        'username' => $username,
-        'email' => $email,
+        'id' => $id,
+        'product_name' => $product_name,
+        'maker' => $maker,
+        'category_id' => $category_id,
         'image' => $image,
-        'authority' => $authority,
-        'delflag' => $delflag
+        'price' => $price,
+        'details' => $details,
       ]);
-      header('Location: '. SITE_URL . '/user_manage.php');
+      header('Location: '. SITE_URL . '/product_manage.php');
       exit();
     } elseif(isset($_POST['delete'])) {
       $userModel->adminDelete($_POST['id']);
-      header('Location: '. SITE_URL . '/user_manage.php');
+      header('Location: '. SITE_URL . '/product_manage.php');
       exit();
     } elseif(isset($_POST['create'])) {
-      header('Location: '. SITE_URL . '/user_manage_create.php');
+      header('Location: '. SITE_URL . '/product_manage_create.php');
       exit();
     }
   }
@@ -70,7 +81,7 @@ class UserManage extends \Shop\Controller {
   private function validate() {
     $validate = new \Shop\Controller\Validate();
     $validate->tokenCheck($_POST['token']);
-    if (is_null($_POST['id'])) {
+    if (is_null($_POST['product'])) {
       throw new \Shop\Exception\EmptyPost("ユーザーを選択してください");
     }
 

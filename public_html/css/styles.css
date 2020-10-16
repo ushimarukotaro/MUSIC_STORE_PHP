@@ -352,11 +352,16 @@ textarea {
 }
 
 .imgarea img {
-  border-radius: 50%;
+  border-radius: 10px;
   width: 200px;
   height: 200px;
   -o-object-fit: cover;
      object-fit: cover;
+}
+
+.imgarea img:hover {
+  cursor: pointer;
+  opacity: .8;
 }
 
 .noimage img {
@@ -446,8 +451,17 @@ textarea {
       flex-wrap: wrap;
 }
 
-.product li a {
-  border: 1px solid #323232;
+.product li {
+  border: 2px solid #7c7979;
+  width: 14rem;
+  height: 14rem;
+  margin: 0.8rem;
+  position: relative;
+}
+
+.product li .imgarea {
+  width: 14rem;
+  height: 8rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -457,13 +471,50 @@ textarea {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 10rem;
-  height: 10rem;
-  margin: 1rem;
 }
 
-.product li a:hover {
-  opacity: 0.5;
+.product li .imgarea .category_name {
+  display: inline-block;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  font-size: 2px;
+  font-weight: bold;
+  color: #cfcfcf;
+  text-align: center;
+  line-height: 40px;
+  width: 80px;
+  height: 40px;
+  background-color: #007bffe8;
+  border-radius: 40px;
+  z-index: -99;
+}
+
+.product li .imgarea img {
+  width: 6rem;
+  height: 6rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.product li .imgarea:hover {
+  opacity: 0.8;
+}
+
+.product li .details {
+  width: 92%;
+  text-align: center;
+  margin: 0 auto;
+  padding: 0.4rem 0;
+  border: 1px dotted #7c7979;
+}
+
+.product li .details div span {
+  font-weight: bold;
+}
+
+.product li .details .pro_price {
+  color: #fc1616;
 }
 
 .product-area {
@@ -544,6 +595,13 @@ textarea {
   padding: 1.5rem;
 }
 
+.img_area img {
+  width: 240px;
+  height: 240px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 .signup-btn {
   margin: 1.5rem 0;
 }
@@ -585,6 +643,26 @@ textarea {
 
 .pro_form .btn {
   margin: 3rem;
+}
+
+.create-table {
+  width: 90%;
+  margin: 3rem auto;
+  border: 1px solid #7c7979;
+}
+
+.create-table th {
+  width: 30%;
+  font-weight: bold;
+}
+
+.create-table td {
+  width: 70%;
+}
+
+.create-table th, .create-table td {
+  padding: 1rem 2rem;
+  border: 1px solid #7c7979;
 }
 
 .pro_create_confirm {
@@ -641,6 +719,36 @@ textarea {
 
 .review-p {
   margin: 3rem 0;
+}
+
+.admin-table {
+  width: 90%;
+  margin: 3rem auto;
+  border: 1px solid #7c7979;
+}
+
+.admin-table th {
+  font-weight: bold;
+  border-bottom: 1px solid #7c7979;
+}
+
+.admin-table th, .admin-table td {
+  padding: 1rem;
+}
+
+.admin-table td {
+  border-bottom: 1px dotted #7c7979;
+}
+
+.admin-table label {
+  font-size: 1rem;
+}
+
+.admin-table img {
+  width: 36px;
+  height: 36px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 footer {

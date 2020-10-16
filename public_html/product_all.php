@@ -1,5 +1,7 @@
 <?php
 require_once(__DIR__ . '/header.php');
+$showProductAll = new Shop\Model\Product();
+$products = $showProductAll->productAll();
 ?>
 <div class="title">
   <h1 class="page__ttl">商品一覧</h1>
@@ -13,21 +15,23 @@ require_once(__DIR__ . '/header.php');
     </div>
   </form>
 </div>
-<ul class="product">
-  <li><a href="product_disp.php" class="item">item1</a></li>
-  <li><a href="<?= SITE_URL ?>/product_disp.php" class="item">item2</a></li>
-  <li><a href="" class="item">item3</a></li>
-  <li><a href="" class="item">item4</a></li>
-  <li><a href="" class="item">item5</a></li>
-  <li><a href="" class="item">item6</a></li>
-  <li><a href="" class="item">item7</a></li>
-  <li><a href="" class="item">item8</a></li>
-  <li><a href="" class="item">item9</a></li>
-  <li><a href="" class="item">item10</a></li>
-  <li><a href="" class="item">item11</a></li>
-  <li><a href="" class="item">item12</a></li>
-  <li><a href="" class="item">item13</a></li>
-  <li><a href="" class="item">item14</a></li>
-</ul>
+<form>
+  <ul class="product">
+    <?php foreach($products as $product) : ?>
+    <li>
+      <div class="imgarea">
+        <span class="category_name"><?= $product->category_name ?></span>
+        <a href="product_disp.php" class="item"><img src="./gazou/<?= $product->image ?>"></a>
+      </div>
+      <div class="details">
+        <div><span class="pro_maker"><?= $product->maker ?></span></div>
+        <div><span class="pro_name"><?= $product->product_name ?></span></div>
+        <div><span class="pro_price">¥<?= $product->price ?>(税込み)</span></div>
+      </div>
+      <input type="hidden" name="id">
+    </li>
+    <?php endforeach; ?>
+  </ul>
+</form>
 <?php
 require_once(__DIR__ . '/footer.php');

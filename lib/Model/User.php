@@ -2,13 +2,14 @@
 namespace Shop\Model;
 class User extends \Shop\Model {
   public function create($values) {
-    $stmt = $this->db->prepare("INSERT INTO users (username,email,zip1,zip2,address,password,created,modified) VALUES (:username,:email,:zip1,:zip2,:address,:password,now(),now())");
+    $stmt = $this->db->prepare("INSERT INTO users (username,email,zip1,zip2,prefecture_id,address2,password,created,modified) VALUES (:username,:email,:zip1,:zip2,:prefecture_id,:address2,:password,now(),now())");
     $res = $stmt->execute([
       ':username' => $values['username'],
       ':email' => $values['email'],
       ':zip1' => $values['zip1'],
       ':zip2' => $values['zip2'],
-      ':address' => $values['address'],
+      ':prefecture_id' => $values['prefecture_id'],
+      ':address2' => $values['address2'],
       // パスワードのハッシュ化
       ':password' => password_hash($values['password'],PASSWORD_DEFAULT),
     ]);
@@ -76,8 +77,16 @@ class User extends \Shop\Model {
   }
 
   public function adminShow() {
-    $stmt = $this->db->query("SELECT * FROM users");
+    $stmt = $this->db->query("SELECT p.id,p.product_name,p.maker,p.price,p.image,p.details,p.created,c.category_name FROM products AS p INNER JOIN categories AS c ON p.category_id = c.id");
     return $stmt->fetchAll(\PDO::FETCH_OBJ);
+  }
+
+  public function adminDispShow($values) {
+    $stmt = $this->db->prepare("SELECT p.id,p.product_name,p.maker,p.price,p.image,p.details,p.created,c.category_name FROM products AS p INNER JOIN categories AS c ON p.category_id = c.id WHERE p.id = :id");
+    $stmt->execute([
+      ':id' => $values['id'],
+    ]);
+    return $stmt->fetch(\PDO::FETCH_OBJ);
   }
 
   public function adminCreate($values) {
@@ -110,5 +119,10 @@ class User extends \Shop\Model {
   public function adminDelete($values) {
     $stmt = $this->db->prepare("DELETE FROM users WHERE id = :id");
     $stmt->execute([":id" => $values]);
+  }
+
+  public function getPrefectures() {
+    $stmt = $this->db->query("SELECT * FROM prefectures");
+    return $stmt->fetchAll(\PDO::FETCH_OBJ);
   }
 }

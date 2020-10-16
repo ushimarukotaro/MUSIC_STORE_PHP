@@ -287,10 +287,14 @@ textarea {
 .imgarea {
   position: relative;
   img {
-    border-radius: 50%;
+    border-radius: 10px;
     width: 200px;
     height: 200px;
     object-fit: cover;
+    &:hover {
+      cursor: pointer;
+      opacity: .8;
+    }
   }
 }
 
@@ -382,16 +386,55 @@ textarea {
 .product {
   display: flex;
   flex-wrap: wrap;
-  li a {
-    border: 1px solid #323232;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 10rem;
-    height: 10rem;
-    margin: 1rem;
-    &:hover {
-      opacity: 0.5;
+  li {
+    border: 2px solid #7c7979;
+    width: 14rem;
+    height: 14rem;
+    margin: 0.8rem;
+    position: relative;
+    .imgarea {
+      width: 14rem;
+      height: 8rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .category_name {
+        display: inline-block;
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        font-size: 2px;
+        font-weight: bold;
+        color: #cfcfcf;
+        text-align: center;
+        line-height: 40px;
+        width: 80px;
+        height: 40px;
+        background-color: $mainColor;
+        border-radius: 40px;
+        z-index: -99;
+      }
+      img {
+        width: 6rem;
+        height: 6rem;
+        object-fit: cover;
+      }
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+    .details {
+      width: 92%;
+      text-align: center;
+      margin: 0 auto;
+      padding: 0.4rem 0;
+      border: 1px dotted #7c7979;
+      div span {
+        font-weight: bold;
+      }
+      .pro_price {
+        color: rgb(252, 22, 22);
+      }
     }
   }
 }
@@ -464,6 +507,12 @@ textarea {
   }
 }
 
+.img_area img {
+  width: 240px;
+  height: 240px;
+  object-fit: cover;
+}
+
 // サインアップページ
 .signup-btn {
   margin: 1.5rem 0;
@@ -509,6 +558,22 @@ textarea {
   }
 }
 
+.create-table {
+  width: 90%;
+  margin: 3rem auto;
+  border: 1px solid #7c7979;
+  th {
+    width: 30%;
+    font-weight: bold;
+  }
+  td {
+    width: 70%;
+  }
+  th, td {
+    padding: 1rem 2rem;
+    border: 1px solid #7c7979;
+  }
+}
 //購入確認
 .pro_create_confirm {
   margin: 3rem auto;
@@ -557,6 +622,32 @@ textarea {
 }
 .review-p {
   margin: 3rem 0;
+}
+
+
+// 管理者ようページ
+.admin-table {
+  width: 90%;
+  margin: 3rem auto;
+  border: 1px solid #7c7979;
+  th {
+    font-weight: bold;
+    border-bottom: 1px solid #7c7979;
+  }
+  th, td {
+    padding: 1rem;
+  }
+  td {
+    border-bottom: 1px dotted #7c7979;
+  }
+  label {
+    font-size: 1rem;
+  }
+  img {
+    width: 36px;
+    height: 36px;
+    object-fit: cover;
+  }
 }
 
 //フッター

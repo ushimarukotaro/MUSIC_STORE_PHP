@@ -24,7 +24,9 @@ class Signup extends \Shop\Controller {
     } catch (\Shop\Exception\EmptyPost $e) {
         $this->setErrors('zip2', $e->getMessage());
     } catch (\Shop\Exception\EmptyPost $e) {
-        $this->setErrors('address', $e->getMessage());
+        $this->setErrors('prefecture_id', $e->getMessage());
+    } catch (\Shop\Exception\EmptyPost $e) {
+        $this->setErrors('address2', $e->getMessage());
     } catch (\Shop\Exception\InvalidPassword $e) {
         $this->setErrors('password', $e->getMessage());
     }
@@ -32,7 +34,8 @@ class Signup extends \Shop\Controller {
     $this->setValues('email', $_POST['email']);
     $this->setValues('zip1', $_POST['zip1']);
     $this->setValues('zip2', $_POST['zip2']);
-    $this->setValues('address', $_POST['address']);
+    $this->setValues('prefecture_id', $_POST['prefecture_id']);
+    $this->setValues('address2', $_POST['address2']);
     if ($this->hasError()) {
       return;
     } else {
@@ -43,7 +46,8 @@ class Signup extends \Shop\Controller {
           'email' => $_POST['email'],
           'zip1' => $_POST['zip1'],
           'zip2' => $_POST['zip2'],
-          'address' => $_POST['address'],
+          'prefecture_id' => $_POST['prefecture_id'],
+          'address2' => $_POST['address2'],
           'password' => $_POST['password'],
         ]);
       }
@@ -64,6 +68,12 @@ class Signup extends \Shop\Controller {
     }
   }
 
+  public function getPrefecture() {
+    $prefectureModel = new \Shop\Model\User();
+    $res = $prefectureModel->getPrefectures();
+    return $res;
+  }
+
   // バリデーションメソッド
   private function validate() {
     $validate = new \Shop\Controller\Validate();
@@ -81,7 +91,7 @@ class Signup extends \Shop\Controller {
     if($validate->emptyCheck([$_POST['zip2']])) {
       throw new \Shop\Exception\EmptyPost("郵便番号に未入力があります！");
     }
-    if($validate->emptyCheck([$_POST['address']])) {
+    if($validate->emptyCheck([$_POST['prefecture_id'],$_POST['address2']])) {
       throw new \Shop\Exception\EmptyPost("住所が入力されていません");
     }
     if($validate->passwordCheck([$_POST['password']])) {
