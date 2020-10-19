@@ -1,10 +1,13 @@
 <?php
 require_once(__DIR__ . '/header.php');
 $showProductAll = new Shop\Model\Product();
-$products = $showProductAll->productAll();
+$category_id = $_GET['id'];
+$category_name = $showProductAll->getCategory($category_id);
+$products = $showProductAll->productCategory($category_id);
+// var_dump($category_name);
 ?>
 <div class="title">
-  <h1 class="page__ttl">商品一覧</h1>
+  <h1 class="page__ttl"><?= $category_name->category_name ?></h1>
   <form action="product_search.php" method="get" class="form-group form-search">
     <div class="form-group">
       <input type="text" name="keyword" placeholder="　検索したい商品名">

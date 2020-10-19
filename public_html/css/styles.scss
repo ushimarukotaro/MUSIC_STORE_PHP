@@ -30,9 +30,11 @@ textarea {
 }
 
 .btn {
-  width: 150px;
-  padding: 10px 0;
-  font-size: 20px;
+  width: 160px;
+  padding: .5rem 0;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 1rem;
 }
 
 .err {
@@ -135,8 +137,8 @@ textarea {
       width: 8px;
       height: 8px;
       margin: 0 0 0 12px;
-      border-right: 1px solid #fff;
-      border-bottom: 1px solid #fff;
+      border-right: 2px solid #fff;
+      border-bottom: 2px solid #fff;
       transform: rotate(45deg);
     }
   }
@@ -184,17 +186,19 @@ textarea {
 
 .nav-left {
   background: rgb(255, 255, 255);
-  border: 1px solid #323232;
+  border: 2px solid #7c7979;
   width: 15%;
   height: 85%;
   position: fixed;
-  left: 4px;
+  left: 6px;
   text-align: center;
+  margin: 1rem 0;
   h3 {
-    border: 1px solid #323232;
-    width: 80%;
+    border: 2px solid #7c7979;
+    width: 85%;
     margin: 1rem auto;
     font-size: 1.25rem;
+    font-weight: bold;
     padding: 12px;
   }
   .left_ul {
@@ -203,6 +207,17 @@ textarea {
     text-align: left;
     li {
       padding: 0.5rem;
+      font-weight: bold;
+    }
+    .imgarea.nav_img {
+      height: 100%;
+      text-align: center;
+      img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        // margin: 2rem 0;
+      }
     }
   }
 }
@@ -293,7 +308,7 @@ textarea {
     object-fit: cover;
     &:hover {
       cursor: pointer;
-      opacity: .8;
+      opacity: 0.8;
     }
   }
 }
@@ -325,8 +340,8 @@ textarea {
 
 .file-btn {
   position: absolute;
-  bottom: 10px;
-  left: 10px;
+  bottom: 24px;
+  left: 6px;
 }
 
 // お気に入りボタン
@@ -388,16 +403,16 @@ textarea {
   flex-wrap: wrap;
   li {
     border: 2px solid #7c7979;
-    width: 14rem;
-    height: 14rem;
-    margin: 0.8rem;
+    width: 16rem;
+    height: 19rem;
+    margin: 0.2rem;
     position: relative;
-    .imgarea {
-      width: 14rem;
-      height: 8rem;
+    .imgarea.allimgarea {
+      height: 10rem;
       display: flex;
       justify-content: center;
       align-items: center;
+      margin-right: 0;
       .category_name {
         display: inline-block;
         position: absolute;
@@ -405,18 +420,18 @@ textarea {
         left: 2px;
         font-size: 2px;
         font-weight: bold;
-        color: #cfcfcf;
+        color: #fff;
         text-align: center;
         line-height: 40px;
         width: 80px;
         height: 40px;
         background-color: $mainColor;
         border-radius: 40px;
-        z-index: -99;
+        //z-index: -99;
       }
       img {
-        width: 6rem;
-        height: 6rem;
+        width: 7rem;
+        height: 7rem;
         object-fit: cover;
       }
       &:hover {
@@ -427,10 +442,15 @@ textarea {
       width: 92%;
       text-align: center;
       margin: 0 auto;
-      padding: 0.4rem 0;
+      padding: 1rem 0;
       border: 1px dotted #7c7979;
-      div span {
-        font-weight: bold;
+      div {
+        max-width: 100%;
+        height: 1.5rem;
+        overflow: scroll;
+        span {
+          font-weight: bold;
+        }
       }
       .pro_price {
         color: rgb(252, 22, 22);
@@ -443,56 +463,94 @@ textarea {
 .product-area {
   margin: 0 auto;
   display: flex;
-  .product-image {
+  .product-image{
     position: relative;
-    width: 500px;
+    width: 50%;
     height: 600px;
-    border: 1px solid #7c7979;
-    p {
+    border: 2px solid #7c7979;
+    .category_name {
+      display: inline-block;
+      text-align: center;
+      line-height: 120px;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: $mainColor;
+      color: #fff;
+      font-size: 14px;
+      font-weight: bold;
+      margin: 1rem;
+    }
+    img {
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%,-50%);
+      width: 400px;
+      height: 400px;
+      object-fit: cover;
+      z-index: -110;
     }
   }
   .product-disp {
     width: 40%;
+    height: 600px;
     margin: 0 auto;
-    .product-name {
-      text-align: center;
+    border: 2px solid #7c7979;
+    background-color: #0f80fa67;
+    .details {
+      display: flex;
       padding: 2rem;
       margin-bottom: 2rem;
-      border-bottom: 1px solid #7c7979;
-    }
-    .product-price {
-      text-align: right;
-      font-size: 24px;
-      padding: 1rem;
-    }
-    .product-order {
-      text-align: right;
-      margin-bottom: 2rem;
+      border-bottom: 2px dotted #7c7979;
+      font-size: 1rem;
+      font-weight: bold;
+      .details-info {
+        width: 100%;
+        div {
+          padding: 0.2rem 0;
+        }
+        input[type=text] {
+          width: 3rem;
+        }
+      }
+      .details-input {
+        text-align: right;
+        .btn {
+          color: #fff;
+          margin-left: 0;
+        }
+      }
+      .pro_price {
+        color: red;
+      }
     }
     .product-text {
-      border: 1px solid #7c7979;
-      width: 100%;
-      height: 320px;
+      border: 2px solid #7c7979;
+      background-color: #fff;
+      width: 90%;
+      height: 300px;
       padding: 1rem;
-      margin-bottom: 2rem;
+      margin: 2.5rem auto;
+      overflow: scroll;
     }
   }
 }
 //レビューエリア
 .review-area {
+  margin-top: 4rem; 
   .review {
     margin: 0 auto;
-    border: 1px solid #7c7979;
-    width: 800px;
+    border: 2px solid #7c7979;
+    width: 90%;
     height: 300px;
     margin-bottom: 2.5rem;
-    span {
-      display: inline-block;
-      padding: 1rem;
+    .review-user {
+      border-bottom: 2px dotted #7c7979;
+      span {
+        display: inline-block;
+        padding: 1rem;
+      }
     }
     p {
       padding: 1rem;
@@ -559,8 +617,8 @@ textarea {
 }
 
 .create-table {
-  width: 90%;
-  margin: 3rem auto;
+  width: 95%;
+  margin: 3rem 0;
   border: 1px solid #7c7979;
   th {
     width: 30%;
@@ -569,7 +627,8 @@ textarea {
   td {
     width: 70%;
   }
-  th, td {
+  th,
+  td {
     padding: 1rem 2rem;
     border: 1px solid #7c7979;
   }
@@ -624,24 +683,28 @@ textarea {
   margin: 3rem 0;
 }
 
-
 // 管理者ようページ
 .admin-table {
-  width: 90%;
-  margin: 3rem auto;
+  width: 95%;
+  margin: 3rem 0;
   border: 1px solid #7c7979;
   th {
     font-weight: bold;
     border-bottom: 1px solid #7c7979;
+    background: #81818180;
   }
-  th, td {
+  th,
+  td {
     padding: 1rem;
+    // max-width: calc(100% / 5);
+    // overflow: scroll;
   }
   td {
     border-bottom: 1px dotted #7c7979;
   }
   label {
     font-size: 1rem;
+    margin: 0;
   }
   img {
     width: 36px;
@@ -650,6 +713,9 @@ textarea {
   }
 }
 
+.edit-img {
+  display: flex;
+}
 //フッター
 footer {
   background-color: #7c7979;

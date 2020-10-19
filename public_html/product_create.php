@@ -10,7 +10,7 @@ $categories = $app->getCategories();
 <div class="container">
   <p>権限：1=一般ユーザー、99=管理者</p>
   <form action="product_create.php" method="post" id="userupdate" class="form pro_form" enctype="multipart/form-data">
-    <div class="col-md-8">
+    <div class="col-md-8 pro-create">
       <div class="form-group">
         <label>商品名
           <input type="text" name="product_name" value="<?= isset($app->getValues()->product_name) ? h($app->getValues()->product_name) : ''; ?>" class="form-control">
@@ -27,9 +27,9 @@ $categories = $app->getCategories();
         <label>カテゴリー</label>
         <select name="category_id">
           <option value="" selected disabled>-- 選択してください --</option>
-          <?php foreach($categories as $category) : ?>
+          <?php foreach ($categories as $category) : ?>
             <option value="<?= $category->id ?>" <?= array_key_exists('category_id', $_POST) && $_POST['category_id'] == $category->id ? 'selected' : ''; ?>><?= $category->category_name ?></option>
-          <?php endforeach ; ?>
+          <?php endforeach; ?>
         </select>
         <p class="err"><?= h($app->getErrors('category_id')) ?></p>
       </div>
@@ -45,7 +45,7 @@ $categories = $app->getCategories();
         <p class="err"><?= h($app->getErrors('details')) ?></p>
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group edit-img">
       <div class="imgarea ">
         <label>
           <span class="btn-gray file-btn">
@@ -58,13 +58,12 @@ $categories = $app->getCategories();
         </label>
       </div>
     </div>
-
-    <input type="submit" class="btn btn-primary" value="登録">
+    <input type="submit" class="btn btn-primary btn-lg" value="登録">
     <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
 
-    <a href="<? SITE_URL ?>/product_manage.php" onclick="history.back()" class="btn btn-primary">戻る</a>
+    <a href="<?= SITE_URL ?>/product_manage.php" onclick="history.back()" class="btn btn-outline-primary bt-sm">戻る</a>
   </form>
-</div>
+</div> <!--  container  -->
 
 <?php
 require_once(__DIR__ . "/footer.php");

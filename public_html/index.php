@@ -2,7 +2,7 @@
 require_once(__DIR__ . '/header.php');
 ?>
 <div class="title index">
-  <h1 class="page__ttl">牛丸楽器</h1>
+  <h1 class="page__ttl">ウシマル楽器</h1>
   <form action="product_search.php" method="get" class="form-group form-search">
     <div class="form-group">
       <input type="text" name="keyword" placeholder="　検索したい商品名">

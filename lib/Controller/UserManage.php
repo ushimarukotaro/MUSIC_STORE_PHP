@@ -23,8 +23,8 @@ class UserManage extends \Shop\Controller {
   public function adminDispShow() {
     $userModel = new \Shop\Model\User();
     $product = $userModel->adminDispShow([
-      'id' => $_POST['id'],
-      'product_name' => $_POST['product_name'],
+      'product_id' => $_GET['product_id'],
+      // 'product_name' => $_POST['product_name'],
     ]);
     return $product;
   }

@@ -46,8 +46,6 @@ $app->run();
       <p class="err"></p>
     </div>
   </form>
-  <?php //if(isset($app->getValues()->image)): ?>
-  <?php //endif; ?>
   <form class="user-delete" action="user_delete_confirm.php" method="post">
     <input type="submit" class="btn btn-default" value="退会する">
     <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">

@@ -82,9 +82,9 @@ class User extends \Shop\Model {
   }
 
   public function adminDispShow($values) {
-    $stmt = $this->db->prepare("SELECT p.id,p.product_name,p.maker,p.price,p.image,p.details,p.created,c.category_name FROM products AS p INNER JOIN categories AS c ON p.category_id = c.id WHERE p.id = :id");
+    $stmt = $this->db->prepare("SELECT p.id,p.product_name,p.maker,p.price,p.image,p.details,p.created,p.delflag,c.id,c.category_name FROM products AS p INNER JOIN categories AS c ON p.category_id = c.id WHERE p.id = :id");
     $stmt->execute([
-      ':id' => $values['id'],
+      ':id' => $values['product_id'],
     ]);
     return $stmt->fetch(\PDO::FETCH_OBJ);
   }

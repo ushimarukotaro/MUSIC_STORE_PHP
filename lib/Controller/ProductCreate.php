@@ -64,7 +64,6 @@ class ProductCreate extends \Shop\Controller {
           $this->setErrors('email', $e->getMessage());
           return;
         }
-
         header('Location: ' . SITE_URL . '/product_manage.php');
         exit();
       

@@ -1,5 +1,9 @@
 <?php
 require_once(__DIR__ . '/header.php');
+$showProductAll = new Shop\Model\Product();
+$product_id = $_GET['id'];
+$product = $showProductAll->productShow($product_id);
+// var_dump($product);
 ?>
 <div class="title">
   <h1 class="page__ttl">商品詳細</h1>
@@ -15,44 +19,40 @@ require_once(__DIR__ . '/header.php');
 </div>
 <div class="product-area">
   <div class="product-image">
-    <p>画像イメージ</p>
+    <span class="category_name"><?= $product->category_name ?></span>
+    <img class="" src="./gazou/<?= $product->image ?>">
   </div>
   <div class="product-disp">
     <form action="" method="post" class="form">
-      <div class="product-name">
-        <h4>Gibson レスポール</h4>
+      <div class="details">
+        <div class="details-info">
+          <div><span class="pro_maker"><?= $product->maker ?></span></div>
+          <div><span class="pro_name"><?= $product->product_name ?></span></div>
+          <div><span class="pro_price">¥<?= number_format($product->price) ?>(税抜き)</span></div>
+          <div><span class="pro_price_taxin">¥<?= number_format(floor($product->price * 1.10)) ?>(税込み)</span></div>
+          <span class="product-order">
+            注文数：<input type="text" name="order" value="1">
+          </span>
+        </div>
+        <div class="details-input">
+          <button type="submit" formaction="product_favorite.php" class="btn btn-warning" value=""><i class="far fa-star"></i>欲しい物に追加</button>
+          <button type="submit" formaction="cart_list.php" class="btn btn-primary" value=""><i class="fas fa-cart-plus"></i>カートに入れる</button>
+        </div>
       </div>
-      <div class="product-price">
-        <p>¥200,000</p>
-      </div>
-      <div class="product-order">
-        注文数：<input type="text" name="order" value="1">
-      </div>
-      <p class="product-text">
-        商品説明商品説明商品説明商品説明商品説明商品説明商品説明商品説明商品説明商品説明商品説明
-        商品説明商品説明商品説明商品説明商品説明商品説明商品説明商品説明商品説明商品説明商品説明
-        商品説明商品説明商品説明商品説明商品説明商品説明商品説明商品説明商品説明商品説明商品説明
-      </p>
-      <input type="submit" formaction="product_favorite.php" class="btn btn-primary" value="欲しい物に追加">
-      <input type="submit" formaction="cart_list.php" class="btn btn-primary" value="カートに入れる">
+      <p class="product-text"><?= $product->details ?></p>
+
     </form>
   </div>
 </div>
 <div class="review-area">
-  <h2 class="page__ttl">レビュー</h2>
   <div class="review">
-    <span>投稿者：牛丸</span>
-    <span>投稿日：2020/07/21</span>
-    <p>
-      めっちゃよかった。なぜならめっちゃよかったから
-    </p>
-  </div>
-  <div class="review">
-    <span>投稿者：タケミッチ</span>
-    <span>投稿日：2020/07/03</span>
-    <p>
-      めっちゃよかった。なぜならめっちゃよかったから
-    </p>
+    <div class="review-user">
+      <span>投稿者：牛丸</span>
+      <span>投稿日：2020/07/21</span>
+    </div>
+    <div class="review-details">
+      <p>めっちゃよかった。なぜならめっちゃよかったから</p>
+    </div>
   </div>
 </div>
 <?php

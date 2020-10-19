@@ -1,5 +1,6 @@
 <?php
 require_once(__DIR__ . '/../config/config.php');
+$r = rand(0,2);
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -10,7 +11,7 @@ require_once(__DIR__ . '/../config/config.php');
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Cache-Control" content="no-cache">
-  <title>My Shopping Site</title>
+  <title>ウシマル楽器</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
   <link href="https://fonts.googleapis.com/css?family=Charm|M+PLUS+Rounded+1c&amp;subset=latin-ext,thai,vietnamese" rel="stylesheet">
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -46,7 +47,7 @@ require_once(__DIR__ . '/../config/config.php');
                   <span class="name init-bottom"><?= h($_SESSION['me']->username); ?></span></a>
                 <ul class="prof-dropdown">
                   <li><a href="<?= SITE_URL; ?>/product_favorite.php" class="name">欲しい物リスト</a></li>
-                  <li><a href="<?= SITE_URL; ?>/cart_list.php" class="name">カート</a></li>
+                  <li><a href="<?= SITE_URL; ?>/cart_list.php" class="name">カート<i class="fas fa-shopping-cart"></i></a></li>
                   <form action="logout.php" method="post" id="logout">
                     <li><label>
                         <span class="name">ログアウト</span>
@@ -76,17 +77,30 @@ require_once(__DIR__ . '/../config/config.php');
     </div>
   </header>
   <div class="body_wrap">
-    <nav class="nav-left">
-      <h3>ジャンル別</h3>
-      <ul class="left_ul">
-        <li><a href="">ギター</a></li>
-        <li><a href="">ベース</a></li>
-        <li><a href="">ドラム</a></li>
-        <li><a href="">キーボード</a></li>
-        <li><a href="">マイク</a></li>
-        <li><a href="">アンプ</a></li>
-        <li><a href="">エフェクター</a></li>
-        <li><a href="">アクセサリー</a></li>
-      </ul>
-    </nav>
+    <form id="product-category">
+      <nav class="nav-left">
+        <h3>ジャンル別</h3>
+        <ul class="left_ul">
+          <li><a href="<?= SITE_URL; ?>/product_category.php?id=1" class="item" onclick="document.getElementById('product_category').submit">ギター</a></li>
+          <li><a href="<?= SITE_URL; ?>/product_category.php?id=2" class="item" onclick="document.getElementById('product_category').submit">ベース</a></li>
+          <li><a href="<?= SITE_URL; ?>/product_category.php?id=3" class="item" onclick="document.getElementById('product_category').submit">ドラム</a></li>
+          <li><a href="<?= SITE_URL; ?>/product_category.php?id=4" class="item" onclick="document.getElementById('product_category').submit">キーボード</a></li>
+          <li><a href="<?= SITE_URL; ?>/product_category.php?id=5" class="item" onclick="document.getElementById('product_category').submit">マイク</a></li>
+          <li><a href="<?= SITE_URL; ?>/product_category.php?id=6" class="item" onclick="document.getElementById('product_category').submit">アンプ</a></li>
+          <li><a href="<?= SITE_URL; ?>/product_category.php?id=7" class="item" onclick="document.getElementById('product_category').submit">エフェクター</a></li>
+          <li><a href="<?= SITE_URL; ?>/product_category.php?id=8" class="item" onclick="document.getElementById('product_category').submit">アクセサリー</a></li>
+          <div class="imgarea nav_img">
+            <a href="<?= SITE_URL; ?>/index.php">
+              <?php if ($r == 0) : ?>
+                <img src="./asset/img/animal_music_band.png" alt="">
+              <?php elseif ($r == 1) : ?>
+                <img src="./asset/img/楽器屋.png" alt="">
+              <?php else : ?>
+                <img src="./asset/img/music_band_studio.png" alt="">
+              <?php endif; ?>
+            </a>
+          </div>
+        </ul>
+      </nav>
+    </form>
     <div class="wrapper">
