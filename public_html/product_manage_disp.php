@@ -7,7 +7,7 @@ $product = $adminCon->adminDispShow($product_id);
 $app = new Shop\Controller\ProductCreate();
 $app->run();
 $categories = $app->getCategories();
-// var_dump($product);
+var_dump($product->delflag);
 ?>
 <div class="title">
   <h1 class="page__ttl">商品詳細変更</h1>
@@ -54,7 +54,7 @@ $categories = $app->getCategories();
           カテゴリー
         </th>
         <td>
-          <select name="category_id">
+          <select class="select" name="category_id">
             <?php foreach ($categories as $category) : ?>
               <option value="<?= $category->id ?>" <?= $category->id == $product->id ? 'selected' : ''; ?>><?= $category->category_name ?></option>
             <?php endforeach; ?>
@@ -67,6 +67,19 @@ $categories = $app->getCategories();
         </th>
         <td>
           <input type="text" name="price" class="form-control" value="<?= h($product->price) ?>">
+        </td>
+      </tr>
+      <tr>
+        <th>
+          削除フラグ
+          
+        </th>
+        <td>
+          <select class="select" name="delflag">
+            <option value="0" <?= $product->delflag == 0 ? 'selected' : ''; ?>>表示</option>
+            <option value="1" <?= $product->delflag == 1 ? 'selected' : ''; ?>>削除</option>
+          </select>
+          <!-- <input type="text" name="delflag" class="form-control" value=""> -->
         </td>
       </tr>
       <tr>

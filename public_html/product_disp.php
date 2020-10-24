@@ -9,11 +9,11 @@ $product = $showProductAll->productShow($product_id);
   <h1 class="page__ttl">商品詳細</h1>
   <form action="product_search.php" method="get" class="form-group form-search">
     <div class="form-group">
-      <input type="text" name="keyword" placeholder="　検索">
+      <input type="text" name="keyword" placeholder="　検索したい商品名" value="">
     </div>
     <div class="form-group">
       <button type="submit" value="" class="search-btn"><i class="fa fa-search" aria-hidden="true"></i></button>
-      <input type="hidden" name="type" value="searchthread">
+      <input type="hidden" name="type" value="product_search">
     </div>
   </form>
 </div>
@@ -26,20 +26,20 @@ $product = $showProductAll->productShow($product_id);
     <form action="" method="post" class="form">
       <div class="details">
         <div class="details-info">
-          <div><span class="pro_maker"><?= $product->maker ?></span></div>
-          <div><span class="pro_name"><?= $product->product_name ?></span></div>
-          <div><span class="pro_price">¥<?= number_format($product->price) ?>(税抜き)</span></div>
-          <div><span class="pro_price_taxin">¥<?= number_format(floor($product->price * 1.10)) ?>(税込み)</span></div>
+          <div><span class="pro_maker"><?= h($product->maker) ?></span></div>
+          <div><span class="pro_name"><?= h($product->product_name) ?></span></div>
+          <div><span class="pro_price">¥<?= h(number_format($product->price)) ?>(税抜き)</span></div>
+          <div><span class="pro_price_taxin">¥<?= h(number_format(floor($product->price * 1.10))) ?>(税込み)</span></div>
           <span class="product-order">
             注文数：<input type="text" name="order" value="1">
           </span>
         </div>
         <div class="details-input">
-          <button type="submit" formaction="product_favorite.php" class="btn btn-warning" value=""><i class="far fa-star"></i>欲しい物に追加</button>
+          <div id="fav__btn" class="btn btn-dark fav__btn <?= isset($showProductAll->fav_id) ? ' active' : ''; ?>" value=""><i class="far fa-star"></i>欲しい物に追加</div>
           <button type="submit" formaction="cart_list.php" class="btn btn-primary" value=""><i class="fas fa-cart-plus"></i>カートに入れる</button>
         </div>
       </div>
-      <p class="product-text"><?= $product->details ?></p>
+      <p class="product-text"><?= nl2br(h($product->details)) ?></p>
 
     </form>
   </div>

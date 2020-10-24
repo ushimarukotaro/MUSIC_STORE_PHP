@@ -42,7 +42,7 @@ class Login extends \Shop\Controller {
       session_regenerate_id(true);
       // ユーザー情報をセッションに格納
       $_SESSION['me'] = $user;
-      // スレッド一覧ページへリダイレクト
+      // 商品一覧ページへリダイレクト
       header('Location: '. SITE_URL . '/product_all.php');
       exit();
     }

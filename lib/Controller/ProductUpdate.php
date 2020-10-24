@@ -13,15 +13,6 @@ class ProductUpdate extends \Shop\Controller
     }
   }
 
-  // protected function showUser()
-  // {
-  //   $user = new \Shop\Model\User();
-  //   $userData = $user->find($_SESSION['me']->id);
-  //   $this->setValues('username', $userData->username);
-  //   $this->setValues('email', $userData->email);
-  //   $this->setValues('image', $userData->image);
-  // }
-
   protected function updateProduct() {
     try {
       $this->validate();
@@ -40,6 +31,7 @@ class ProductUpdate extends \Shop\Controller
     $this->setValues('maker', $_POST['maker']);
     $this->setValues('category_id', $_POST['category_id']);
     $this->setValues('price', $_POST['price']);
+    $this->setValues('delflag', $_POST['delflag']);
     $this->setValues('details', $_POST['details']);
     if ($this->hasError()) {
       return;
@@ -61,6 +53,7 @@ class ProductUpdate extends \Shop\Controller
             'maker' => $_POST['maker'],
             'category_id' => $_POST['category_id'],
             'price' => $_POST['price'],
+            'delflag' => $_POST['delflag'],
             'details' => $_POST['details'],
             'image' => $pro_img['name'],
             'id' => $_POST['id']
@@ -72,6 +65,7 @@ class ProductUpdate extends \Shop\Controller
             'maker' => $_POST['maker'],
             'category_id' => $_POST['category_id'],
             'price' => $_POST['price'],
+            'delflag' => $_POST['delflag'],
             'details' => $_POST['details'],
             'image' => $old_img,
             'id' => $_POST['id']

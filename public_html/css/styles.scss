@@ -31,7 +31,7 @@ textarea {
 
 .btn {
   width: 160px;
-  padding: .5rem 0;
+  padding: 0.5rem 0;
   font-size: 14px;
   font-weight: bold;
   margin: 1rem;
@@ -40,6 +40,10 @@ textarea {
 .err {
   margin: 10px 0;
   color: rgb(216, 38, 38);
+}
+
+.select {
+  padding: 0.3rem;
 }
 
 /* bbs style */
@@ -122,6 +126,9 @@ textarea {
     span {
       display: inline-block;
       padding: 1rem;
+      &:hover {
+        background-color: rgb(37, 41, 248);
+      }
     }
     .init-bottom {
       display: inline-block;
@@ -190,9 +197,8 @@ textarea {
   width: 15%;
   height: 85%;
   position: fixed;
-  left: 6px;
   text-align: center;
-  margin: 1rem 0;
+  margin: 1rem;
   h3 {
     border: 2px solid #7c7979;
     width: 85%;
@@ -223,7 +229,7 @@ textarea {
 }
 
 .wrapper {
-  max-width: 80%;
+  max-width: 82%;
   min-height: 80vh;
   margin: 0 0 0 auto;
   .title {
@@ -338,21 +344,16 @@ textarea {
   }
 }
 
-.file-btn {
-  position: absolute;
-  bottom: 24px;
-  left: 6px;
-}
-
 // お気に入りボタン
-.fav__btn {
-  font-size: 20px;
+#fav__btn {
+  // font-size: 20px;
   &.active {
-    color: rgb(232, 232, 38);
+    background-color: rgb(255, 196, 0);
+    transition: 0.3s;
+    color: #fff;
+    border-color: #fff;
   }
 }
-// .fav__btn.active {
-// }
 
 .form-search {
   display: flex;
@@ -372,7 +373,7 @@ textarea {
     border: 2px solid #323232;
     &:hover {
       cursor: pointer;
-      opacity: 0.5;
+      background-color: #797979;
     }
   }
 }
@@ -398,6 +399,13 @@ textarea {
 }
 
 // 商品一覧ページ
+
+.select-form {
+  width: 96%;
+  padding: 0.5rem;
+  background-color: #7c79798f;
+  border-radius: 6px;
+}
 .product {
   display: flex;
   flex-wrap: wrap;
@@ -405,7 +413,7 @@ textarea {
     border: 2px solid #7c7979;
     width: 16rem;
     height: 19rem;
-    margin: 0.2rem;
+    margin: 0.4rem;
     position: relative;
     .imgarea.allimgarea {
       height: 10rem;
@@ -463,7 +471,7 @@ textarea {
 .product-area {
   margin: 0 auto;
   display: flex;
-  .product-image{
+  .product-image {
     position: relative;
     width: 50%;
     height: 600px;
@@ -485,7 +493,7 @@ textarea {
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%,-50%);
+      transform: translate(-50%, -50%);
       width: 400px;
       height: 400px;
       object-fit: cover;
@@ -510,7 +518,7 @@ textarea {
         div {
           padding: 0.2rem 0;
         }
-        input[type=text] {
+        input[type="text"] {
           width: 3rem;
         }
       }
@@ -538,11 +546,11 @@ textarea {
 }
 //レビューエリア
 .review-area {
-  margin-top: 4rem; 
+  margin-top: 4rem;
   .review {
-    margin: 0 auto;
+    //margin: 0 auto;
     border: 2px solid #7c7979;
-    width: 90%;
+    width: 80%;
     height: 300px;
     margin-bottom: 2.5rem;
     .review-user {
@@ -684,22 +692,40 @@ textarea {
 }
 
 // 管理者ようページ
-.admin-table {
-  width: 95%;
-  margin: 3rem 0;
-  border: 1px solid #7c7979;
+
+.create-or-search {
+  display: flex;
+  justify-content: space-around;
+  align-items: baseline;
+  .form-search {
+    // margin-right: 2rem;
+  }
+}
+
+#fav-table {
   th {
     font-weight: bold;
     border-bottom: 1px solid #7c7979;
-    background: #81818180;
+    background-color: #007bffa8;
+    font-size: 14px;
+    #table-img {
+      padding: 0;
+    }
   }
-  th,
-  td {
+}
+
+.admin-table.table {
+  width: 98%;
+  border: 1px solid #7c7979;
+  th {
     padding: 1rem;
-    // max-width: calc(100% / 5);
-    // overflow: scroll;
+    border-top: 1px solid #7c7979;
+    // border-bottom: 1px solid #7c7979;
   }
   td {
+    max-width: 2%;
+    padding: 1rem;
+    vertical-align: middle;
     border-bottom: 1px dotted #7c7979;
   }
   label {
@@ -713,8 +739,23 @@ textarea {
   }
 }
 
-.edit-img {
+#userupdate.pro_form {
+  margin: 0;
+}
+.pro_update {
   display: flex;
+  width: 100%;
+  .edit-img {
+    position: relative;
+    margin-right: 3rem;
+    .file-btn {
+      text-align: center;
+      width: 100%;
+      position: absolute;
+      bottom: 24px;
+      left: 14px;
+    }
+  }
 }
 //フッター
 footer {
@@ -725,11 +766,10 @@ footer {
     padding-top: 2rem;
   }
   .btn-default {
+    width: 14rem;
     text-align: right;
     padding: 2rem;
-    margin-right: 1rem;
-  }
-  a {
-    color: white;
+    margin: 0 1rem 0 auto;
+    color: #fff;
   }
 }

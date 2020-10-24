@@ -36,7 +36,7 @@ class UserManage extends \Shop\Controller {
       } catch (\Shop\Exception\EmptyPost $e) {
           $this->setErrors('id', $e->getMessage());
       }
-      $this->setValues('id', $_POST['id']);
+      // $this->setValues('id', $_POST['id']);
       if ($this->hasError()) {
         return;
       } else {
@@ -51,6 +51,7 @@ class UserManage extends \Shop\Controller {
       $category_id = $_POST['category_id' . $_POST['id']];
       $image = $_POST['image' . $_POST['id']];
       $price = $_POST['price' . $_POST['id']];
+      $delflag = $_POST['delflag' . $_POST['id']];
       $details = $_POST['details' . $_POST['id']];
 
       if(empty($image)) {
@@ -64,12 +65,13 @@ class UserManage extends \Shop\Controller {
         'category_id' => $category_id,
         'image' => $image,
         'price' => $price,
+        'delflag' => $delflag,
         'details' => $details,
       ]);
       header('Location: '. SITE_URL . '/product_manage.php');
       exit();
     } elseif(isset($_POST['delete'])) {
-      $userModel->adminDelete($_POST['id']);
+      $userModel->adminDelete($_POST['product_id']);
       header('Location: '. SITE_URL . '/product_manage.php');
       exit();
     } elseif(isset($_POST['create'])) {
@@ -81,7 +83,7 @@ class UserManage extends \Shop\Controller {
   private function validate() {
     $validate = new \Shop\Controller\Validate();
     $validate->tokenCheck($_POST['token']);
-    if (is_null($_POST['product'])) {
+    if (is_null($_POST['product_id'])) {
       throw new \Shop\Exception\EmptyPost("ユーザーを選択してください");
     }
 

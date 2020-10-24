@@ -6,9 +6,9 @@ class Favorite extends \Shop\Model {
     try {
       $this->db->beginTransaction();
       // レコード取得
-      $stmt = $this->db->prepare("SELECT * FROM favorites WHERE thread_id = :thread_id AND user_id = :user_id");
+      $stmt = $this->db->prepare("SELECT * FROM favorites WHERE product_id = :product_id AND user_id = :user_id");
       $stmt->execute([
-        ':thread_id' => $values['thread_id'],
+        ':product_id' => $values['product_id'],
         ':user_id' => $values['user_id']
       ]);
       $stmt->setFetchMode(\PDO::FETCH_CLASS, 'stdClass');
@@ -16,16 +16,16 @@ class Favorite extends \Shop\Model {
 
       $fav_flag = 0;
       if (empty($rec)) {
-        $stmt = $this->db->prepare("INSERT INTO favorites (thread_id,user_id,created) VALUES (:thread_id,:user_id,now())");
+        $stmt = $this->db->prepare("INSERT INTO favorites (product_id,user_id,created) VALUES (:product_id,:user_id,now())");
         $stmt->execute([
-          ':thread_id' => $values['thread_id'],
+          ':product_id' => $values['product_id'],
           ':user_id' => $values['user_id']
         ]);
         $fav_flag = 1;
       } else {
-        $stmt = $this->db->prepare("DELETE FROM favorites WHERE thread_id = :thread_id AND user_id = :user_id");
+        $stmt = $this->db->prepare("DELETE FROM favorites WHERE product_id = :product_id AND user_id = :user_id");
         $stmt->execute([
-          ':thread_id' => $values['thread_id'],
+          ':product_id' => $values['product_id'],
           ':user_id' => $values['user_id']
         ]);
         $fav_flag = 0;

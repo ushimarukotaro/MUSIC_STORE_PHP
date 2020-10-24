@@ -18,6 +18,17 @@ $products = $showProductAll->productCategory($category_id);
     </div>
   </form>
 </div>
+<form action="" method="post">
+  <div class="form-group select-form">
+    <span style="margin-left:1rem;">並び順 : </span>
+    <select name="sort" class="sort select" onchange="submit(this.form)">
+      <option value="created_desc">新着順</option>
+      <option value="created_asc">古いもの順</option>
+      <option value="price_desc">値段が高い順</option>
+      <option value="price_asc">値段が安い順</option>
+    </select>
+  </div>
+</form>
 <form id="product_disp" action="">
   <ul class="product">
     <?php foreach($products as $product) : ?>

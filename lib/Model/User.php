@@ -48,11 +48,14 @@ class User extends \Shop\Model {
   }
 
   public function update($values) {
-    $stmt = $this->db->prepare("UPDATE users SET username = :username,email = :email, image = :image, modified = now() WHERE id = :id");
+    $stmt = $this->db->prepare("UPDATE users SET username = :username,email = :email, zip1 = :zip1, zip2 = :zip2, prefecture_id = :prefecture_id, address2 = :address2, modified = now() WHERE id = :id");
     $res = $stmt->execute([
       ':username' => $values['username'],
       ':email' => $values['email'],
-      'image' => $values['userimg'],
+      ':zip1' => $values['zip1'],
+      ':zip2' => $values['zip2'],
+      ':prefecture_id' => $values['prefecture_id'],
+      ':address2' => $values['address2'],
       ':id' => $_SESSION['me']->id,
     ]);
     if ($res === false) {
@@ -77,7 +80,7 @@ class User extends \Shop\Model {
   }
 
   public function adminShow() {
-    $stmt = $this->db->query("SELECT p.id,p.product_name,p.maker,p.price,p.image,p.details,p.created,c.category_name FROM products AS p INNER JOIN categories AS c ON p.category_id = c.id");
+    $stmt = $this->db->query("SELECT p.id,p.product_name,p.maker,p.price,p.image,p.details,p.delflag,p.created,c.category_name FROM products AS p INNER JOIN categories AS c ON p.category_id = c.id");
     return $stmt->fetchAll(\PDO::FETCH_OBJ);
   }
 
@@ -117,7 +120,7 @@ class User extends \Shop\Model {
   }
 
   public function adminDelete($values) {
-    $stmt = $this->db->prepare("DELETE FROM users WHERE id = :id");
+    $stmt = $this->db->prepare("DELETE FROM products WHERE id = :id");
     $stmt->execute([":id" => $values]);
   }
 

@@ -42,4 +42,27 @@ $(function () {
     });
     return false;
   });
+
+  $('.fav__btn').on('click', function() {
+    $('.fav__btn').toggleClass('active');
+  });
 });
+
+$(document).ready(function() {
+  $('#fav-table').tablesorter({
+    headers: {
+      0: {sorter: false},
+      1: {sorter: false}
+    }
+  });
+});
+
+function Sort_onChange(){
+  for (var i=0; i<document.f_page_size.sort.options.length; i++){
+      if (document.f_page_size.sort.options[i].selected == true){
+          document.f_search.i_sort.value = document.f_page_size.sort.options[i].value;
+          break;
+      }
+  }
+  document.f_search.submit();
+}

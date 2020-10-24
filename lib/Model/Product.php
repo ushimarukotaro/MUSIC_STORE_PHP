@@ -21,12 +21,13 @@ class Product extends \Shop\Model {
   }
 
   public function updatePro($values) {
-    $stmt = $this->db->prepare("UPDATE products SET product_name = :product_name,maker = :maker,category_id = :category_id,price = :price,details = :details, image = :image, modified = now() WHERE id = :id");
+    $stmt = $this->db->prepare("UPDATE products SET product_name = :product_name,maker = :maker,category_id = :category_id,price = :price,delflag = :delflag,details = :details, image = :image, modified = now() WHERE id = :id");
     $res = $stmt->execute([
       ':product_name' => $values['product_name'],
       ':maker' => $values['maker'],
       ':category_id' => $values['category_id'],
       ':price' => $values['price'],
+      ':delflag' => $values['delflag'],
       ':details' => $values['details'],
       'image' => $values['image'],
       ':id' => $_POST['id'],
@@ -51,7 +52,7 @@ class Product extends \Shop\Model {
 
   // 全商品取得
   public function productAll() {
-    $stmt = $this->db->query("SELECT p.id,p.product_name,p.maker,p.price,p.image,p.details,p.created,c.category_name FROM products AS p INNER JOIN categories AS c ON p.category_id = c.id WHERE delflag = 0");
+    $stmt = $this->db->query("SELECT p.id,p.product_name,p.maker,p.price,p.image,p.details,p.created,c.category_name FROM products AS p INNER JOIN categories AS c ON p.category_id = c.id WHERE delflag = 0 ORDER BY p.id DESC");
     return $stmt->fetchAll(\PDO::FETCH_OBJ);
   }
 
@@ -66,16 +67,33 @@ class Product extends \Shop\Model {
 
     //　カテゴリーごとに取得
   public function productCategory($values) {
-    $stmt = $this->db->prepare("SELECT p.id,p.product_name,p.maker,p.price,p.image,p.details,p.created,c.category_name FROM products AS p INNER JOIN categories AS c ON p.category_id = c.id WHERE c.id = :id AND delflag = 0");
+    $stmt = $this->db->prepare("SELECT p.id,p.product_name,p.maker,p.price,p.image,p.details,p.created,c.category_name FROM products AS p INNER JOIN categories AS c ON p.category_id = c.id WHERE c.id = :id AND delflag = 0 ORDER BY p.id DESC");
     $stmt->execute([
       ':id' => $_GET['id'],
     ]);
     return $stmt->fetchAll(\PDO::FETCH_OBJ);
   }
 
+    //　検索
   public function searchProduct($keyword) {
-    $stmt = $this->db->prepare("SELECT * FROM products WHERE product_name LIKE :product_name AND delflag = 0;");
+    $stmt = $this->db->prepare("SELECT p.id,p.product_name,p.maker,p.price,p.image,c.category_name FROM products AS p INNER JOIN categories AS c ON p.category_id = c.id WHERE CONCAT(p.product_name,p.maker,c.category_name) collate utf8_unicode_ci LIKE :product_name AND delflag = 0");
     $stmt->execute([':product_name' => '%'.$keyword.'%']);
+    return $stmt->fetchAll(\PDO::FETCH_OBJ);
+  }
+  
+  //　ソート
+  public function oldArrivals() {
+    $stmt = $this->db->query("SELECT p.id,p.product_name,p.maker,p.price,p.image,p.details,p.created,c.category_name FROM products AS p INNER JOIN categories AS c ON p.category_id = c.id WHERE delflag = 0");
+    return $stmt->fetchAll(\PDO::FETCH_OBJ);
+  }
+
+  public function sortPriceDesc() {
+    $stmt = $this->db->query("SELECT p.id,p.product_name,p.maker,p.price,p.image,p.details,p.created,c.category_name FROM products AS p INNER JOIN categories AS c ON p.category_id = c.id WHERE delflag = 0 ORDER BY p.price DESC");
+    return $stmt->fetchAll(\PDO::FETCH_OBJ);
+  }
+
+  public function sortPriceAsc() {
+    $stmt = $this->db->query("SELECT p.id,p.product_name,p.maker,p.price,p.image,p.details,p.created,c.category_name FROM products AS p INNER JOIN categories AS c ON p.category_id = c.id WHERE delflag = 0 ORDER BY p.price ASC");
     return $stmt->fetchAll(\PDO::FETCH_OBJ);
   }
 
