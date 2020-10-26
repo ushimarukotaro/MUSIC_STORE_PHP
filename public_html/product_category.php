@@ -5,6 +5,10 @@ $category_id = $_GET['id'];
 $category_name = $showProductAll->getCategory($category_id);
 $products = $showProductAll->productCategory($category_id);
 // var_dump($category_name);
+$showProductSort = new Shop\Controller\SortProduct();
+if (isset($_GET['i_sort'])) {
+  $products = $showProductSort->sortProductCategory();
+}
 ?>
 <div class="title">
   <h1 class="page__ttl"><?= $category_name->category_name ?></h1>
@@ -18,14 +22,14 @@ $products = $showProductAll->productCategory($category_id);
     </div>
   </form>
 </div>
-<form action="" method="post">
+<form action="" name="f_page_size" method="get">
   <div class="form-group select-form">
     <span style="margin-left:1rem;">並び順 : </span>
-    <select name="sort" class="sort select" onchange="submit(this.form)">
-      <option value="created_desc">新着順</option>
-      <option value="created_asc">古いもの順</option>
-      <option value="price_desc">値段が高い順</option>
-      <option value="price_asc">値段が安い順</option>
+    <select name="sort" class="sort select" onchange="Sort_onChange();">
+      <option value="NewArrivals" <?= array_key_exists('i_sort', $_GET) && $_GET['i_sort'] == 'NewArrivals' ? 'selected' : ''; ?>>新着順</option>
+      <option value="OldArrivals" <?= array_key_exists('i_sort', $_GET) && $_GET['i_sort'] == 'OldArrivals' ? 'selected' : ''; ?>>古いもの順</option>
+      <option value="Price_DESC" <?= array_key_exists('i_sort', $_GET) && $_GET['i_sort'] == 'Price_DESC' ? 'selected' : ''; ?>>値段が高い順</option>
+      <option value="Price_ASC" <?= array_key_exists('i_sort', $_GET) && $_GET['i_sort'] == 'Price_ASC' ? 'selected' : ''; ?>>値段が安い順</option>
     </select>
   </div>
 </form>
@@ -43,10 +47,15 @@ $products = $showProductAll->productCategory($category_id);
         <div><span class="pro_price">¥<?= number_format($product->price) ?>(税抜き)</span></div>
         <div><span class="pro_price_taxin">¥<?= number_format(floor($product->price * 1.10)) ?>(税込み)</span></div>
       </div>
-      <input type="hidden" name="id">
     </li>
     <?php endforeach; ?>
   </ul>
+</form>
+<!-- sort -->
+<form name="f_search" method="get" action="product_category.php">
+  <input type="hidden" name="i_sort" value="">
+  <input type="hidden" name="type" value="product_sort_category">
+  <input type="hidden" name="id" value="<?= $category_id; ?>">
 </form>
 <?php
 require_once(__DIR__ . '/footer.php');

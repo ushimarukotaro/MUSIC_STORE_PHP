@@ -1,7 +1,12 @@
 <?php
 require_once(__DIR__ . '/header.php');
+
 $showProductAll = new Shop\Model\Product();
 $products = $showProductAll->productAll();
+$showProductSort = new Shop\Controller\SortProduct();
+if (isset($_GET['i_sort'])) {
+  $products = $showProductSort->sortProduct();
+}
 ?>
 <div class="title">
   <h1 class="page__ttl">商品一覧</h1>
@@ -19,10 +24,10 @@ $products = $showProductAll->productAll();
   <div class="form-group select-form">
     <span style="margin-left:1rem;">並び順 : </span>
     <select name="sort" class="sort select" onchange="Sort_onChange();">
-      <option value="NewArrivals" selected>新着順</option>
-      <option value="OldArrivals">古いもの順</option>
-      <option value="Price_DESC">値段が高い順</option>
-      <option value="Price_ASC">値段が安い順</option>
+      <option value="NewArrivals" <?= array_key_exists('i_sort', $_GET) && $_GET['i_sort'] == 'NewArrivals' ? 'selected' : ''; ?>>新着順</option>
+      <option value="OldArrivals" <?= array_key_exists('i_sort', $_GET) && $_GET['i_sort'] == 'OldArrivals' ? 'selected' : ''; ?>>古いもの順</option>
+      <option value="Price_DESC" <?= array_key_exists('i_sort', $_GET) && $_GET['i_sort'] == 'Price_DESC' ? 'selected' : ''; ?>>値段が高い順</option>
+      <option value="Price_ASC" <?= array_key_exists('i_sort', $_GET) && $_GET['i_sort'] == 'Price_ASC' ? 'selected' : ''; ?>>値段が安い順</option>
     </select>
   </div>
 </form>
@@ -40,7 +45,7 @@ $products = $showProductAll->productAll();
         <div><span class="pro_price">¥<?= h(number_format($product->price)) ?>(税抜き)</span></div>
         <div><span class="pro_price_taxin">¥<?= h(number_format(floor($product->price * 1.10))) ?>(税込み)</span></div>
       </div>
-      <!-- <input type="hidden" name="id"> -->
+      <input type="hidden" name="id">
     </li>
     <?php endforeach; ?>
   </ul>

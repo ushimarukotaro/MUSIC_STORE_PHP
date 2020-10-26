@@ -73,6 +73,27 @@ class Product extends \Shop\Model {
     ]);
     return $stmt->fetchAll(\PDO::FETCH_OBJ);
   }
+  public function productCategoryOld($values) {
+    $stmt = $this->db->prepare("SELECT p.id,p.product_name,p.maker,p.price,p.image,p.details,p.created,c.category_name FROM products AS p INNER JOIN categories AS c ON p.category_id = c.id WHERE c.id = :id AND delflag = 0 ORDER BY p.id");
+    $stmt->execute([
+      ':id' => $_GET['id'],
+    ]);
+    return $stmt->fetchAll(\PDO::FETCH_OBJ);
+  }
+  public function productCategoryPriceDesc($values) {
+    $stmt = $this->db->prepare("SELECT p.id,p.product_name,p.maker,p.price,p.image,p.details,p.created,c.category_name FROM products AS p INNER JOIN categories AS c ON p.category_id = c.id WHERE c.id = :id AND delflag = 0 ORDER BY p.price DESC");
+    $stmt->execute([
+      ':id' => $_GET['id'],
+    ]);
+    return $stmt->fetchAll(\PDO::FETCH_OBJ);
+  }
+  public function productCategoryPriceAsc($values) {
+    $stmt = $this->db->prepare("SELECT p.id,p.product_name,p.maker,p.price,p.image,p.details,p.created,c.category_name FROM products AS p INNER JOIN categories AS c ON p.category_id = c.id WHERE c.id = :id AND delflag = 0 ORDER BY p.price");
+    $stmt->execute([
+      ':id' => $_GET['id'],
+    ]);
+    return $stmt->fetchAll(\PDO::FETCH_OBJ);
+  }
 
     //　検索
   public function searchProduct($keyword) {
