@@ -1,9 +1,13 @@
 <?php
 require_once(__DIR__ . '/header.php');
-$showProductAll = new Shop\Model\Product();
+$showProductDisp = new Shop\Model\Product();
 $product_id = $_GET['id'];
-$product = $showProductAll->productShow($product_id);
-// var_dump($product);
+if(isset($_SESSION['me'])) {
+  $product = $showProductDisp->productShow($product_id);
+} else {
+  $product = $showProductDisp->productShowDisp($product_id);
+}
+var_dump($product->f_id);
 ?>
 <div class="title">
   <h1 class="page__ttl">商品詳細</h1>
@@ -24,18 +28,18 @@ $product = $showProductAll->productShow($product_id);
   </div>
   <div class="product-disp">
     <form action="" method="post" class="form">
-      <div class="details">
+      <div class="details" data-productid="<?= $product_id; ?>">
         <div class="details-info">
           <div><span class="pro_maker"><?= h($product->maker) ?></span></div>
           <div><span class="pro_name"><?= h($product->product_name) ?></span></div>
-          <div><span class="pro_price">¥<?= h(number_format($product->price)) ?>(税抜き)</span></div>
-          <div><span class="pro_price_taxin">¥<?= h(number_format(floor($product->price * 1.10))) ?>(税込み)</span></div>
+          <div><span class="pro_price">¥<?= h(number_format($product->price)) ?>(税抜)</span></div>
+          <div><span class="pro_price_taxin">¥<?= h(number_format(floor($product->price * 1.10))) ?>(税込)</span></div>
           <span class="product-order">
             注文数：<input type="text" name="order" value="1">
           </span>
         </div>
         <div class="details-input">
-          <div id="fav__btn" class="btn btn-dark fav__btn <?= isset($showProductAll->fav_id) ? ' active' : ''; ?>" value=""><i class="far fa-star"></i>欲しい物に追加</div>
+          <div id="fav__btn" class="btn btn-dark fav__btn<?= isset($product->f_id) ? ' active' : ''; ?>"><i class="far fa-star"></i>欲しい物に追加</div>
           <button type="submit" formaction="cart_list.php" class="btn btn-primary" value=""><i class="fas fa-cart-plus"></i>カートに入れる</button>
         </div>
       </div>

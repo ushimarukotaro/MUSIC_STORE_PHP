@@ -3,6 +3,10 @@ require_once(__DIR__ . "/header.php");
 $adminCon = new Shop\Controller\UserManage();
 $adminCon->run();
 $products = $adminCon->adminShow();
+$searchProductsCon = new Shop\Controller\ProductSearch();
+if (isset($_GET['keyword'])) {
+  $products = $searchProductsCon->run();
+}
 ?>
 <div class="title">
   <h1 class="page__ttl">商品管理画面</h1>
@@ -10,13 +14,14 @@ $products = $adminCon->adminShow();
 <p>更新または削除を行う商品を選択してください。</p>
 <div class="create-or-search">
   <a href="product_create.php" class="btn btn-primary">商品新規登録</a>
-  <form action="product_manage_search.php" method="get" class="form-group form-search">
+  <form action="product_manage.php" method="get" class="form-group form-search">
     <div class="form-group">
-      <input type="text" name="keyword" placeholder="　絞り込み" value="">
+      <input type="text" name="keyword" placeholder="　絞り込み" value="<?= isset($searchProductsCon->getValues()->keyword) ? h($searchProductsCon->getValues()->keyword) : ''; ?>">
     </div>
+    <p class="err"><?= h($adminCon->getErrors('keyword')); ?></p>
     <div class="form-group">
       <button type="submit" value="" class="search-btn"><i class="fa fa-search" aria-hidden="true"></i></button>
-      <input type="hidden" name="type" value="product_manage_search">
+      <input type="hidden" name="type" value="product_search">
     </div>
   </form>
 </div>

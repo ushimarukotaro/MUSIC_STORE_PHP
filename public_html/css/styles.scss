@@ -407,13 +407,14 @@ textarea {
   border-radius: 6px;
 }
 .product {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   li {
     border: 2px solid #7c7979;
     width: 16rem;
     height: 19rem;
-    margin: 0.4rem;
+    margin: 0.2rem;
     position: relative;
     .imgarea.allimgarea {
       height: 10rem;
@@ -723,7 +724,9 @@ textarea {
     // border-bottom: 1px solid #7c7979;
   }
   td {
-    max-width: 2%;
+    max-width: 10rem;
+    white-space: nowrap;
+    overflow: scroll;
     padding: 1rem;
     vertical-align: middle;
     border-bottom: 1px dotted #7c7979;
@@ -755,6 +758,13 @@ textarea {
       bottom: 24px;
       left: 14px;
     }
+  }
+}
+
+.pro_form {
+  .btn-area {
+    width: 1000px;
+    text-align: center;
   }
 }
 //フッター

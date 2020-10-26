@@ -11,7 +11,7 @@ $categories = $app->getCategories();
   <p>権限：1=一般ユーザー、99=管理者</p>
   <form action="product_create.php" method="post" id="userupdate" class="form pro_form" enctype="multipart/form-data">
     <div class="pro_update">
-    <div class="form-group edit-img col-md-4">
+      <div class="form-group edit-img col-md-4">
         <div class="imgarea ">
           <label>
             <span class="btn-gray file-btn">
@@ -59,12 +59,13 @@ $categories = $app->getCategories();
           <p class="err"><?= h($app->getErrors('details')) ?></p>
         </div>
       </div>
-  </div>
+    </div>
+    <div class="btn-area">
+      <input type="submit" class="btn btn-primary btn-lg" value="登録">
+      <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
+      <a href="<?= SITE_URL ?>/product_manage.php" onclick="history.back()" class="btn btn-outline-primary bt-sm">戻る</a>
+    </div>
 
-    <input type="submit" class="btn btn-primary btn-lg" value="登録">
-    <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
-
-    <a href="<?= SITE_URL ?>/product_manage.php" onclick="history.back()" class="btn btn-outline-primary bt-sm">戻る</a>
   </form>
 </div> <!--  container  -->
 

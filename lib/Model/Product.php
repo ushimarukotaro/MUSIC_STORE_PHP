@@ -56,9 +56,18 @@ class Product extends \Shop\Model {
     return $stmt->fetchAll(\PDO::FETCH_OBJ);
   }
 
-  // 1件商品取得
+  // 1件商品取得とお気に入り情報
   public function productShow($values) {
-    $stmt = $this->db->prepare("SELECT p.id,p.product_name,p.maker,p.price,p.image,p.details,p.created,p.delflag,c.id,c.category_name FROM products AS p INNER JOIN categories AS c ON p.category_id = c.id WHERE p.id = :id");
+    $user_id = $_SESSION['me']->id;
+    $stmt = $this->db->prepare("SELECT p.id AS p_id,p.product_name,p.maker,p.price,p.image,p.details,p.created,p.delflag,c.id,c.category_name,f.id AS f_id FROM products AS p INNER JOIN categories AS c ON p.category_id = c.id LEFT JOIN favorites AS f ON p.id = f.product_id AND f.user_id = $user_id WHERE p.id = :id");
+    $stmt->execute([
+      ':id' => $_GET['id'],
+    ]);
+    return $stmt->fetch(\PDO::FETCH_OBJ);
+  }
+
+  public function productShowDisp($values) {
+    $stmt = $this->db->prepare("SELECT p.id AS p_id,p.product_name,p.maker,p.price,p.image,p.details,p.created,p.delflag,c.id,c.category_name FROM products AS p INNER JOIN categories AS c ON p.category_id = c.id WHERE p.id = :id");
     $stmt->execute([
       ':id' => $_GET['id'],
     ]);
@@ -97,7 +106,7 @@ class Product extends \Shop\Model {
 
     //　検索
   public function searchProduct($keyword) {
-    $stmt = $this->db->prepare("SELECT p.id,p.product_name,p.maker,p.price,p.image,c.category_name FROM products AS p INNER JOIN categories AS c ON p.category_id = c.id WHERE CONCAT(p.product_name,p.maker,c.category_name) collate utf8_unicode_ci LIKE :product_name AND delflag = 0");
+    $stmt = $this->db->prepare("SELECT p.id,p.product_name,p.maker,p.price,p.image,p.delflag,p.created,c.category_name FROM products AS p INNER JOIN categories AS c ON p.category_id = c.id WHERE CONCAT(p.product_name,p.maker,c.category_name) collate utf8_unicode_ci LIKE :product_name AND delflag = 0");
     $stmt->execute([':product_name' => '%'.$keyword.'%']);
     return $stmt->fetchAll(\PDO::FETCH_OBJ);
   }

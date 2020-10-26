@@ -7,7 +7,6 @@ $product = $adminCon->adminDispShow($product_id);
 $app = new Shop\Controller\ProductCreate();
 $app->run();
 $categories = $app->getCategories();
-var_dump($product->delflag);
 ?>
 <div class="title">
   <h1 class="page__ttl">商品詳細変更</h1>

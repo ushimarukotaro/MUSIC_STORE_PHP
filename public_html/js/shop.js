@@ -23,13 +23,13 @@ $(function () {
   $('.fav__btn').on('click', function () {
     var origin = location.origin;
     var $favbtn = $(this);
-    var $threadid = $favbtn.parent().parent().data('threadid');
+    var $productid = $favbtn.parent().parent().data('productid');
     var $myid = $('.prof-show').data('me');
     $.ajax({
       type: 'post',
-      url: origin + '/public_html/ajax.php',
+      url: origin + '/original_appli/public_html/ajax.php',
       data: {
-        'thread_id': $threadid,
+        'product_id': $productid,
         'user_id': $myid,
       },
       success: function (data) {
@@ -43,9 +43,9 @@ $(function () {
     return false;
   });
 
-  $('.fav__btn').on('click', function() {
-    $('.fav__btn').toggleClass('active');
-  });
+  // $('.fav__btn').on('click', function() {
+  //   $('.fav__btn').toggleClass('active');
+  // });
 });
 
 $(document).ready(function() {

@@ -469,6 +469,7 @@ textarea {
 }
 
 .product {
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -480,7 +481,7 @@ textarea {
   border: 2px solid #7c7979;
   width: 16rem;
   height: 19rem;
-  margin: 0.4rem;
+  margin: 0.2rem;
   position: relative;
 }
 
@@ -834,7 +835,9 @@ textarea {
 }
 
 .admin-table.table td {
-  max-width: 2%;
+  max-width: 10rem;
+  white-space: nowrap;
+  overflow: scroll;
   padding: 1rem;
   vertical-align: middle;
   border-bottom: 1px dotted #7c7979;
@@ -874,6 +877,11 @@ textarea {
   position: absolute;
   bottom: 24px;
   left: 14px;
+}
+
+.pro_form .btn-area {
+  width: 1000px;
+  text-align: center;
 }
 
 footer {
