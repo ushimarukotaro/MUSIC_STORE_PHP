@@ -7,7 +7,6 @@ if(isset($_SESSION['me'])) {
 } else {
   $product = $showProductDisp->productShowDisp($product_id);
 }
-var_dump($product->f_id);
 ?>
 <div class="title">
   <h1 class="page__ttl">商品詳細</h1>
@@ -27,7 +26,7 @@ var_dump($product->f_id);
     <img class="" src="./gazou/<?= $product->image ?>">
   </div>
   <div class="product-disp">
-    <form action="" method="post" class="form">
+    <form action="cart_list.php" method="post" class="form">
       <div class="details" data-productid="<?= $product_id; ?>">
         <div class="details-info">
           <div><span class="pro_maker"><?= h($product->maker) ?></span></div>
@@ -35,16 +34,18 @@ var_dump($product->f_id);
           <div><span class="pro_price">¥<?= h(number_format($product->price)) ?>(税抜)</span></div>
           <div><span class="pro_price_taxin">¥<?= h(number_format(floor($product->price * 1.10))) ?>(税込)</span></div>
           <span class="product-order">
-            注文数：<input type="text" name="order" value="1">
+            注文数：<input type="text" name="num" value="1" maxlength="2" oninput="value = value.replace(/[^0-9]+/i,'');">
           </span>
         </div>
         <div class="details-input">
           <div id="fav__btn" class="btn btn-dark fav__btn<?= isset($product->f_id) ? ' active' : ''; ?>"><i class="far fa-star"></i>欲しい物に追加</div>
-          <button type="submit" formaction="cart_list.php" class="btn btn-primary" value=""><i class="fas fa-cart-plus"></i>カートに入れる</button>
+          <button type="submit" class="btn btn-primary" value=""><i class="fas fa-cart-plus"></i>カートに入れる</button>
         </div>
       </div>
       <p class="product-text"><?= nl2br(h($product->details)) ?></p>
-
+      <input type="hidden" name="type" value="cart_in">
+      <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
+      <input type="hidden" name="id" value="<?= $product_id; ?>">
     </form>
   </div>
 </div>

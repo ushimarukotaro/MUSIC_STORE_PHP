@@ -35,6 +35,9 @@ textarea {
   font-size: 14px;
   font-weight: bold;
   margin: 1rem;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .err {
@@ -352,6 +355,9 @@ textarea {
     transition: 0.3s;
     color: #fff;
     border-color: #fff;
+    &:hover {
+      background-color: rgb(255, 227, 0);
+    }
   }
 }
 
@@ -452,6 +458,8 @@ textarea {
       text-align: center;
       margin: 0 auto;
       padding: 1rem 0;
+      white-space: nowrap;
+      overflow: scroll;
       border: 1px dotted #7c7979;
       div {
         max-width: 100%;
@@ -528,6 +536,9 @@ textarea {
         .btn {
           color: #fff;
           margin-left: 0;
+          &:hover {
+            cursor: pointer;
+          }
         }
       }
       .pro_price {
@@ -590,21 +601,123 @@ textarea {
 
 // お気に入りページ
 .favorite {
-  margin: 0 auto;
-  border: 1px solid #7c7979;
+  width: 90%;
+  margin: 2rem auto;
+  border: 2px solid #7c7979;
   tr {
-    border-bottom: 1px solid #7c7979;
+    border-bottom: 1px dotted #7c7979;
     td {
-      padding: 4rem 2rem;
+      // height: 200px;
+      text-align: center;
+      vertical-align: middle;
+      padding: 0.5rem;
+      font-weight: bold;
+      border-right: 1px dotted #7c7979;
+    }
+    .img-area {
+      width: 25%;
+      position: relative;
+      .category_name {
+        display: inline-block;
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        font-size: 2px;
+        font-weight: bold;
+        color: #fff;
+        text-align: center;
+        line-height: 40px;
+        width: 80px;
+        height: 40px;
+        background-color: $mainColor;
+        border-radius: 50px;
+        white-space: nowrap;
+        overflow: scroll;
+      }
+      img {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        &:hover {
+          opacity: 0.6;
+        }
+      }
+    }
+    .detail-area {
+      text-align: left;
+      width: 45%;
+      white-space: nowrap;
+      overflow: scroll;
+      p {
+        margin: 0.4rem;
+      }
+    }
+    .btn-area {
+      width: 30%;
+      background: #c9c9c9a4;
     }
   }
 }
 
 //カート一覧
-.cart-info,
-.purchase-btn {
+.cart-info {
   text-align: right;
-  margin: 2rem 4rem;
+  margin: 2rem 6rem;
+  font-weight: bold;
+}
+.purchase-btn {
+  display: flex;
+  justify-content: center;
+}
+.cart-table {
+  width: 94%;
+  border: 2px solid #7c79798f;
+  text-align: center;
+  tr {
+    height: 260px;
+  }
+  .img_area {
+    width: 20%;
+    vertical-align: middle;
+    img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+    }
+  }
+  .detail_area {
+    width: 60%;
+    text-align: left;
+    font-weight: bold;
+    vertical-align: middle;
+    p {
+      // margin-bottom: 0;
+    }
+    .red {
+      color: red;
+    }
+  }
+  .submit_area {
+    width: 20%;
+    background: #007bff83;
+    vertical-align: middle;
+    .product-order {
+      input[type="text"] {
+        width: 36px;
+      }
+    }
+  }
+}
+.cart_all_delete {
+  text-align: right;
+  margin-right: 4rem;
+}
+.submit_btn_area {
+  text-align: center;
+  .purchase-btn {
+    display: inline-block;
+    margin: 16px 64px;
+  }
 }
 
 //　カート削除

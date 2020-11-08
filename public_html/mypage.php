@@ -4,7 +4,7 @@ $app = new Shop\Controller\UserUpdate();
 $app->run();
 $signupCon = new Shop\Controller\Signup();
 $prefectures = $signupCon->getPrefecture();
-var_dump($_SESSION['me']);
+// var_dump($_SESSION['me']);
 ?>
 <div class="title">
   <h1 class="page__ttl">マイページ</h1>
@@ -49,8 +49,9 @@ var_dump($_SESSION['me']);
       <p class="err"></p>
     </div>
   </form>
-  <form class="user-delete" action="user_delete_confirm.php" method="post">
-    <input type="submit" class="btn btn-success" value="退会する">
+  <form id="del_user" class="user-delete" action="user_delete.php" method="post">
+    <input type="button" class="btn btn-success" value="退会する" onclick="confirmDelete();">
+    <input type="hidden" name="type" value="delete">
     <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
   </form>
 </div>

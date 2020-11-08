@@ -80,7 +80,7 @@ class User extends \Shop\Model {
   }
 
   public function adminShow() {
-    $stmt = $this->db->query("SELECT p.id,p.product_name,p.maker,p.price,p.image,p.details,p.delflag,p.created,c.category_name FROM products AS p INNER JOIN categories AS c ON p.category_id = c.id");
+    $stmt = $this->db->query("SELECT p.id,p.product_name,p.maker,p.price,p.image,p.details,p.delflag,p.created,c.category_name FROM products AS p INNER JOIN categories AS c ON p.category_id = c.id ORDER BY p.id DESC");
     return $stmt->fetchAll(\PDO::FETCH_OBJ);
   }
 

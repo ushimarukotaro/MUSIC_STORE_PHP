@@ -43,9 +43,6 @@ $(function () {
     return false;
   });
 
-  // $('.fav__btn').on('click', function() {
-  //   $('.fav__btn').toggleClass('active');
-  // });
 });
 
 $(document).ready(function() {
@@ -65,4 +62,18 @@ function Sort_onChange(){
       }
   }
   document.f_search.submit();
+}
+
+function confirmDelete() {
+  var res = confirm('退会します。\nよろしいですか？？');
+  if(res === true) {
+    document.getElementById('del_user').submit();
+  }
+}
+
+function cartAllDelete() {
+  var res = confirm('カートの中身を全て削除します。\nよろしいですか？？');
+  if(res === true) {
+    document.getElementById('cart_all_delete').submit();
+  }
 }

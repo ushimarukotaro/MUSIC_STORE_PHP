@@ -7,6 +7,10 @@ $searchProductsCon = new Shop\Controller\ProductSearch();
 if (isset($_GET['keyword'])) {
   $products = $searchProductsCon->run();
 }
+if (isset($_GET['i_get_c'])) {
+  $products = $searchProductsCon->run();
+}
+
 ?>
 <div class="title">
   <h1 class="page__ttl">商品管理画面</h1>

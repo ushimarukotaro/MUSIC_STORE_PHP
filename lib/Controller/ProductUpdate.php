@@ -5,7 +5,6 @@ namespace Shop\Controller;
 class ProductUpdate extends \Shop\Controller
 {
   public function run() {
-    // $this->showUser();
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['type'] === 'productupdate') {
       $this->updateProduct();
     } elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['type'] === 'imgdelete') {
@@ -77,7 +76,6 @@ class ProductUpdate extends \Shop\Controller
         return;
       }
     }
-    // $_SESSION['me']->username = $_POST['username'];
     header('Location: ' . SITE_URL . '/product_manage.php');
     exit();
   }
