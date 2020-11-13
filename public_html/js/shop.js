@@ -43,6 +43,7 @@ $(function () {
     return false;
   });
 
+
 });
 
 $(document).ready(function() {
@@ -77,3 +78,4 @@ function cartAllDelete() {
     document.getElementById('cart_all_delete').submit();
   }
 }
+

@@ -22,32 +22,37 @@ class CartIn extends \Shop\Controller {
 
   private function cartIn() {
     $id = $_POST['id'];
-    $num = $_POST['num'];
-    $_SESSION['cart'][$id] = $num; //セッションにデータを格納
-    $cart = array();
+    // $num = $_POST['num'];
+
     if (isset($_SESSION['cart'])) {
       $cart = $_SESSION['cart'];
+      $num = $_SESSION['num'];
     }
-    // $_SESSION['cart'] = $cart;
-    foreach ($cart as $key => $val) {
-      $cartProducts = new \Shop\Model\Product();
-      $data[0] = $val;
-      $res = $cartProducts->cartProducts($data);
+    $cart[] = $id;
+    $num[] = $_POST['num'];
+    $_SESSION['cart'] = $cart; 
+    $_SESSION['num'] = $num; //セッションにデータを格納
 
-      $name[] = $res['product_name'];
-      $maker[] = $res['maker'];
-      $price[] = $res['price'];
-      $image[] = $res['image'];
-      $category[] = $res['category_name'];
-
-      // $cart = $res;
-      // $_SESSION['cart'] = $cart;
-    }
-    var_dump($cart);
-    var_dump($res);
+    // var_dump($cart);
+    // exit;
   }
 
   private function cartDelete() {
     
+  }
+
+  public function numChange() {
+    if (isset($_POST['type']) == 'num_change') {
+
+      $max = count($_SESSION['cart']);
+
+      for ($i = 0;$i < $max; $i++) {
+        $num[] = $_POST['num' . $i];
+      }
+      $_SESSION['num'] = $num;
+  
+      header('Location:cart_list.php');
+      exit();
+    }
   }
 }

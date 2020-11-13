@@ -77,9 +77,10 @@ class Product extends \Shop\Model {
 
   //　カートに入れた商品
   public function cartProducts($values) {
-    $stmt = $this->db->prepare("SELECT p.id AS p_id,p.product_name,p.maker,p.price,p.image,c.id,c.category_name FROM products AS p INNER JOIN categories AS c ON p.category_id = c.id WHERE p.id = :id");
+    $cart = $_SESSION['cart'];
+    $stmt = $this->db->prepare("SELECT p.id AS p_id,p.product_name,p.maker,p.price,p.image,c.category_name FROM products AS p INNER JOIN categories AS c ON p.category_id = c.id WHERE p.id = :id");
     $stmt->execute([
-      ':id' => $_POST['id'],
+      ':id' => $values,
     ]);
     return $stmt->fetch(\PDO::FETCH_ASSOC);
   }

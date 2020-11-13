@@ -2,6 +2,7 @@
 session_start();
 $session_name = session_name();
 $_SESSION['cart'] = array();
+$_SESSION['num'] = array();
 // unset($_SESSION['cart']);
 if (isset($_COOKIE[$session_name]) === true) {
   setcookie($session_name, '', time() - 3600);

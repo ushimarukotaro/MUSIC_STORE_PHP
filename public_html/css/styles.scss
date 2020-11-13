@@ -166,6 +166,26 @@ textarea {
       padding: 1rem;
       height: 100%;
     }
+    .cart-icon {
+      position: relative;
+      .count-cart {
+        position: absolute;
+        top: 50%;
+        left: 120px;
+        transform: translateY(-50%);
+        display: inline-block;
+        background-color: #fff;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        font-size: 14px;
+        text-align: center;
+        line-height: 24px;
+      }
+      .not_display {
+        display: none;
+      }
+    }
     label {
       color: #007bff;
       font-size: 16px;
@@ -671,10 +691,10 @@ textarea {
 }
 .cart-table {
   width: 94%;
-  border: 2px solid #7c79798f;
   text-align: center;
   tr {
-    height: 260px;
+    height: 220px;
+    border: 2px solid #7c79798f;
   }
   .img_area {
     width: 20%;
@@ -706,6 +726,12 @@ textarea {
         width: 36px;
       }
     }
+  }
+}
+.empty-cart {
+  text-align: center;
+  a {
+    font-size: 1rem;
   }
 }
 .cart_all_delete {

@@ -24,6 +24,7 @@ $r = rand(0,2);
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/js/jquery.tablesorter.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/css/theme.default.min.css">
 <link rel="stylesheet" href="./css/styles.css">
+
 </head>
 
 <body>
@@ -51,7 +52,7 @@ $r = rand(0,2);
                   <span class="name init-bottom"><?= h($_SESSION['me']->username); ?></span></a>
                 <ul class="prof-dropdown">
                   <li><a href="<?= SITE_URL; ?>/product_favorite.php" class="name">欲しい物リスト</a></li>
-                  <li><a href="<?= SITE_URL; ?>/cart_list.php" class="name">カート<i class="fas fa-shopping-cart"></i></a></li>
+                  <li class="cart-icon"><a href="<?= SITE_URL; ?>/cart_list.php" class="name">カート<i class="fas fa-shopping-cart"></i></a><span class="count-cart <?= !isset($_SESSION['cart']) ? 'not_display' : ''; ?>"><?= isset($_SESSION['cart']) ? count($_SESSION['cart']) : ''; ?></span></li>
                   <form action="logout.php" method="post" id="logout">
                     <li><label>
                         <span class="name">ログアウト</span>
