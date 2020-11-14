@@ -684,6 +684,12 @@ textarea {
   text-align: right;
   margin: 2rem 6rem;
   font-weight: bold;
+  &.total-price {
+    width: 400px;
+    margin: 0 6rem 0 auto;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #323232;
+  }
 }
 .purchase-btn {
   display: flex;
