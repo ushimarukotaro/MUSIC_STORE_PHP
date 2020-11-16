@@ -4,7 +4,6 @@ $app = new Shop\Controller\CartIn();
 $app->run();
 $cart = $_SESSION['cart'];
 $num = $_SESSION['num'];
-// var_dump($num);
 ?>
 <div class="title">
   <h1 class="page__ttl">カート一覧</h1>

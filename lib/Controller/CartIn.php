@@ -20,7 +20,6 @@ class CartIn extends \Shop\Controller {
 
   private function cartIn() {
     $id = $_POST['id'];
-    // $num = $_POST['num'];
 
     if (isset($_SESSION['cart'])) {
       $cart = $_SESSION['cart'];
