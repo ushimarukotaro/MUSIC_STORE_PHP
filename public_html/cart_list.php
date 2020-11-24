@@ -2,8 +2,10 @@
 require_once(__DIR__ . '/header.php');
 $app = new Shop\Controller\CartIn();
 $app->run();
-$cart = $_SESSION['cart'];
-$num = $_SESSION['num'];
+if (isset($_SESSION['cart']) && isset($_SESSION['num'])) {
+  $cart = $_SESSION['cart'];
+  $num = $_SESSION['num'];
+}
 ?>
 <div class="title">
   <h1 class="page__ttl">カート一覧</h1>
@@ -47,7 +49,7 @@ $num = $_SESSION['num'];
                 注文数：<input type="text" name="num<?= $i; ?>" value="<?= h($num[$i]); ?>" maxlength="2" oninput="value = value.replace(/[^0-9]+/i,'');">
               </span>
               <?php $totalPrice = h(number_format(floor($price[$i] * $num[$i] * 1.1))); ?>
-              <p><?= $totalPrice; ?>（込）</p>
+              <p>小計￥<?= $totalPrice; ?>（込）</p>
               <input type="hidden" name="type" value="num_change">
               <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
   </form>
@@ -62,13 +64,14 @@ $num = $_SESSION['num'];
 <?php endfor; ?>
 </tbody>
 </table>
-
-<input type="button" value="数量変更" class="btn btn-success" onclick="document.getElementById('num_change').submit();">
+<div class="change_button_area">
+  <input type="button" value="数量変更" class="btn btn-success" onclick="document.getElementById('num_change').submit();">
+  <form id="cart_all_delete" action="cart_delete_all.php" class="cart_all_delete">
+    <input type="button" class="btn btn-dark" value="カートを空にする" onclick="cartAllDelete();">
+  </form>
+</div>
 <p class="cart-info total-price">合計　¥<?= $app->showSubTotal(); ?>（税込）</p>
 
-<form id="cart_all_delete" action="cart_delete_all.php" class="cart_all_delete">
-  <input type="button" class="btn btn-dark" value="カートを空にする" onclick="cartAllDelete();">
-</form>
 <form action="purchase_confirm.php" id="cart_in" method="post">
   <div class="submit_btn_area">
     <span class="purchase-btn">
@@ -78,6 +81,7 @@ $num = $_SESSION['num'];
       <a class="btn btn-outline-primary" href="javascript:history.back();">戻る</a>
     </span>
   </div>
+  <input type="hidden" name="id" value="<?= $pro_id ?>">
 </form>
 <?php endif; ?>
 <?php

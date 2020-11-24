@@ -24,6 +24,11 @@ class CartIn extends \Shop\Controller {
     if (isset($_SESSION['cart'])) {
       $cart = $_SESSION['cart'];
       $num = $_SESSION['num'];
+      if(in_array($id,$cart)) {
+        echo 'コチラの商品はカートに追加済みです';
+        echo '<a class="btn btn-link" href="javascript:history.back();">戻る</a>';
+        exit();
+      }
     }
     $cart[] = $id;
     $num[] = $_POST['num'];

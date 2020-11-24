@@ -128,4 +128,15 @@ class User extends \Shop\Model {
     $stmt = $this->db->query("SELECT * FROM prefectures");
     return $stmt->fetchAll(\PDO::FETCH_OBJ);
   }
+
+  public function purchaseConfirmUser($values) {
+    $stmt = $this->db->prepare("SELECT u.id AS u_id,u.username,u.email,u.zip1,u.zip2,p.prefecture_name,u.address2 FROM users AS u INNER JOIN prefectures AS p ON u.prefecture_id = p.id WHERE u.id = :u_id");
+    $stmt->execute([
+      ':u_id' => $_SESSION['me']->id,
+    ]);
+    $stmt->setFetchMode(\PDO::FETCH_CLASS, 'stdClass');
+    $user = $stmt->fetch();
+    return $user;
+  }
 }
+

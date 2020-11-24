@@ -1,18 +1,27 @@
 <?php
 require_once(__DIR__ . '/header.php');
+$app = new Shop\Controller\PurchaseDone();
+$app->run();
+$cart = $_SESSION['cart'];
+$num = $_SESSION['num'];
 ?>
+
 <div class="title">
   <h1 class="page__ttl">購入完了</h1>
 </div>
-<p class="user-disp">購入しました。<br>ご利用ありがとうございました。<br>またのご利用お待ちしております。</p>
-<div class="container">
-  <form class="user-confirm" action="user_update_done.php" method="post">
-    <a class="btn btn-primary" href="product_all.php">トップへ</a>
-    <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
-    <input type="hidden" name="type" value="delete">
-  </form>
+<div class="thanks_wrap">
+  <div class="thanks_sentence">
+    <p>購入手続きが完了しました。</p>
+    <p><?= $_SESSION['me']->email ?>宛にメールが送信されます。ご確認ください。</p>
+    <p>ご利用ありがとうございました。</p>
+    <p>またのご利用お待ちしております。</p>
+  </div>
+  <div class="thanks_img">
+    <img src="./asset/img/ojigi_tenin_woman.png">
+  </div>
 </div>
-<!--container -->
+<a class="btn btn-primary back-to-top" href="product_all.php">商品一覧に戻る</a>
+
 <?php
 require_once(__DIR__ . '/footer.php');
 ?>

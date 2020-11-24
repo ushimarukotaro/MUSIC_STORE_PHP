@@ -861,6 +861,12 @@ textarea {
   width: 36px;
 }
 
+.change_button_area {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 .empty-cart {
   text-align: center;
 }
@@ -883,12 +889,100 @@ textarea {
   margin: 16px 64px;
 }
 
+.conf_wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.conf_wrap .cart-table.purchase-table {
+  width: 50%;
+}
+
+.conf_wrap .cart-table.purchase-table tr {
+  height: 160px;
+}
+
+.conf_wrap .cart-table.purchase-table tr .img_area.confirm_img img {
+  width: 80px;
+  height: 80px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.conf_wrap .cart-table.purchase-table tr .img_area.confirm_img {
+  width: 25%;
+}
+
+.conf_wrap .cart-table.purchase-table tr .detail_area.confirm_detail {
+  width: 40%;
+}
+
+.conf_wrap .cart-table.purchase-table tr .submit_area.confirm_submit {
+  width: 35%;
+  font-weight: bold;
+}
+
+.address_confirm_area {
+  width: 40%;
+  border: 2px solid #7c7979;
+  height: 400px;
+}
+
+.address_confirm_area .send_address_show {
+  font-size: 14px;
+  font-weight: bold;
+  padding: 1em;
+}
+
+.price_area {
+  text-align: left;
+  width: 400px;
+}
+
+.price_area .confirm-price {
+  font-weight: bold;
+  margin: 2rem;
+  padding: 1.5rem;
+  border-bottom: 2px solid #7c7979;
+}
+
 .wrap {
   margin-top: 2rem;
 }
 
 .wrap p {
   margin-bottom: 2rem;
+}
+
+.thanks_wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.thanks_wrap .thanks_sentence p {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.thanks_wrap .thanks_img img {
+  width: 160px;
+  height: 280px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.back-to-top {
+  margin: 0 0 50px 200px;
 }
 
 .pro_form select {

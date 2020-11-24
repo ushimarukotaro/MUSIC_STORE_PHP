@@ -159,4 +159,14 @@ class Product extends \Shop\Model {
     return $stmt->fetchAll(\PDO::FETCH_OBJ);
   }
 
+  //購入完了
+  public function purchaseDone($values) {
+    $stmt = $this->db->prepare("INSERT INTO histories (product_id,user_id,num,created) VALUES (:product_id,:user_id,num,now())");
+    $res = $stmt->execute([
+      ':product_id' => $values['id'],
+      ':user_id' => $values['user_id'],
+      ':num' => $values['num']
+    ]);
+    $stmt->fetchAll(\PDO::FETCH_OBJ);
+  }
 }
