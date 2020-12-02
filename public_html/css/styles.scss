@@ -866,6 +866,14 @@ textarea {
 }
 
 //購入りれき
+
+.purchase-day {
+  background-color: #007bffce;
+  span {
+    // font-weight: 100;
+    color: #fff;
+  }
+}
 .pro_create_history {
   margin: 2rem auto;
   width: 90%;
@@ -875,22 +883,62 @@ textarea {
 }
 
 //レビュー確認
+.review-form {
+  table {
+    border-collapse: separate; //テーブルの角を丸めるため
+    width: 70%;
+    border: 1px solid #ced4da;
+    border-radius: 12px;
+    margin: 2rem 0;
+    .first_tr {
+      .t_head {
+        border-bottom: 1px dotted #ced4da;
+        border-radius: 10px 10px 0 0;
+        padding: 12px;
+        vertical-align: middle;
+        background-color: #007bffcc;
+        color: #fff;
+        p {
+          margin-bottom: 0;
+        }
+      }
+    }
+    td {
+      vertical-align: middle;
+      font-weight: bold;
+    }
+    .imgarea {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      margin: 1rem;
+    }
+  }
+}
 .review_table {
   max-width: 100%;
+  border-collapse: separate; //テーブルの角を丸めるため
   border: 1px solid #7c7979;
+  border-radius: 10px;
   margin-bottom: 2rem;
   tr {
-    border-bottom: 1px solid #7c7979;
+    // border-bottom: 1px solid #7c7979;
     th {
       width: 25%;
       font-weight: bold;
+      background-color: #7c7979b4;
+    }
+    .first-th {
+      border-radius: 10px 0 0 0;
+    }
+    .last-th {
+      border-radius: 0 0 0 10px;
     }
     td {
       width: 75%;
     }
     th,
     td {
-      border-right: 1px solid #7c7979;
       padding: 1.5rem;
     }
   }

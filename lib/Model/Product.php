@@ -161,12 +161,34 @@ class Product extends \Shop\Model {
 
   //購入完了
   public function purchaseDone($values) {
-    $stmt = $this->db->prepare("INSERT INTO histories (product_id,user_id,num,created) VALUES (:product_id,:user_id,num,now())");
+    $stmt = $this->db->prepare("INSERT INTO histories (product_id,user_id,num,created) VALUES (:product_id,:user_id,:num,now())");
     $res = $stmt->execute([
-      ':product_id' => $values['id'],
+      ':product_id' => $values['product_id'],
       ':user_id' => $values['user_id'],
       ':num' => $values['num']
     ]);
     $stmt->fetchAll(\PDO::FETCH_OBJ);
+  }
+
+  //　購入履歴表示
+  public function showPurchaseHistory($values) {
+    $stmt = $this->db->prepare("SELECT p.id AS p_id,h.created AS h_created,p.image,p.product_name,p.maker,p.price FROM products AS p INNER JOIN histories AS h ON p.id = h.product_id WHERE h.user_id = :id AND delflag = 0 ORDER BY h.created DESC");
+    $stmt->execute([
+      ':id' => $_SESSION['me']->id,
+    ]);
+    return $stmt->fetchAll(\PDO::FETCH_OBJ);
+  }
+
+  //レビュー投稿
+  public function postReview($values) {
+    $stmt = $this->db->prepare("INSERT INTO reviews (userid,productid,hyouka,content,created,modified) VALUES (:userid,:productid,:hyouka,:content,now(),now())");
+    $res = $stmt->execute([
+      ':userid' => $values['userid'],
+      ':productid' => $values['productid'],
+      ':hyouka' => $values['hyouka'],
+      ':content' => $values['content'],
+    ]);
+    // $stmt->fetchAll(\PDO::FETCH_OBJ);
+    // return $res;
   }
 }

@@ -1023,6 +1023,14 @@ textarea {
   padding: 2rem;
 }
 
+.purchase-day {
+  background-color: #007bffce;
+}
+
+.purchase-day span {
+  color: #fff;
+}
+
 .pro_create_history {
   margin: 2rem auto;
   width: 90%;
@@ -1032,19 +1040,60 @@ textarea {
   padding: 1rem;
 }
 
-.review_table {
-  max-width: 100%;
-  border: 1px solid #7c7979;
-  margin-bottom: 2rem;
+.review-form table {
+  border-collapse: separate;
+  width: 70%;
+  border: 1px solid #ced4da;
+  border-radius: 12px;
+  margin: 2rem 0;
 }
 
-.review_table tr {
-  border-bottom: 1px solid #7c7979;
+.review-form table .first_tr .t_head {
+  border-bottom: 1px dotted #ced4da;
+  border-radius: 10px 10px 0 0;
+  padding: 12px;
+  vertical-align: middle;
+  background-color: #007bffcc;
+  color: #fff;
+}
+
+.review-form table .first_tr .t_head p {
+  margin-bottom: 0;
+}
+
+.review-form table td {
+  vertical-align: middle;
+  font-weight: bold;
+}
+
+.review-form table .imgarea {
+  width: 80px;
+  height: 80px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin: 1rem;
+}
+
+.review_table {
+  max-width: 100%;
+  border-collapse: separate;
+  border: 1px solid #7c7979;
+  border-radius: 10px;
+  margin-bottom: 2rem;
 }
 
 .review_table tr th {
   width: 25%;
   font-weight: bold;
+  background-color: #7c7979b4;
+}
+
+.review_table tr .first-th {
+  border-radius: 10px 0 0 0;
+}
+
+.review_table tr .last-th {
+  border-radius: 0 0 0 10px;
 }
 
 .review_table tr td {
@@ -1053,7 +1102,6 @@ textarea {
 
 .review_table tr th,
 .review_table tr td {
-  border-right: 1px solid #7c7979;
   padding: 1.5rem;
 }
 

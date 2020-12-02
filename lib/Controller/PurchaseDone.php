@@ -10,20 +10,22 @@ class PurchaseDone extends \Shop\Controller {
         exit;
       }
       if(!isset($_SESSION['cart']) || !isset($_SESSION['num'])) {
-        header('Location: ' . SITE_URL . '/product_al.php');
+        header('Location: ' . SITE_URL . '/product_all.php');
         exit();
       }
-      $carts = $_SESSION['cart'];
-      $nums = $_SESSION['num'];
+      $cart = $_SESSION['cart'];
+      $num = $_SESSION['num'];
 
       $purchase = new \Shop\Model\Product();
-      // $purchase->purchaseDone([
-      //     'product_id' => $carts,
-      //     'user_id' => $_SESSION['me']->id,
-      //     'num' => $nums,
-      //     ]);
-        // }
-
+      for($i = 0;$i < count($cart);$i++) {
+        $purchase->purchaseDone([
+          'product_id' => $cart[$i],
+          'user_id' => $_SESSION['me']->id,
+          'num' => $num[$i],
+          ]);
+        }
+        $_SESSION['cart'] = array();
+        $_SESSION['num'] = array();
     }
   }
 }
