@@ -9,11 +9,13 @@ $LoginCon->run();
   <form action="" method="post" id="login" class="form">
     <div class="form-group">
       <label>メールアドレス</label>
-      <input type="text" name="email" value="" class="form-control">
+      <input type="text" name="email" value="<?= isset($LoginCon->getValues()->email) ? h($LoginCon->getValues()->email) : ''; ?>" class="form-control">
+      <p class="err"><?= h($LoginCon->getErrors('email')); ?></p>
     </div>
     <div class="form-group">
       <label>パスワード</label>
       <input type="password" name="password" class="form-control">
+      <p class="err"><?= h($LoginCon->getErrors('password')); ?></p>
     </div>
     <p class="err"></p>
     <button class="btn btn-primary signup-btn" onclick="document.getElementById('login').submit();">ログイン</button>

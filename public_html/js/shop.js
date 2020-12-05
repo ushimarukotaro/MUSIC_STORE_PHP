@@ -79,3 +79,10 @@ function cartAllDelete() {
   }
 }
 
+function reviewDelete() {
+  var res = confirm('このレビューを削除します。\nよろしいですか？？');
+  if(res === true) {
+    document.getElementById('review_delete').submit();
+  }
+}
+

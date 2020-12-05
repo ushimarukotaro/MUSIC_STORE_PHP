@@ -580,13 +580,13 @@ textarea {
 .review-area {
   margin-top: 4rem;
   .review {
-    //margin: 0 auto;
     border: 2px solid #7c7979;
     width: 80%;
     height: 300px;
     margin-bottom: 2.5rem;
     .review-user {
       border-bottom: 2px dotted #7c7979;
+      font-weight: bold;
       span {
         display: inline-block;
         padding: 1rem;

@@ -35,20 +35,12 @@ $product = $showProductDisp->productShow($product_id);
         <option value="★★">★★</option>
         <option value="★">★</option>
       </select>
-      <p class="err"></p>
-    </div>
-    <div class="form-group">
-      <label>ユーザー名</label>
-      <input type="text" name="name" class="form-control" value="<?= h($_SESSION['me']->username); ?>">
-      <p class="err"></p>
     </div>
     <div class="form-group">
       <label>レビュー</label>
       <textarea name="content" class="form-control" placeholder="レビュー内容" rows="10" value=""></textarea>
-      <p class="err"></p>
     </div>
     <input type="submit" class="btn btn-primary review-btn" value="送信する">
-    
     <input type="hidden" name="userid" value="<?= h($_SESSION['me']->id); ?>">
     <input type="hidden" name="productid" value="<?= h($product_id); ?>">
     <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">

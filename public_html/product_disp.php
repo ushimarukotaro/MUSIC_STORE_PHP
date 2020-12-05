@@ -7,6 +7,8 @@ if(isset($_SESSION['me'])) {
 } else {
   $product = $showProductDisp->productShowDisp($product_id);
 }
+$reviews = $showProductDisp->getReview($product_id);
+// var_dump($reviews);
 ?>
 <div class="title">
   <h1 class="page__ttl">商品詳細</h1>
@@ -49,16 +51,31 @@ if(isset($_SESSION['me'])) {
     </form>
   </div>
 </div>
+<?php if(isset($reviews)) : ?>
 <div class="review-area">
+  <p>レビュー数：<?= count($reviews); ?>件</p>
+  <?php foreach($reviews as $review) : ?>
   <div class="review">
     <div class="review-user">
-      <span>投稿者：牛丸</span>
-      <span>投稿日：2020/07/21</span>
+      <span>投稿者：<?= h($review->u_name); ?></span>
+      <span>投稿日：<?= h($review->r_created); ?></span>
+      <span>評価：<?= h($review->hyouka); ?></span>
+      <?php if($_SESSION['me']->id == $review->r_userid || $_SESSION['me']->authority == '99') : ?>
+        <span>
+          <form id="review_delete" action="review_delete.php" method="get">
+            <button class="btn btn-danger" onclick="reviewDelete();">レビューを削除する</button>
+            <input type="hidden" name="review_id" value="<?= h($review->r_id); ?>">
+            <input type="hidden" name="p_id" value="<?= h($review->productid); ?>">
+          </form>
+        </span>
+      <?php endif; ?>
     </div>
     <div class="review-details">
-      <p>めっちゃよかった。なぜならめっちゃよかったから</p>
+      <p><?= nl2br(h($review->content)) ?></p>
     </div>
   </div>
+  <?php endforeach; ?>
 </div>
+  <?php endif; ?>
 <?php
 require_once(__DIR__ . '/footer.php');

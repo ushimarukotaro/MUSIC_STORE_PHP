@@ -15,6 +15,9 @@ class CartIn extends \Shop\Controller {
           $this->cartIn();
         }
       }
+    } else {
+      header('Location: ' . SITE_URL . '/login.php');
+      exit();
     }
   }
 
@@ -52,7 +55,7 @@ class CartIn extends \Shop\Controller {
     $_SESSION['cart'] = $cart;
     $_SESSION['num'] = $num;
 
-    header('Location:cart_list.php');
+    header('Location: ' . SITE_URL . 'cart_list.php');
     exit();
   }
 

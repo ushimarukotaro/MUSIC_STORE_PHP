@@ -10,18 +10,18 @@ $prefectures = $signupCon->getPrefecture();
 <form action="" method="post" id="signup" class="form mypage-form">
   <div class="form-group">
     <label>ユーザー名</label>
-    <input type="text" name="username" value="<?= isset($signupCon->getValues()->username) ? h($signupCon->getValues()->username) : ''; ?>" class="form-control" placeholder="佐藤太郎">
+    <input type="text" name="username" value="<?= isset($signupCon->getValues()->username) ? h($signupCon->getValues()->username) : ''; ?>" class="form-control">
     <p class="err"><?= h($signupCon->getErrors('username')) ?></p>
   </div>
   <div class="form-group">
     <label>メールアドレス</label>
-    <input type="text" name="email" value="<?= isset($signupCon->getValues()->email) ? h($signupCon->getValues()->email) : ''; ?>" class="form-control" placeholder="sample@sample.com">
+    <input type="text" name="email" value="<?= isset($signupCon->getValues()->email) ? h($signupCon->getValues()->email) : ''; ?>" class="form-control">
     <p class="err"><?= h($signupCon->getErrors('email')) ?></p>
   </div>
   <div class="form-group">
     <label>郵便番号</label>
-    〒<input type="text" name="zip1" placeholder="123" value="<?= isset($signupCon->getValues()->zip1) ? h($signupCon->getValues()->zip1) : ''; ?>" class="form-control" style="width: 5rem; display: inline-block;" onKeyUp="AjaxZip3.zip2addr('zip1', 'zip2', 'prefecture_id', 'address2');" /> -
-    <input type="text" name="zip2" placeholder="4567" value="<?= isset($signupCon->getValues()->zip2) ? h($signupCon->getValues()->zip2) : ''; ?>" class="form-control" style="width: 8rem; display: inline-block;" onKeyUp="AjaxZip3.zip2addr('zip1', 'zip2', 'prefecture_id', 'address2');" />
+    〒<input type="text" name="zip1" value="<?= isset($signupCon->getValues()->zip1) ? h($signupCon->getValues()->zip1) : ''; ?>" class="form-control" style="width: 5rem; display: inline-block;" onKeyUp="AjaxZip3.zip2addr('zip1', 'zip2', 'prefecture_id', 'address2');" /> -
+    <input type="text" name="zip2" value="<?= isset($signupCon->getValues()->zip2) ? h($signupCon->getValues()->zip2) : ''; ?>" class="form-control" style="width: 8rem; display: inline-block;" onKeyUp="AjaxZip3.zip2addr('zip1', 'zip2', 'prefecture_id', 'address2');" />
     <p class="err"><?= h($signupCon->getErrors('zip1')) ?></p>
     <p class="err"><?= h($signupCon->getErrors('zip2')) ?></p>
   </div>

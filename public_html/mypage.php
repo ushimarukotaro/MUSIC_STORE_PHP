@@ -2,15 +2,14 @@
 require_once(__DIR__ . '/header.php');
 $app = new Shop\Controller\UserUpdate();
 $app->run();
-$signupCon = new Shop\Controller\Signup();
-$prefectures = $signupCon->getPrefecture();
-// var_dump($_SESSION['me']);
+$getPrefecture = new Shop\Model\User();
+$prefectures = $getPrefecture->getPrefectures();
 ?>
 <div class="title">
   <h1 class="page__ttl">マイページ</h1>
 </div>
 <div class="container">
-  <form action="user_update_done.php" method="post" id="userupdate" class="form mypage-form row" enctype="multipart/form-data">
+  <form action="" method="post" id="userupdate" class="form mypage-form row">
     <div class="col-md-8">
       <div class="form-group">
         <label>メールアドレス</label>
@@ -46,13 +45,12 @@ $prefectures = $signupCon->getPrefecture();
       <button class="btn btn-primary" onclick="document.getElementById('userupdate').submit();">更新</button>
       <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
       <input type="hidden" name="type" value="userupdate">
-      <p class="err"></p>
     </div>
   </form>
   <form id="del_user" class="user-delete" action="user_delete.php" method="post">
     <input type="button" class="btn btn-success" value="退会する" onclick="confirmDelete();">
     <input type="hidden" name="type" value="delete">
-    <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
+    <!-- <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>"> -->
   </form>
 </div>
 <!--container -->

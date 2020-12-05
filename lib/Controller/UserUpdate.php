@@ -25,21 +25,22 @@ class UserUpdate extends \Shop\Controller {
     } catch (\Shop\Exception\InvalidEmail $e) {
       $this->setErrors('email', $e->getMessage());
     } catch (\Shop\Exception\EmptyPost $e) {
+      $this->setErrors('email', $e->getMessage());
+    } catch (\Shop\Exception\EmptyPost $e) {
       $this->setErrors('username', $e->getMessage());
-    } catch (\Shop\Exception\EmptyPost $e) {
+    } catch (\Shop\Exception\InvalidZip $e) {
       $this->setErrors('zip1', $e->getMessage());
-    } catch (\Shop\Exception\EmptyPost $e) {
+    } catch (\Shop\Exception\InvalidZip $e) {
       $this->setErrors('zip2', $e->getMessage());
     } catch (\Shop\Exception\EmptyPost $e) {
-      $this->setErrors('prefecture_if', $e->getMessage());
-    } catch (\Shop\Exception\EmptyPost $e) {
+      $this->setErrors('prefecture_id', $e->getMessage());
+    } catch (\Shop\Exception\InvalidAddress $e) {
       $this->setErrors('address2', $e->getMessage());
     }
     $this->setValues('username', $_POST['username']);
     $this->setValues('email', $_POST['email']);
     $this->setValues('zip1', $_POST['zip1']);
     $this->setValues('zip2', $_POST['zip2']);
-    $this->setValues('prefecture_id', $_POST['prefecture_id']);
     $this->setValues('address2', $_POST['address2']);
     if ($this->hasError()) {
       return;
@@ -54,7 +55,7 @@ class UserUpdate extends \Shop\Controller {
             'prefecture_id' => $_POST['prefecture_id'],
             'address2' => $_POST['address2'],
           ]);
-      } catch (\Shop\Exception\DuplicateEmail $e) {
+      } catch (\Shop\Exception\DuplicateEmail $e) { //メールアドレスが重複してないかチェック
         $this->setErrors('email', $e->getMessage());
         return;
       }
@@ -72,20 +73,17 @@ class UserUpdate extends \Shop\Controller {
     if ($validate->mailCheck($_POST['email'])) {
       throw new \Shop\Exception\InvalidEmail("メールアドレスの形式が不正です!");
     }
-    if($validate->emptyCheck([$_POST['username']])) {
-      throw new \Shop\Exception\EmptyPost("ユーザー名が入力されていません");
+    if($validate->emptyCheck([$_POST['username'],$_POST['email']])) {
+      throw new \Shop\Exception\EmptyPost("ユーザー名またはメールアドレスが入力されていません");
     }
-    if($validate->emptyCheck([$_POST['zip1']])) {
-      throw new \Shop\Exception\EmptyPost("郵便番号が入力されていません");
-    }
-    if($validate->emptyCheck([$_POST['zip2']])) {
-      throw new \Shop\Exception\EmptyPost("郵便番号が入力されていません");
+    if($validate->emptyCheck([$_POST['zip1'],$_POST['zip2']])) {
+      throw new \Shop\Exception\InvalidZip("郵便番号が入力されていません");
     }
     if($validate->emptyCheck([$_POST['prefecture_id']])) {
-      throw new \Shop\Exception\EmptyPost("都道府県が選択されていません");
+      throw new \Shop\Exception\InvalidZip("都道府県が選択されていません");
     }
     if($validate->emptyCheck([$_POST['address2']])) {
-      throw new \Shop\Exception\EmptyPost("住所が入力されていません");
+      throw new \Shop\Exception\InvalidAddress("住所が正しく入力されていません");
     }
   }
 }

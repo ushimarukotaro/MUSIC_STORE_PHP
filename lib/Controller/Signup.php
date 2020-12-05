@@ -17,24 +17,27 @@ class Signup extends \Shop\Controller {
       $this->validate();
     } catch (\Shop\Exception\EmptyPost $e) {
         $this->setErrors('username', $e->getMessage());
+    } catch (\Shop\Exception\CharLength $e) {
+        $this->setErrors('username', $e->getMessage());
     } catch (\Shop\Exception\InvalidEmail $e) {
         $this->setErrors('email', $e->getMessage());
-    } catch (\Shop\Exception\EmptyPost $e) {
+    } catch (\Shop\Exception\InvalidZip $e) {
         $this->setErrors('zip1', $e->getMessage());
-    } catch (\Shop\Exception\EmptyPost $e) {
+    } catch (\Shop\Exception\InvalidZip $e) {
         $this->setErrors('zip2', $e->getMessage());
     } catch (\Shop\Exception\EmptyPost $e) {
         $this->setErrors('prefecture_id', $e->getMessage());
-    } catch (\Shop\Exception\EmptyPost $e) {
+    } catch (\Shop\Exception\InvalidAddress $e) {
         $this->setErrors('address2', $e->getMessage());
     } catch (\Shop\Exception\InvalidPassword $e) {
+        $this->setErrors('password', $e->getMessage());
+    } catch (\Shop\Exception\CharLength $e) {
         $this->setErrors('password', $e->getMessage());
     }
     $this->setValues('username', $_POST['username']);
     $this->setValues('email', $_POST['email']);
     $this->setValues('zip1', $_POST['zip1']);
     $this->setValues('zip2', $_POST['zip2']);
-    $this->setValues('prefecture_id', $_POST['prefecture_id']);
     $this->setValues('address2', $_POST['address2']);
     if ($this->hasError()) {
       return;
@@ -85,17 +88,23 @@ class Signup extends \Shop\Controller {
     if($validate->emptyCheck([$_POST['username']])) {
       throw new \Shop\Exception\EmptyPost("ユーザー名が入力されていません");
     }
+    if($validate->charLengthCheck($_POST['username'],20)) {
+      throw new \Shop\Exception\CharLength("ユーザー名は20文字以内で入力してください！");
+    }
     if($validate->emptyCheck([$_POST['zip1']])) {
-      throw new \Shop\Exception\EmptyPost("郵便番号に未入力があります！");
+      throw new \Shop\Exception\InvalidZip("郵便番号を正しく入力してください!");
     }
     if($validate->emptyCheck([$_POST['zip2']])) {
-      throw new \Shop\Exception\EmptyPost("郵便番号に未入力があります！");
+      throw new \Shop\Exception\InvalidZip("郵便番号を正しく入力してください!");
     }
     if($validate->emptyCheck([$_POST['prefecture_id'],$_POST['address2']])) {
-      throw new \Shop\Exception\EmptyPost("住所が入力されていません");
+      throw new \Shop\Exception\InvalidAddress("住所を正しく入力してください！");
     }
     if($validate->passwordCheck([$_POST['password']])) {
       throw new \Shop\Exception\InvalidPassword("パスワードは半角英数字で入力してください。");
+    }
+    if($validate->charLengthCheck($_POST['password'],10)) {
+      throw new \Shop\Exception\CharLength("パスワードは10文字以内で入力してください。");
     }
   }
 }

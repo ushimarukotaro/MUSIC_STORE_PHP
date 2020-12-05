@@ -161,6 +161,11 @@ class Product extends \Shop\Model {
 
   //購入完了
   public function purchaseDone($values) {
+    try {
+    $this->db->beginTransaction();
+    $sql = "LOCK TABLES histories WRITE";
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute();
     $stmt = $this->db->prepare("INSERT INTO histories (product_id,user_id,num,created) VALUES (:product_id,:user_id,:num,now())");
     $res = $stmt->execute([
       ':product_id' => $values['product_id'],
@@ -168,11 +173,20 @@ class Product extends \Shop\Model {
       ':num' => $values['num']
     ]);
     $stmt->fetchAll(\PDO::FETCH_OBJ);
+
+    $sql = "UNLOCK TABLES";
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute();
+    $this->db->commit();
+    } catch (\Exception $e) {
+      echo $e->getMessage();
+      $this->db->rollBack();
+    }
   }
 
   //　購入履歴表示
   public function showPurchaseHistory($values) {
-    $stmt = $this->db->prepare("SELECT p.id AS p_id,h.created AS h_created,p.image,p.product_name,p.maker,p.price FROM products AS p INNER JOIN histories AS h ON p.id = h.product_id WHERE h.user_id = :id AND delflag = 0 ORDER BY h.created DESC");
+    $stmt = $this->db->prepare("SELECT p.id AS p_id,h.created AS h_created,p.image,p.product_name,p.maker,p.price FROM products AS p INNER JOIN histories AS h ON p.id = h.product_id WHERE h.user_id = :id AND delflag = 0 ORDER BY h.created DESC LIMIT 10");
     $stmt->execute([
       ':id' => $_SESSION['me']->id,
     ]);
@@ -182,13 +196,28 @@ class Product extends \Shop\Model {
   //レビュー投稿
   public function postReview($values) {
     $stmt = $this->db->prepare("INSERT INTO reviews (userid,productid,hyouka,content,created,modified) VALUES (:userid,:productid,:hyouka,:content,now(),now())");
-    $res = $stmt->execute([
+    $stmt->execute([
       ':userid' => $values['userid'],
       ':productid' => $values['productid'],
       ':hyouka' => $values['hyouka'],
       ':content' => $values['content'],
     ]);
-    // $stmt->fetchAll(\PDO::FETCH_OBJ);
-    // return $res;
+  }
+
+  // レビュー取得
+  public function getReview($values) {
+    $stmt = $this->db->prepare("SELECT r.id AS r_id,productid,hyouka,content,r.created AS r_created,r.userid AS r_userid,u.username AS u_name FROM reviews AS r INNER JOIN users AS u ON r.userid = u.id WHERE r.delflag = 0 AND productid = :productid");
+    $stmt->bindValue('productid',$_GET['id']);
+    $stmt->execute();
+    return $stmt->fetchAll(\PDO::FETCH_OBJ);
+  }
+
+  //レビュー削除
+  public function deleteReview() {
+    $stmt = $this->db->prepare("UPDATE reviews SET delflag = :delflag,modified = now() WHERE id = :id");
+    $stmt->execute([
+      ':delflag' => 1,
+      ':id' => $_GET['review_id'],
+    ]);
   }
 }

@@ -699,6 +699,7 @@ textarea {
 .review-area .review .review-user span {
   display: inline-block;
   padding: 1rem;
+  font-weight: bold;
 }
 
 .review-area .review p {
