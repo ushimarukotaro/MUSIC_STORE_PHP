@@ -28,6 +28,8 @@ class UserUpdate extends \Shop\Controller {
       $this->setErrors('email', $e->getMessage());
     } catch (\Shop\Exception\EmptyPost $e) {
       $this->setErrors('username', $e->getMessage());
+    } catch (\Shop\Exception\CharLength $e) {
+      $this->setErrors('username', $e->getMessage());
     } catch (\Shop\Exception\InvalidZip $e) {
       $this->setErrors('zip1', $e->getMessage());
     } catch (\Shop\Exception\InvalidZip $e) {
@@ -75,6 +77,9 @@ class UserUpdate extends \Shop\Controller {
     }
     if($validate->emptyCheck([$_POST['username'],$_POST['email']])) {
       throw new \Shop\Exception\EmptyPost("ユーザー名またはメールアドレスが入力されていません");
+    }
+    if($validate->charLengthCheck($_POST['username'],20)) {
+      throw new \Shop\Exception\CharLength("ユーザー名は20文字以内で入力してください！");
     }
     if($validate->emptyCheck([$_POST['zip1'],$_POST['zip2']])) {
       throw new \Shop\Exception\InvalidZip("郵便番号が入力されていません");

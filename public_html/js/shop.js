@@ -20,6 +20,7 @@ $(function () {
     reader.readAsDataURL(file);
   });
 
+  // お気に入りボタン
   $('.fav__btn').on('click', function () {
     var origin = location.origin;
     var $favbtn = $(this);
@@ -43,9 +44,9 @@ $(function () {
     return false;
   });
 
-
 });
 
+//　管理者ページの商品情報のソート機能
 $(document).ready(function() {
   $('#fav-table').tablesorter({
     headers: {
@@ -55,7 +56,8 @@ $(document).ready(function() {
   });
 });
 
-function Sort_onChange(){
+//　商品ページのソート機能
+function Sort_onChange() {
   for (var i=0; i<document.f_page_size.sort.options.length; i++){
       if (document.f_page_size.sort.options[i].selected == true){
           document.f_search.i_sort.value = document.f_page_size.sort.options[i].value;
@@ -63,6 +65,17 @@ function Sort_onChange(){
       }
   }
   document.f_search.submit();
+}
+
+// 管理画面のジャンル絞り込み
+function selectCategory() {
+  for (var i=0;i < document.getElementById('category').select.options.length;i++) {
+    if (document.getElementById('category').select.options[i].selected == true) {
+      document.getElementById('search').keyword.value = document.getElementById('category').select.options[i].value;
+      break;
+    }
+  }
+  document.getElementById('search').submit();
 }
 
 function confirmDelete() {

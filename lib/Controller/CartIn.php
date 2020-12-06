@@ -38,6 +38,9 @@ class CartIn extends \Shop\Controller {
     $_SESSION['cart'] = $cart; 
     $_SESSION['num'] = $num; //セッションにデータを格納
 
+    header('Location: ' . SITE_URL . '/cart_list.php');
+
+    // header('Location ' . SITE_URL . '/cart_list.php');
   }
 
   public function cartDelete() {
@@ -55,7 +58,7 @@ class CartIn extends \Shop\Controller {
     $_SESSION['cart'] = $cart;
     $_SESSION['num'] = $num;
 
-    header('Location: ' . SITE_URL . 'cart_list.php');
+    header('Location: ' . SITE_URL . '/cart_list.php');
     exit();
   }
 

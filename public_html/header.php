@@ -52,7 +52,7 @@ $r = rand(0,2);
                   <span class="name init-bottom"><?= h($_SESSION['me']->username); ?></span></a>
                 <ul class="prof-dropdown">
                   <li><a href="<?= SITE_URL; ?>/product_favorite.php" class="name">欲しい物リスト</a></li>
-                  <li class="cart-icon"><a href="<?= SITE_URL; ?>/cart_list.php" class="name">カート<i class="fas fa-shopping-cart"></i></a><span class="count-cart <?= !isset($_SESSION['cart']) ? 'not_display' : ''; ?>"><?= isset($_SESSION['cart']) ? count($_SESSION['cart']) : ''; ?></span></li>
+                  <li class="cart-icon"><a href="<?= SITE_URL; ?>/cart_list.php" class="name cart__num" data-cart="<?= count($_SESSION['cart']); ?>">カート<i class="fas fa-shopping-cart"></i></a><span class="count-cart <?= !isset($_SESSION['cart']) ? 'not_display' : ''; ?>"><?= isset($_SESSION['cart']) ? count($_SESSION['cart']) : ''; ?></span></li>
                   <li><a href="<?= SITE_URL ?>/purchase_history.php" class="name">購入履歴</a></li>
                   <form action="logout.php" method="post" id="logout">
                     <li><label>

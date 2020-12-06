@@ -2,7 +2,6 @@
 require_once(__DIR__ . '/header.php');
 $showHistories = new Shop\Model\Product();
 $products = $showHistories->showPurchaseHistory($_SESSION['me']->id);
-// var_dump($products);
 ?>
 <div class="title">
   <h1 class="page__ttl">購入履歴</h1>

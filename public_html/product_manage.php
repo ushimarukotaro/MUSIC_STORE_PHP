@@ -18,7 +18,22 @@ if (isset($_GET['i_get_c'])) {
 <p>更新または削除を行う商品を選択してください。</p>
 <div class="create-or-search">
   <a href="product_create.php" class="btn btn-primary">商品新規登録</a>
-  <form action="product_manage.php" method="get" class="form-group form-search">
+  <div class="form-group">
+    <form id="category" name="s_c" action="">
+      <select name="select" class="select sort" onchange="selectCategory();">
+        <option selected disabled>ジャンルで絞る</option>
+        <option value="ギター">ギター</option>
+        <option value="ベース">ベース</option>
+        <option value="ドラム">ドラム</option>
+        <option value="キーボード">キーボード</option>
+        <option value="マイク">マイク</option>
+        <option value="アンプ">アンプ</option>
+        <option value="エフェクター">エフェクター</option>
+        <option value="アクセサリー">アクセサリー</option>
+      </select>
+    </form>
+  </div>
+  <form id="search" action="product_manage.php" method="get" class="form-group form-search">
     <div class="form-group">
       <input type="text" name="keyword" placeholder="　絞り込み" value="<?= isset($searchProductsCon->getValues()->keyword) ? h($searchProductsCon->getValues()->keyword) : ''; ?>">
     </div>

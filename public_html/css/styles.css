@@ -46,7 +46,6 @@ textarea {
   padding: 0.3rem;
 }
 
-/* bbs style */
 .wrapper {
   margin: 0 auto;
 }
@@ -218,7 +217,7 @@ textarea {
 .header-r .prof-dropdown .cart-icon .count-cart {
   position: absolute;
   top: 50%;
-  left: 120px;
+  left: 100px;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
   display: inline-block;
@@ -227,6 +226,7 @@ textarea {
   height: 24px;
   border-radius: 50%;
   font-size: 14px;
+  font-weight: bold;
   text-align: center;
   line-height: 24px;
 }
@@ -694,12 +694,12 @@ textarea {
 
 .review-area .review .review-user {
   border-bottom: 2px dotted #7c7979;
+  font-weight: bold;
 }
 
 .review-area .review .review-user span {
   display: inline-block;
   padding: 1rem;
-  font-weight: bold;
 }
 
 .review-area .review p {

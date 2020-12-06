@@ -8,6 +8,8 @@ if(isset($_SESSION['me'])) {
   $product = $showProductDisp->productShowDisp($product_id);
 }
 $reviews = $showProductDisp->getReview($product_id);
+$app = new Shop\Controller\CartIn();
+$app->run();
 // var_dump($reviews);
 ?>
 <div class="title">
@@ -28,7 +30,7 @@ $reviews = $showProductDisp->getReview($product_id);
     <img class="" src="./gazou/<?= $product->image ?>">
   </div>
   <div class="product-disp">
-    <form action="cart_list.php" method="post" class="form">
+    <form id="cartin" action="" method="post" class="form">
       <div class="details" data-productid="<?= $product_id; ?>">
         <div class="details-info">
           <div><span class="pro_maker"><?= h($product->maker) ?></span></div>
@@ -41,7 +43,7 @@ $reviews = $showProductDisp->getReview($product_id);
         </div>
         <div class="details-input">
           <div id="fav__btn" class="btn btn-dark fav__btn<?= isset($product->f_id) ? ' active' : ''; ?>"><i class="far fa-star"></i>欲しい物に追加</div>
-          <button type="submit" class="btn btn-primary" value=""><i class="fas fa-cart-plus"></i>カートに入れる</button>
+          <button onclick="document.getElementById('cartin').submit();" class="btn btn-primary cart__btn"><i class="fas fa-cart-plus"></i>カートに入れる</button>
         </div>
       </div>
       <p class="product-text"><?= nl2br(h($product->details)) ?></p>
