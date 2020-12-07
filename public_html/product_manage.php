@@ -19,7 +19,7 @@ if (isset($_GET['i_get_c'])) {
 <div class="create-or-search">
   <a href="product_create.php" class="btn btn-primary">商品新規登録</a>
   <div class="form-group">
-    <form id="category" name="s_c" action="">
+    <form id="category" action="">
       <select name="select" class="select sort" onchange="selectCategory();">
         <option selected disabled>ジャンルで絞る</option>
         <option value="ギター">ギター</option>

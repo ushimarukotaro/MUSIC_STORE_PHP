@@ -1084,7 +1084,7 @@ textarea {
 }
 
 .review_table tr th {
-  width: 25%;
+  width: 30%;
   font-weight: bold;
   background-color: #7c7979b4;
 }
@@ -1098,7 +1098,7 @@ textarea {
 }
 
 .review_table tr td {
-  width: 75%;
+  width: 70%;
 }
 
 .review_table tr th,
@@ -1199,6 +1199,20 @@ textarea {
 .pro_form .btn-area {
   width: 1000px;
   text-align: center;
+}
+
+.info-done h2 {
+  margin: 2em 0 1em 0;
+}
+
+.message {
+  width: 60%;
+  text-align: left;
+  margin: 3em auto;
+}
+
+.message p {
+  margin: 1.5em 0;
 }
 
 footer {
