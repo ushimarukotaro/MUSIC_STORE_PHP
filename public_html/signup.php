@@ -34,7 +34,8 @@ $prefectures = $signupCon->getPrefecture();
         <option value="<?= $prefecture->id ?>" <?= array_key_exists('prefecture_id', $_POST) && $_POST['prefecture_id'] == $prefecture->id ? 'selected' : ''; ?>><?= $prefecture->prefecture_name ?></option>
       <?php endforeach ; ?>
     </select>
-    <div class="form-city"></div>
+    <p class="err"><?= h($signupCon->getErrors('prefecture_id')) ?></p>
+    <!-- <div class="form-city"></div> -->
     <input type="text" name="address2" placeholder="市区町村　番地　建物名　部屋番号 etc" value="<?= isset($signupCon->getValues()->address2) ? h($signupCon->getValues()->address2) : ''; ?>" class="form-control">
     <p class="err"><?= h($signupCon->getErrors('address2')) ?></p>
   </div>

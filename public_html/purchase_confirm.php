@@ -68,11 +68,13 @@ $app = new Shop\Controller\CartIn();
   <div class="price_area">
     <p class="confirm-price">合計　¥<?= $app->showSubTotal(); ?>（税込）</p>
   </div>
-  <input type="submit" name="create" class="btn btn-primary" value="購入を確定">
-  <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
-  <input type="hidden" name="pro_id" value="<?= h($pro_id); ?>">
-  <input type="hidden" name="num" value="<?= $_SESSION['num']; ?>">
+  <div class="btn-area">
+    <input type="submit" name="create" class="btn btn-primary" value="購入を確定">
+    <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
+    <input type="hidden" name="pro_id" value="<?= h($pro_id); ?>">
+    <input type="hidden" name="num" value="<?= $_SESSION['num']; ?>">
+    <a href="javascript:history.back();" class="btn btn-outline-primary">戻る</a>
+  </div>
 </form>
-<button class="btn btn-outline-primary" onclick="history.back()">戻る</button>
 <?php
 require_once(__DIR__ . '/footer.php');

@@ -60,8 +60,9 @@ $app->run();
   <div class="review">
     <div class="review-user">
       <span>投稿者：<?= h($review->u_name); ?></span>
-      <span>投稿日：<?= h($review->r_created); ?></span>
+      <span>投稿日：<?= h(substr($review->r_created,0,11)); ?></span>
       <span>評価：<?= h($review->hyouka); ?></span>
+      <span>ID：<?= h($review->r_id); ?></span>
       <?php if($_SESSION['me']->id == $review->r_userid || $_SESSION['me']->authority == '99') : ?>
         <span>
           <form id="review_delete" action="review_delete.php" method="get">

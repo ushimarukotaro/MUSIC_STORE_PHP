@@ -18,7 +18,7 @@ class PostReview extends \Shop\Controller {
             'userid' => $_SESSION['me']->id,
             'productid' => $_POST['productid'],
             'hyouka' => $_POST['hyouka'],
-            'content' => $_POST['content']
+            'content' => $_POST['content'],
           ]);
         } catch (\Shop\Exception\DuplicateEmail $e) {
           $this->setErrors('email', $e->getMessage());

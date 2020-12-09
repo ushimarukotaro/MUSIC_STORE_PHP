@@ -18,7 +18,8 @@ class SendMail extends \Shop\Controller {
     $to = h($_POST['email']);
     $title = h($_POST['title']);
     $content = h($_POST['content']);
+    $header = 'From: info@ushimarugakki.com';
 
-    mb_send_mail($to, $title, $content);
+    mb_send_mail($to, $title, $content, $header);
   }
 }

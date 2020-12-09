@@ -25,9 +25,9 @@ class Signup extends \Shop\Controller {
         $this->setErrors('zip1', $e->getMessage());
     } catch (\Shop\Exception\InvalidZip $e) {
         $this->setErrors('zip2', $e->getMessage());
-    } catch (\Shop\Exception\EmptyPost $e) {
+    } catch (\Shop\Exception\EmptyPrefecture $e) {
         $this->setErrors('prefecture_id', $e->getMessage());
-    } catch (\Shop\Exception\InvalidAddress $e) {
+    } catch (\Shop\Exception\EmptyPost $e) {
         $this->setErrors('address2', $e->getMessage());
     } catch (\Shop\Exception\InvalidPassword $e) {
         $this->setErrors('password', $e->getMessage());
@@ -82,23 +82,23 @@ class Signup extends \Shop\Controller {
     $validate = new \Shop\Controller\Validate();
     $validate->tokenCheck($_POST['token']);
     $validate->unauthorizedCheck([$_POST['email'],$_POST['username'],$_POST['password']]);
-    if ($validate->mailCheck($_POST['email'])) {
-      throw new \Shop\Exception\InvalidEmail("メールアドレスの形式が不正です!");
-    }
     if($validate->emptyCheck([$_POST['username']])) {
       throw new \Shop\Exception\EmptyPost("ユーザー名が入力されていません");
     }
     if($validate->charLengthCheck($_POST['username'],20)) {
       throw new \Shop\Exception\CharLength("ユーザー名は20文字以内で入力してください！");
     }
-    if($validate->emptyCheck([$_POST['zip1']])) {
+    if ($validate->mailCheck($_POST['email'])) {
+      throw new \Shop\Exception\InvalidEmail("メールアドレスの形式が不正です!");
+    }
+    if($validate->emptyCheck([$_POST['zip1'],$_POST['zip2']])) {
       throw new \Shop\Exception\InvalidZip("郵便番号を正しく入力してください!");
     }
-    if($validate->emptyCheck([$_POST['zip2']])) {
-      throw new \Shop\Exception\InvalidZip("郵便番号を正しく入力してください!");
-    }
-    if($validate->emptyCheck([$_POST['prefecture_id'],$_POST['address2']])) {
+    if($validate->emptyCheck($_POST['address2'])) {
       throw new \Shop\Exception\InvalidAddress("住所を正しく入力してください！");
+    }
+    if(!isset($_POST['prefecture_id'])) {
+      throw new \Shop\Exception\EmptyPrefecture("都道府県を選択してください！");
     }
     if($validate->passwordCheck([$_POST['password']])) {
       throw new \Shop\Exception\InvalidPassword("パスワードは半角英数字で入力してください。");

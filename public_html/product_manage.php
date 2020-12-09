@@ -88,7 +88,7 @@ if (isset($_GET['i_get_c'])) {
             <label for="pro_id<?= h($product->id); ?>">¥<?= h(number_format($product->price)) ?></label>
           </td>
           <td>
-            <label for="pro_id<?= h($product->id); ?>"><?= h($product->created) ?></label>
+            <label for="pro_id<?= h($product->id); ?>"><?= h(substr($product->created,0,11)) ?></label>
           </td>
         </tr>
       <?php endforeach; ?>

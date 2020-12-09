@@ -11,7 +11,8 @@ $products = $showHistories->showPurchaseHistory($_SESSION['me']->id);
     <tbody>
       <tr>
         <th class="purchase-day" colspan="3">
-          <span>購入日：<?= $product->h_created ?></span>
+          <span>購入日：<?= h(substr($product->h_created,0,11)) ?></span>
+          <span>　　購入数：<?= h($product->h_num) ?>点</span>
         </th>
       </tr>
       <tr>

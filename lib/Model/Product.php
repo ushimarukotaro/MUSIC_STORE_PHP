@@ -186,7 +186,7 @@ class Product extends \Shop\Model {
 
   //　購入履歴表示
   public function showPurchaseHistory($values) {
-    $stmt = $this->db->prepare("SELECT p.id AS p_id,h.created AS h_created,p.image,p.product_name,p.maker,p.price FROM products AS p INNER JOIN histories AS h ON p.id = h.product_id WHERE h.user_id = :id AND delflag = 0 ORDER BY h.created DESC LIMIT 10");
+    $stmt = $this->db->prepare("SELECT p.id AS p_id,h.created AS h_created,h.num AS h_num,p.image,p.product_name,p.maker,p.price FROM products AS p INNER JOIN histories AS h ON p.id = h.product_id WHERE h.user_id = :id AND delflag = 0 ORDER BY h.created DESC LIMIT 10");
     $stmt->execute([
       ':id' => $_SESSION['me']->id,
     ]);

@@ -1,7 +1,5 @@
 <?php
 require_once(__DIR__ . '/header.php');
-// $app = new Shop\Controller\PostReview();
-// $app->run();
 ?>
 <div class="title">
   <h1 class="page__ttl">レビュー内容確認</h1>
@@ -40,6 +38,7 @@ require_once(__DIR__ . '/header.php');
     <input type="hidden" name="productid" value="<?= h($_POST['productid']); ?>">
     <input type="hidden" name="hyouka" value="<?= h($_POST['hyouka']) ?>">
     <input type="hidden" name="content" value="<?= h($_POST['content']); ?>">
+    <input type="hidden" name="review_id" value="<?= h($_POST['content']); ?>">
     <input type="hidden" name="token" value="<?= h($_SESSION['token']) ?>">
     <input type="button" onclick="history.back()" class="btn btn-outline-primary" value="戻る">
   <?php endif; ?>

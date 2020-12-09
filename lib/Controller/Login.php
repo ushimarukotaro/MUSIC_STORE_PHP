@@ -15,16 +15,8 @@ class Login extends \Shop\Controller {
   protected function postProcess() {
     try {
       $this->validate();
-    // } catch (\Shop\Exception\EmptyPost $e) {
-    //   $this->setErrors('login', $e->getMessage());
     } catch (\Shop\Exception\EmptyPost $e) {
-      $this->setErrors('email', $e->getMessage());
-    } catch (\Shop\Exception\InvalidEmail $e) {
-      $this->setErrors('email', $e->getMessage());
-    } catch (\Shop\Exception\EmptyPost $e) {
-      $this->setErrors('password', $e->getMessage());
-    } catch (\Shop\Exception\InvalidPassword $e) {
-      $this->setErrors('password', $e->getMessage());
+      $this->setErrors('login', $e->getMessage());
     }
     $this->setValues('email', $_POST['email']);
     if ($this->hasError()) {
@@ -63,15 +55,7 @@ class Login extends \Shop\Controller {
     $validate->unauthorizedCheck([$_POST['email'],$_POST['password']]);
     if($validate->emptyCheck([$_POST['email'],$_POST['password']])) {
       throw new \Shop\Exception\EmptyPost("メールアドレスまたはパスワードを入力してください。");
-    }
-    if ($validate->mailCheck($_POST['email'])) {
-      throw new \Shop\Exception\InvalidEmail("メールアドレスの形式が不正です!");
-    }
-    if($validate->emptyCheck([$_POST['email']])) {
-      throw new \Shop\Exception\EmptyPost("メールアドレスが入力されていません");
-    }
-    if($validate->passwordCheck([$_POST['password']])) {
-      throw new \Shop\Exception\InvalidPassword("パスワードが正しく入力されていません！");
+    
     }
   }
 }
