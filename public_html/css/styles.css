@@ -950,6 +950,18 @@ textarea {
   border-bottom: 2px solid #7c7979;
 }
 
+.btn-area.confirm_purchase_btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.btn-area.confirm_purchase_btn input[type="submit"] {
+  width: 50%;
+}
+
 .wrap {
   margin-top: 2rem;
 }

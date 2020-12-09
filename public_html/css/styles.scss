@@ -801,6 +801,14 @@ textarea {
     border-bottom: 2px solid #7c7979;
   }
 }
+.btn-area.confirm_purchase_btn {
+  display: flex;
+  justify-content: space-around;
+  input[type="submit"] {
+    width: 50%;
+  }
+}
+
 //　カート削除
 .wrap {
   margin-top: 2rem;
