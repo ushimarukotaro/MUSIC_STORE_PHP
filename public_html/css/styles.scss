@@ -394,8 +394,9 @@ textarea {
     font-weight: bold;
   }
   .search-btn {
-    padding: 1px 1rem;
+    padding: 5px 1rem;
     border: 2px solid #323232;
+    border-radius: 4px;
     &:hover {
       cursor: pointer;
       background-color: #797979;
@@ -410,9 +411,9 @@ textarea {
     .form-city {
       margin-bottom: 1.3rem;
     }
-    select {
-      padding: 0.2rem 1rem;
-      margin-bottom: 1rem;
+    .select.form-control {
+      width: 50%;
+      // padding: 0 3rem;
     }
   }
 }
@@ -430,6 +431,14 @@ textarea {
   padding: 0.5rem;
   background-color: #7c79798f;
   border-radius: 6px;
+  display: flex;
+  align-items: center;
+  span {
+    margin: 0 1.2rem;
+  }
+  .form-control.select {
+    width: 15%;
+  }
 }
 .product {
   width: 100%;
@@ -861,6 +870,12 @@ textarea {
   td {
     padding: 1rem 2rem;
     border: 1px solid #7c7979;
+  }
+  .form-control.select {
+    width: 40%;
+  }
+  .form-control.detail {
+    height: 180px;
   }
 }
 //購入確認

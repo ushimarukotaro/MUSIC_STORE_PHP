@@ -12,7 +12,7 @@ if (isset($_GET['i_sort'])) {
   <h1 class="page__ttl">商品一覧</h1>
   <form action="product_search.php" method="get" class="form-group form-search">
     <div class="form-group">
-      <input type="text" name="keyword" placeholder="　検索したい商品名　メーカー名" value="">
+      <input type="text" name="keyword" class="form-control" placeholder="　検索したい商品名　メーカー名" value="">
     </div>
     <div class="form-group">
       <button type="submit" value="" class="search-btn"><i class="fa fa-search" aria-hidden="true"></i></button>
@@ -22,8 +22,8 @@ if (isset($_GET['i_sort'])) {
 </div>
 <form action="" name="f_page_size" method="get">
   <div class="form-group select-form">
-    <span style="margin-left:1rem;">並び順 : </span>
-    <select name="sort" class="sort select" onchange="Sort_onChange();">
+    <span>並び順 : </span>
+    <select name="sort" class="select form-control" onchange="Sort_onChange();">
       <option value="NewArrivals" <?= array_key_exists('i_sort', $_GET) && $_GET['i_sort'] == 'NewArrivals' ? 'selected' : ''; ?>>新着順</option>
       <option value="OldArrivals" <?= array_key_exists('i_sort', $_GET) && $_GET['i_sort'] == 'OldArrivals' ? 'selected' : ''; ?>>古いもの順</option>
       <option value="Price_DESC" <?= array_key_exists('i_sort', $_GET) && $_GET['i_sort'] == 'Price_DESC' ? 'selected' : ''; ?>>値段が高い順</option>

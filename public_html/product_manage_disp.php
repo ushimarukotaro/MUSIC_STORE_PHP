@@ -53,7 +53,7 @@ $categories = $app->getCategories();
           カテゴリー
         </th>
         <td>
-          <select class="select" name="category_id">
+          <select class="select form-control" name="category_id">
             <?php foreach ($categories as $category) : ?>
               <option value="<?= $category->id ?>" <?= $category->id == $product->id ? 'selected' : ''; ?>><?= $category->category_name ?></option>
             <?php endforeach; ?>
@@ -74,11 +74,10 @@ $categories = $app->getCategories();
           
         </th>
         <td>
-          <select class="select" name="delflag">
-            <option value="0" <?= $product->delflag == 0 ? 'selected' : ''; ?>>表示</option>
-            <option value="1" <?= $product->delflag == 1 ? 'selected' : ''; ?>>削除</option>
+          <select class="select form-control" name="delflag">
+            <option value="0" <?= $product->delflag == 0 ? 'selected' : ''; ?>>表示する</option>
+            <option value="1" <?= $product->delflag == 1 ? 'selected' : ''; ?>>削除する</option>
           </select>
-          <!-- <input type="text" name="delflag" class="form-control" value=""> -->
         </td>
       </tr>
       <tr>
@@ -86,13 +85,13 @@ $categories = $app->getCategories();
           説明文
         </th>
         <td>
-          <textarea name="details" class="form-control" value="<?= h($product->details) ?>"><?= h($product->details) ?></textarea>
+          <textarea name="details" class="form-control detail" value="<?= h($product->details) ?>"><?= h($product->details) ?></textarea>
         </td>
       </tr>
     </tbody>
   </table>
-  <input type="submit" class="btn btn-primary btn-sm" value="更新">
-  <input type="button" class="btn btn-primary btn-sm" onclick="history.back()" value="戻る">
+  <input type="submit" class="btn btn-primary" value="更新">
+  <input type="button" class="btn btn-outline-primary" onclick="history.back()" value="戻る">
   <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
   <input type="hidden" name="old_image" value="<?= h($product->image) ?>">
   <input type="hidden" name="id" value="<?= h($product_id) ?>">

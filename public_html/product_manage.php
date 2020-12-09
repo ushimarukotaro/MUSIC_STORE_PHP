@@ -20,7 +20,7 @@ if (isset($_GET['i_get_c'])) {
   <a href="product_create.php" class="btn btn-primary">商品新規登録</a>
   <div class="form-group">
     <form id="category" action="">
-      <select name="select" class="select sort" onchange="selectCategory();">
+      <select name="select" class="select sort form-control" onchange="selectCategory();">
         <option selected disabled>ジャンルで絞る</option>
         <option value="ギター">ギター</option>
         <option value="ベース">ベース</option>
@@ -35,11 +35,11 @@ if (isset($_GET['i_get_c'])) {
   </div>
   <form id="search" action="product_manage.php" method="get" class="form-group form-search">
     <div class="form-group">
-      <input type="text" name="keyword" placeholder="　絞り込み" value="<?= isset($searchProductsCon->getValues()->keyword) ? h($searchProductsCon->getValues()->keyword) : ''; ?>">
+      <input type="text" name="keyword" class="form-control" placeholder="　絞り込み" value="<?= isset($searchProductsCon->getValues()->keyword) ? h($searchProductsCon->getValues()->keyword) : ''; ?>">
     </div>
     <p class="err"><?= h($adminCon->getErrors('keyword')); ?></p>
     <div class="form-group">
-      <button type="submit" value="" class="search-btn"><i class="fa fa-search" aria-hidden="true"></i></button>
+      <button type="submit" class="search-btn"><i class="fa fa-search" aria-hidden="true"></i></button>
       <input type="hidden" name="type" value="product_search">
     </div>
   </form>

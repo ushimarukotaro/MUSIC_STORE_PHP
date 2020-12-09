@@ -27,9 +27,8 @@ $prefectures = $signupCon->getPrefecture();
   </div>
   <div class="form-group">
     <label>住所</label>
-    <div class="form-city">都道府県</div>
-    <select name="prefecture_id">
-      <option value="" selected disabled>-- 選択してください --</option>
+    <select name="prefecture_id" class="select form-control">
+      <option value="" selected disabled>-- 都道府県を選択してください --</option>
       <?php foreach($prefectures as $prefecture) : ?>
         <option value="<?= $prefecture->id ?>" <?= array_key_exists('prefecture_id', $_POST) && $_POST['prefecture_id'] == $prefecture->id ? 'selected' : ''; ?>><?= $prefecture->prefecture_name ?></option>
       <?php endforeach ; ?>

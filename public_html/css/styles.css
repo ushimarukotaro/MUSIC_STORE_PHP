@@ -467,8 +467,9 @@ textarea {
 }
 
 .form-search .search-btn {
-  padding: 1px 1rem;
+  padding: 5px 1rem;
   border: 2px solid #323232;
+  border-radius: 4px;
 }
 
 .form-search .search-btn:hover {
@@ -484,9 +485,8 @@ textarea {
   margin-bottom: 1.3rem;
 }
 
-.mypage-form .form-group select {
-  padding: 0.2rem 1rem;
-  margin-bottom: 1rem;
+.mypage-form .form-group .select.form-control {
+  width: 50%;
 }
 
 .userimage-delete .btn-gray {
@@ -498,6 +498,20 @@ textarea {
   padding: 0.5rem;
   background-color: #7c79798f;
   border-radius: 6px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.select-form span {
+  margin: 0 1.2rem;
+}
+
+.select-form .form-control.select {
+  width: 15%;
 }
 
 .product {
@@ -1025,6 +1039,14 @@ textarea {
 .create-table td {
   padding: 1rem 2rem;
   border: 1px solid #7c7979;
+}
+
+.create-table .form-control.select {
+  width: 40%;
+}
+
+.create-table .form-control.detail {
+  height: 180px;
 }
 
 .pro_create_confirm {

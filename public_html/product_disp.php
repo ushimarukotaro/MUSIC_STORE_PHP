@@ -16,7 +16,7 @@ $app->run();
   <h1 class="page__ttl">商品詳細</h1>
   <form action="product_search.php" method="get" class="form-group form-search">
     <div class="form-group">
-      <input type="text" name="keyword" placeholder="　検索したい商品名" value="">
+      <input type="text" name="keyword" class="form-control" placeholder="　検索したい商品名" value="">
     </div>
     <div class="form-group">
       <button type="submit" value="" class="search-btn"><i class="fa fa-search" aria-hidden="true"></i></button>

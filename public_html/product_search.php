@@ -8,7 +8,7 @@ $products = $searchProductsCon->run();
 </div>
 <form action="product_search.php" method="get" class="form-group form-search">
   <div class="form-group">
-    <input type="text" name="keyword" placeholder="　検索したい商品名" value="<?= isset($searchProductsCon->getValues()->keyword) ? h($searchProductsCon->getValues()->keyword) : ''; ?>">
+    <input type="text" name="keyword" class="form-control" placeholder="　検索したい商品名" value="<?= isset($searchProductsCon->getValues()->keyword) ? h($searchProductsCon->getValues()->keyword) : ''; ?>">
     <p class="err"><?= h($searchProductsCon->getErrors('keyword')); ?></p>
   </div>
   <div class="form-group">
