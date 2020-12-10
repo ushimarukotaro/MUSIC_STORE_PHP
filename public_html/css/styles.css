@@ -834,8 +834,9 @@ textarea {
 }
 
 .cart-table {
-  width: 94%;
+  width: 80%;
   text-align: center;
+  margin: 0 auto;
 }
 
 .cart-table tr {
@@ -1058,11 +1059,20 @@ textarea {
   padding: 2rem;
 }
 
-.purchase-day {
-  background-color: #007bffce;
+.hist.table {
+  width: 80%;
+  border: 2px solid #7c7979;
+  border-radius: 12px;
+  border-collapse: separate;
 }
 
-.purchase-day span {
+.hist.table .hist_first_tr .purchase-day {
+  background-color: #007bffce;
+  border-radius: 10px 10px 0 0;
+  border-top: 0;
+}
+
+.hist.table .hist_first_tr .purchase-day span {
   color: #fff;
 }
 

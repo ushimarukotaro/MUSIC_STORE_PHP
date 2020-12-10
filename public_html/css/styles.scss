@@ -687,6 +687,7 @@ textarea {
   }
 }
 
+
 //カート一覧
 .cart-info {
   text-align: right;
@@ -704,8 +705,12 @@ textarea {
   justify-content: center;
 }
 .cart-table {
-  width: 94%;
+  width: 80%;
   text-align: center;
+  margin: 0 auto;
+  // border-collapse: separate;
+  // border: 2px solid #7c79798f;
+  // border-radius: 1em;
   tr {
     height: 220px;
     border: 2px solid #7c79798f;
@@ -888,12 +893,21 @@ textarea {
 }
 
 //購入りれき
-
-.purchase-day {
-  background-color: #007bffce;
-  span {
-    // font-weight: 100;
-    color: #fff;
+.hist.table {
+  width: 80%;
+  border: 2px solid #7c7979;
+  border-radius: 12px;
+  border-collapse: separate;
+  .hist_first_tr {
+    .purchase-day {
+      background-color: #007bffce;
+      border-radius: 10px 10px 0 0;
+      border-top: 0;
+      span {
+        // font-weight: 100;
+        color: #fff;
+      }
+    }
   }
 }
 .pro_create_history {
