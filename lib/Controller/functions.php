@@ -20,3 +20,11 @@ function urlFilter() {
     }
   }
 }
+
+function showTotalPrice($subTotals) {
+  $total = 0;
+  foreach($subTotals as $key => $value) {
+    $total = ($total + $value);
+  }
+  return number_format(floor($total));
+}

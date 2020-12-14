@@ -7,12 +7,12 @@ class Product extends \Shop\Model {
       $stmt = $this->db->prepare($sql);
 
       $res = $stmt->execute([
-        'product_name' => $values['product_name'],
-        'maker' => $values['maker'],
-        'category_id' => $values['category_id'],
-        'price' => $values['price'],
-        'details' => $values['details'],
-        'image' => $values['image'],
+        ':product_name' => $values['product_name'],
+        ':maker' => $values['maker'],
+        ':category_id' => $values['category_id'],
+        ':price' => $values['price'],
+        ':details' => $values['details'],
+        ':image' => $values['image'],
       ]);
     } catch (\Exception $e) {
       echo $e->getMessage();
@@ -187,7 +187,7 @@ class Product extends \Shop\Model {
 
   //購入履歴数と日付取得
   public function getHistories() {
-    $stmt = $this->db->prepare("SELECT COUNT(h.id) AS h_id,h.created AS h_created FROM histories AS h WHERE h.user_id = :id GROUP BY h.created ORDER BY h.created DESC LIMIT 10");
+    $stmt = $this->db->prepare("SELECT COUNT(h.id) AS h_id,h.id AS ID,h.created AS h_created,num FROM histories AS h WHERE h.user_id = :id GROUP BY h.created ORDER BY h.created DESC LIMIT 20");
     $stmt->execute([
       ':id' => $_SESSION['me']->id,
     ]);
@@ -196,7 +196,7 @@ class Product extends \Shop\Model {
 
   //　購入履歴表示
   public function showPurchaseHistory($values) {
-    $stmt = $this->db->prepare("SELECT p.id AS p_id,h.created AS h_created,h.num AS h_num,p.image,p.product_name,p.maker,p.price FROM products AS p INNER JOIN histories AS h ON p.id = h.product_id WHERE h.user_id = :id AND delflag = 0 ORDER BY h.created DESC LIMIT 10");
+    $stmt = $this->db->prepare("SELECT p.id AS p_id,h.created AS h_created,h.num AS h_num,p.image,p.product_name,p.maker,p.price FROM products AS p INNER JOIN histories AS h ON p.id = h.product_id WHERE h.user_id = :id AND delflag = 0 ORDER BY h.created DESC LIMIT 20");
     $stmt->execute([
       ':id' => $_SESSION['me']->id,
     ]);
@@ -229,5 +229,15 @@ class Product extends \Shop\Model {
       ':delflag' => 1,
       ':id' => $_GET['review_id'],
     ]);
+  }
+
+  // CSV出力
+  public function getPurchaseCsv($users_id,$created){
+    $stmt = $this->db->prepare("SELECT users.id AS u_id,users.username AS u_name,products.product_name AS p_name,histories.num AS h_num,products.price AS p_price,histories.created AS h_created FROM (histories INNER JOIN products on histories.product_id = products.id) INNER JOIN  users ON histories.user_id = users.id WHERE users.id = :users_id AND histories.created = :h_created");
+    $stmt->execute([
+      ':users_id' => $users_id,
+      ':h_created' => $created
+      ]);
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
   }
 }

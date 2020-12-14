@@ -345,13 +345,15 @@ textarea {
 }
 
 .page__ttl {
-  font-size: 50px;
+  font-size: 32px;
   letter-spacing: 5px;
   text-align: center;
   margin: 3rem 0;
+  padding-bottom: 10px;
   font-family: "Charm", cursive;
   font-weight: 250;
   color: #323232;
+  border-bottom: 2px dotted #777777;
 }
 
 .form {
@@ -881,6 +883,10 @@ textarea {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  margin: 2rem 1rem 3rem 0;
 }
 
 .empty-cart {
@@ -944,6 +950,7 @@ textarea {
 .address_confirm_area {
   width: 40%;
   border: 2px solid #7c7979;
+  margin-right: 1em;
   height: 400px;
 }
 
@@ -1022,14 +1029,26 @@ textarea {
 }
 
 .create-table {
-  width: 95%;
-  margin: 3rem 0;
+  width: 74%;
+  margin: 3rem auto;
   border: 1px solid #7c7979;
+  border-collapse: separate;
+  border-radius: 12px;
 }
 
 .create-table th {
+  vertical-align: middle;
   width: 30%;
   font-weight: bold;
+  background-color: #7c797962;
+}
+
+.create-table th.first_th {
+  border-radius: 12px 0 0 0;
+}
+
+.create-table th.last_th {
+  border-radius: 0 0 0 12px;
 }
 
 .create-table td {
@@ -1038,8 +1057,7 @@ textarea {
 
 .create-table th,
 .create-table td {
-  padding: 1rem 2rem;
-  border: 1px solid #7c7979;
+  padding: 1.5rem 2rem;
 }
 
 .create-table .form-control.select {
@@ -1047,7 +1065,13 @@ textarea {
 }
 
 .create-table .form-control.detail {
-  height: 180px;
+  height: 200px;
+}
+
+.manage-btn-area {
+  text-align: right;
+  margin-right: 3rem;
+  margin-bottom: 3rem;
 }
 
 .pro_create_confirm {
@@ -1073,6 +1097,8 @@ textarea {
 }
 
 .hist.table .hist_first_tr .purchase-day span {
+  font-weight: bold;
+  font-size: 14px;
   color: #fff;
 }
 
@@ -1186,8 +1212,9 @@ textarea {
 }
 
 .admin-table.table {
-  width: 98%;
+  width: 90%;
   border: 1px solid #7c7979;
+  margin: 0 auto;
 }
 
 .admin-table.table th {

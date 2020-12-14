@@ -26,6 +26,9 @@ class PurchaseDone extends \Shop\Controller {
         }
         $_SESSION['cart'] = array();
         $_SESSION['num'] = array();
+
+        header('Location: ' . SITE_URL . '/purchase_done.php');
+        exit();
     }
   }
 }

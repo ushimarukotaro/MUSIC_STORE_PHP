@@ -44,6 +44,13 @@ $(function () {
     return false;
   });
 
+  // $('.total_price').on('click', function() {
+  //   $('.total_price').text('ああああ');
+  //   var price = $('.subT').data('price');
+  //   for (var i=0;i < price.length;i++) {
+  //     console.log(price);
+  //   }
+  // })
 });
 
 //　管理者ページの商品情報のソート機能
@@ -98,4 +105,5 @@ function reviewDelete() {
     document.getElementById('review_delete').submit();
   }
 }
+
 

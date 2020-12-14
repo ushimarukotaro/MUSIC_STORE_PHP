@@ -16,7 +16,7 @@ $categories = $app->getCategories();
   <table class="create-table">
     <tbody>
       <tr>
-        <th>
+        <th class="first_th">
           商品画像
         </th>
         <td>
@@ -71,7 +71,6 @@ $categories = $app->getCategories();
       <tr>
         <th>
           削除フラグ
-          
         </th>
         <td>
           <select class="select form-control" name="delflag">
@@ -81,7 +80,7 @@ $categories = $app->getCategories();
         </td>
       </tr>
       <tr>
-        <th>
+        <th class="last_th">
           説明文
         </th>
         <td>
@@ -90,12 +89,14 @@ $categories = $app->getCategories();
       </tr>
     </tbody>
   </table>
-  <input type="submit" class="btn btn-primary" value="更新">
-  <input type="button" class="btn btn-outline-primary" onclick="history.back()" value="戻る">
-  <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
-  <input type="hidden" name="old_image" value="<?= h($product->image) ?>">
-  <input type="hidden" name="id" value="<?= h($product_id) ?>">
-  <input type="hidden" name="type" value="productupdate">
+  <div class="manage-btn-area">
+    <input type="submit" class="btn btn-primary" value="更新">
+    <input type="button" class="btn btn-outline-primary" onclick="history.back()" value="戻る">
+    <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
+    <input type="hidden" name="old_image" value="<?= h($product->image) ?>">
+    <input type="hidden" name="id" value="<?= h($product_id) ?>">
+    <input type="hidden" name="type" value="productupdate">
+  </div>
 </form>
 
 <?php

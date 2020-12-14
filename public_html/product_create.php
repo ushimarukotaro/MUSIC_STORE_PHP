@@ -39,7 +39,7 @@ $categories = $app->getCategories();
         </div>
         <div class="form-group">
           <label>カテゴリー</label>
-          <select name="category_id">
+          <select name="category_id" class="form-control" style="width: 60%;">
             <option value="" selected disabled>-- 選択してください --</option>
             <?php foreach ($categories as $category) : ?>
               <option value="<?= $category->id ?>" <?= array_key_exists('category_id', $_POST) && $_POST['category_id'] == $category->id ? 'selected' : ''; ?>><?= $category->category_name ?></option>
