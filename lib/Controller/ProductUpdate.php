@@ -2,8 +2,7 @@
 
 namespace Shop\Controller;
 
-class ProductUpdate extends \Shop\Controller
-{
+class ProductUpdate extends \Shop\Controller {
   public function run() {
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['type'] === 'productupdate') {
       $this->updateProduct();
@@ -13,6 +12,7 @@ class ProductUpdate extends \Shop\Controller
   }
 
   protected function updateProduct() {
+    // var_dump($_POST['tag']);exit;
     try {
       $this->validate();
     } catch (\Shop\Exception\EmptyPost $e) {
@@ -23,6 +23,8 @@ class ProductUpdate extends \Shop\Controller
       $this->setErrors('category_id', $e->getMessage());
     } catch (\Shop\Exception\InvalidPrice $e) {
       $this->setErrors('price', $e->getMessage());
+    } catch (\Shop\Exception\InvalidTags $e) {
+      $this->setErrors('tags', $e->getMessage());
     } catch (\Shop\Exception\InvalidDetails $e) {
       $this->setErrors('details', $e->getMessage());
     }
@@ -31,6 +33,8 @@ class ProductUpdate extends \Shop\Controller
     $this->setValues('category_id', $_POST['category_id']);
     $this->setValues('price', $_POST['price']);
     $this->setValues('delflag', $_POST['delflag']);
+    // $this->setValues('tag-delete', $_POST['tag-delete']);
+    // $this->setValues('tag', $_POST['tag']);
     $this->setValues('details', $_POST['details']);
     if ($this->hasError()) {
       return;
@@ -58,6 +62,22 @@ class ProductUpdate extends \Shop\Controller
             'id' => $_POST['id']
           ]);
           $pro_img = $pro_img['name'];
+          if(isset($_POST['tag_delete'])) {
+            $tag_delete = $_POST['tag_delete'];
+            foreach($tag_delete as $val) {
+              $createModel->deleteTags([
+                'tag_id' => $val['tag_id'],
+                'product_id' => $_POST['id'],
+                ]);
+            }
+          }
+          $tags = $_POST['tag'];
+          foreach($tags as $tag) {
+            $createModel->insertTags([
+              'tag_id' => $tag,
+              'product_id' => $_POST['id'],
+              ]);
+          }
         } else {
           $createModel->updatePro([
             'product_name' => $_POST['product_name'],
@@ -70,13 +90,33 @@ class ProductUpdate extends \Shop\Controller
             'id' => $_POST['id']
           ]);
           $pro_img = $old_img;
+          if(isset($_POST['tag_delete'])) {
+            $tag_delete = $_POST['tag_delete'];
+            foreach($tag_delete as $val) {
+              $createModel->deleteTags([
+                'tag_id' => $val['tag_id'],
+                'product_id' => $_POST['id'],
+                ]);
+            }
+          }
+          $tags = $_POST['tag'];
+          // var_dump($tags);exit;
+          $tagDate = '';
+          foreach($tags as $tag) {
+            $createModel->insertTags([
+              'tag_id' => $tag,
+              'product_id' => $_POST['id'],
+              ]);
+              // $tagDate .= implode('.',$tag->tag_name);
+          }
+          // var_dump($tagDate);exit();
         }
       } catch (\Shop\Exception\DuplicateEmail $e) {
         $this->setErrors('email', $e->getMessage());
         return;
       }
     }
-    header('Location: ' . SITE_URL . '/product_manage.php');
+    header('Location: ' . SITE_URL . '/product_manage_disp.php?product_id=' . $_POST['id']);
     exit();
   }
 
@@ -97,11 +137,9 @@ class ProductUpdate extends \Shop\Controller
     $validate = new \Shop\Controller\Validate();
     $validate->tokenCheck($_POST['token']);
     // $validate->unauthorizedCheck([$_POST['email'], $_POST['username']]);
-    // if ($validate->mailCheck($_POST['email'])) {
-    //   throw new \Shop\Exception\InvalidEmail("メールアドレスの形式が不正です!");
+    // if ($validate->emptycheck($_POST['maker'],$_POST['product_name'],$_POST['price'])) {
+    //   throw new \Shop\Exception\EmptyPost("未入力の項目があります!");
     // }
-    // if ($validate->emptyCheck([$_POST['username']])) {
-    //   throw new \Shop\Exception\EmptyPost("ユーザー名が入力されていません");
-    // }
+    
   }
 }

@@ -28,3 +28,12 @@ function showTotalPrice($subTotals) {
   }
   return number_format(floor($total));
 }
+
+//　必要ない？？
+function tagCheck($tagsToProducts) {
+  // $ttpVal[] = '';
+  foreach($tagsToProducts as $ttp) {
+  $ttpVal[] = $ttp;
+  }
+  return $ttpVal;
+}

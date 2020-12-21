@@ -39,7 +39,7 @@ if (isset($_GET['i_get_c'])) {
     </div>
     <p class="err"><?= h($adminCon->getErrors('keyword')); ?></p>
     <div class="form-group">
-      <button type="submit" class="search-btn"><i class="fa fa-search" aria-hidden="true"></i></button>
+      <button type="submit" value="" class="search-btn"><i class="fa fa-search" aria-hidden="true"></i></button>
       <input type="hidden" name="type" value="product_search">
     </div>
   </form>

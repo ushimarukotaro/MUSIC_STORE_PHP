@@ -137,7 +137,7 @@ class Product extends \Shop\Model {
 
     //　検索
   public function searchProduct($keyword) {
-    $stmt = $this->db->prepare("SELECT p.id,p.product_name,p.maker,p.price,p.image,p.delflag,p.created,c.category_name FROM products AS p INNER JOIN categories AS c ON p.category_id = c.id WHERE CONCAT(p.product_name,p.maker,c.category_name) collate utf8_unicode_ci LIKE :product_name AND delflag = 0");
+    $stmt = $this->db->prepare("SELECT p.id,p.product_name,p.maker,p.price,p.image,p.delflag,p.created,c.category_name,ttp.product_id AS ttp_p_id,tags.tag_name FROM products AS p INNER JOIN categories AS c ON p.category_id = c.id INNER JOIN tags_to_products AS ttp ON p.id = ttp.product_id INNER JOIN tags ON ttp.tag_id = tags.id WHERE CONCAT(p.product_name,p.maker,tags.tag_name) collate utf8_unicode_ci LIKE :product_name AND delflag = 0");
     $stmt->execute([':product_name' => '%'.$keyword.'%']);
     return $stmt->fetchAll(\PDO::FETCH_OBJ);
   }
@@ -240,4 +240,52 @@ class Product extends \Shop\Model {
       ]);
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
   }
+
+  //　全タグ取得 
+  public function getTagsAll() {
+    $stmt = $this->db->query("SELECT * FROM tags");
+    $stmt->execute();
+    return $stmt->fetchAll(\PDO::FETCH_OBJ);
+  }
+
+  //タグ数を取得
+  public function getTagsNum($values) {
+    $stmt = $this->db->prepare("SELECT COUNT(product_id) AS NUM FROM tags_to_products WHERE product_id = :product_id");
+    $stmt->execute([
+      ':product_id' => $_GET['product_id']
+    ]);
+    return $stmt->fetch(\PDO::FETCH_OBJ);
+  }
+
+  //　タグ情報取得 
+  public function getTagsToProduct($values) {
+    // $stmt = $this->db->prepare("SELECT products.id,tags_to_products.tag_id,tags.tag_name FROM products INNER JOIN (tags_to_products INNER JOIN tags ON tags_to_products.tag_id =tags.id) ON products.id = tags_to_products.product_id WHERE products.id = :product_id");
+    $stmt = $this->db->prepare("SELECT * FROM tags_to_products WHERE product_id = :product_id");
+    $stmt->execute([
+      ':product_id' => $_GET['product_id']
+    ]);
+    return $stmt->fetchAll(\PDO::FETCH_OBJ);
+  }
+
+  //　タグづけ
+  public function insertTags($values) {
+    $stmt = $this->db->prepare("INSERT INTO tags_to_products (product_id,tag_id) VALUES (:product_id,:tag_id)");
+    $stmt->execute([
+      ':product_id' => $values['product_id'],
+      ':tag_id' => $values['tag_id'],
+    ]);
+  }
+
+  //タグ削除
+  public function deleteTags($values) {
+    $stmt = $this->db->prepare("DELETE FROM tags_to_products WHERE tag_id = :tag_id AND product_id = :product_id");
+    $stmt->execute([
+      ':tag_id' => $values['tag_id'],
+      ':product_id' => $values['product_id'],
+    ]);
+  }
+
+  //　タグと商品紐付け
+  // $stmt = $this->db->query("SELECT * FROM tags INNER JOIN tags_to_products AS ttp ON tags.id = ttp.tag_id");
+
 }

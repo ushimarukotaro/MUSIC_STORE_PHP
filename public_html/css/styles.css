@@ -497,6 +497,7 @@ textarea {
 
 .select-form {
   width: 96%;
+  margin: 1em auto;
   padding: 0.5rem;
   background-color: #7c79798f;
   border-radius: 6px;
@@ -517,7 +518,8 @@ textarea {
 }
 
 .product {
-  width: 100%;
+  width: 95%;
+  margin: 0 auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -527,7 +529,7 @@ textarea {
 
 .product li {
   border: 2px solid #7c7979;
-  width: 16rem;
+  width: calc(96% / 4);
   height: 19rem;
   margin: 0.2rem;
   position: relative;
@@ -1055,6 +1057,11 @@ textarea {
   width: 70%;
 }
 
+.create-table td label.custom-control-label {
+  font-size: 1em;
+  margin-right: 4px;
+}
+
 .create-table th,
 .create-table td {
   padding: 1.5rem 2rem;
@@ -1212,7 +1219,7 @@ textarea {
 }
 
 .admin-table.table {
-  width: 90%;
+  width: 92%;
   border: 1px solid #7c7979;
   margin: 0 auto;
 }
@@ -1220,6 +1227,11 @@ textarea {
 .admin-table.table th {
   padding: 1rem;
   border-top: 1px solid #7c7979;
+}
+
+.admin-table.table .table-title {
+  background: 4fc0f5cc;
+  border-radius: 10px 10px 0 0;
 }
 
 .admin-table.table td {

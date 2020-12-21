@@ -7,12 +7,20 @@ $product = $adminCon->adminDispShow($product_id);
 $app = new Shop\Controller\ProductCreate();
 $app->run();
 $categories = $app->getCategories();
+
+$getTags = new Shop\Model\Product();
+$tagsToProducts = $getTags->getTagsToProduct($product_id);
+$tags = $getTags->getTagsAll();
+
 ?>
 <div class="title">
   <h1 class="page__ttl">商品詳細変更</h1>
 </div>
-
 <form action="product_manage_edit_done.php" method="post" class="create-form" enctype="multipart/form-data">
+  <div class="err-area">
+    <p class="err"><?= h($app->getErrors('maker')) ?></p>
+    <p class="err"><?= h($app->getErrors('product_name')) ?></p>
+  </div>
   <table class="create-table">
     <tbody>
       <tr>
@@ -75,8 +83,43 @@ $categories = $app->getCategories();
         <td>
           <select class="select form-control" name="delflag">
             <option value="0" <?= $product->delflag == 0 ? 'selected' : ''; ?>>表示する</option>
-            <option value="1" <?= $product->delflag == 1 ? 'selected' : ''; ?>>削除する</option>
+            <option value="1" <?= $product->delflag == 1 ? 'selected' : ''; ?>>売り切れ</option>
           </select>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          タグ
+          <p style="font-size: 12px;">＊削除したいタグを選択</p>
+        </th>
+        <td>
+          <div class="form-inline">
+            <?php foreach ($tags as $tag) : ?>
+              <?php foreach ($tagsToProducts as $ttp) : ?>
+                <?php if ($tag->id == $ttp->tag_id) : ?>
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" name="tag_delete[]" class="custom-control-input" id="custom-deltag-<?= $tag->id; ?>" value="<?= $tag->id; ?>">
+                    <label class="custom-control-label" for="custom-deltag-<?= $tag->id; ?>"><?= $tag->tag_name; ?></label>
+                  </div>
+                <?php endif; ?>
+              <?php endforeach; ?>
+            <?php endforeach; ?>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          タグを追加
+        </th>
+        <td>
+          <div class="form-inline">
+            <?php foreach ($tags as $tag) : ?>
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" name="tag[]" class="custom-control-input" id="custom-check-<?= $tag->id; ?>" value="<?= $tag->id; ?>">
+                <label class="custom-control-label" for="custom-check-<?= $tag->id; ?>"><?= $tag->tag_name; ?></label>
+              </div>
+            <?php endforeach; ?>
+          </div>
         </td>
       </tr>
       <tr>
