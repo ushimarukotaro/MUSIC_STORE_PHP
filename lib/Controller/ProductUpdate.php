@@ -12,7 +12,6 @@ class ProductUpdate extends \Shop\Controller {
   }
 
   protected function updateProduct() {
-    // var_dump($_POST['tag']);exit;
     try {
       $this->validate();
     } catch (\Shop\Exception\EmptyPost $e) {
@@ -71,8 +70,13 @@ class ProductUpdate extends \Shop\Controller {
                 ]);
             }
           }
-          $tags = $_POST['tag'];
-          foreach($tags as $tag) {
+          $tags = implode(',', $_POST['tag']);
+          $createModel->insertTagsForProduct([
+            'tags' => $tags,
+            'id' => $_POST['id'],
+            ]);
+            $tagsDate = $_POST['tag'];
+          foreach($tagsDate as $tag) {
             $createModel->insertTags([
               'tag_id' => $tag,
               'product_id' => $_POST['id'],
@@ -99,17 +103,18 @@ class ProductUpdate extends \Shop\Controller {
                 ]);
             }
           }
-          $tags = $_POST['tag'];
-          // var_dump($tags);exit;
-          $tagDate = '';
-          foreach($tags as $tag) {
-            $createModel->insertTags([
-              'tag_id' => $tag,
-              'product_id' => $_POST['id'],
-              ]);
-              // $tagDate .= implode('.',$tag->tag_name);
-          }
-          // var_dump($tagDate);exit();
+          // $tags = implode(',', $_POST['tag']);
+          // $createModel->insertTagsForProduct([
+          //   'tags' => $tags,
+          //   'id' => $_POST['id'],
+          //   ]);
+            $tagsDate = $_POST['tag'];
+            foreach($tagsDate as $tag) {
+              $createModel->insertTags([
+                'tag_id' => $tag,
+                'product_id' => $_POST['id'],
+                ]);
+            }
         }
       } catch (\Shop\Exception\DuplicateEmail $e) {
         $this->setErrors('email', $e->getMessage());

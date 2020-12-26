@@ -137,7 +137,8 @@ class Product extends \Shop\Model {
 
     //　検索
   public function searchProduct($keyword) {
-    $stmt = $this->db->prepare("SELECT p.id,p.product_name,p.maker,p.price,p.image,p.delflag,p.created,c.category_name,ttp.product_id AS ttp_p_id,tags.tag_name FROM products AS p INNER JOIN categories AS c ON p.category_id = c.id INNER JOIN tags_to_products AS ttp ON p.id = ttp.product_id INNER JOIN tags ON ttp.tag_id = tags.id WHERE CONCAT(p.product_name,p.maker,tags.tag_name) collate utf8_unicode_ci LIKE :product_name AND delflag = 0");
+    // $stmt = $this->db->prepare("SELECT p.id,p.product_name,p.maker,p.price,p.image,p.tags,p.delflag,p.created,c.category_name FROM products AS p INNER JOIN categories AS c ON p.category_id = c.id WHERE CONCAT(p.product_name,p.maker,c.category_name,ifnull(p.tags,'')) collate utf8_unicode_ci LIKE :product_name AND delflag = 0");
+    $stmt = $this->db->prepare("SELECT p.id AS p_id,tags.tag_name,p.product_name,p.maker,p.price,p.image,c.category_name,p.delflag,p.created FROM (tags INNER JOIN tags_to_products AS ttp ON tags.id = ttp.tag_id) INNER JOIN products AS p ON ttp.product_id = p.id INNER JOIN categories AS c ON c.id = p.category_id WHERE CONCAT(p.product_name,p.maker,ifnull(tags.tag_name,'')) collate utf8_unicode_ci LIKE :product_name AND delflag = 0");
     $stmt->execute([':product_name' => '%'.$keyword.'%']);
     return $stmt->fetchAll(\PDO::FETCH_OBJ);
   }
@@ -274,6 +275,24 @@ class Product extends \Shop\Model {
       ':product_id' => $values['product_id'],
       ':tag_id' => $values['tag_id'],
     ]);
+  }
+  
+  public function insertTagsForProduct($values) {
+    $stmt = $this->db->prepare("UPDATE products SET tags = :tags WHERE id = :id");
+    $stmt->execute([
+      ':tags' => $values['tags'],
+      ':id' => $values['id'],
+    ]);
+  }
+
+  //タグの名前を取得
+  public function getTagsName($values) {
+    // $stmt = $this->db->prepare("SELECT products.id,tags_to_products.tag_id,tags.tag_name FROM products INNER JOIN (tags_to_products INNER JOIN tags ON tags_to_products.tag_id =tags.id) ON products.id = tags_to_products.product_id WHERE products.id = :product_id");
+    $stmt = $this->db->prepare("SELECT t.tag_name AS t_name FROM tags AS t INNER JOIN tags_to_products AS ttp ON t.id = ttp.tag_id WHERE ttp.product_id = :product_id");
+    $stmt->execute([
+      ':product_id' => $values['product_id']
+    ]);
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
   }
 
   //タグ削除

@@ -11,12 +11,12 @@ $categories = $app->getCategories();
 $getTags = new Shop\Model\Product();
 $tagsToProducts = $getTags->getTagsToProduct($product_id);
 $tags = $getTags->getTagsAll();
-
+// var_dump($tagsToProducts);
 ?>
 <div class="title">
   <h1 class="page__ttl">商品詳細変更</h1>
 </div>
-<form action="product_manage_edit_done.php" method="post" class="create-form" enctype="multipart/form-data">
+<form id="product_disp_form" action="product_manage_edit_done.php" method="post" class="create-form" enctype="multipart/form-data">
   <div class="err-area">
     <p class="err"><?= h($app->getErrors('maker')) ?></p>
     <p class="err"><?= h($app->getErrors('product_name')) ?></p>
@@ -115,7 +115,7 @@ $tags = $getTags->getTagsAll();
           <div class="form-inline">
             <?php foreach ($tags as $tag) : ?>
               <div class="custom-control custom-checkbox">
-                <input type="checkbox" name="tag[]" class="custom-control-input" id="custom-check-<?= $tag->id; ?>" value="<?= $tag->id; ?>">
+                <input type="checkbox" name="tag[]" class="custom-control-input" data-tags_id="<?= $tag->id ?>" id="custom-check-<?= $tag->id; ?>" value="<?= $tag->id; ?>">
                 <label class="custom-control-label" for="custom-check-<?= $tag->id; ?>"><?= $tag->tag_name; ?></label>
               </div>
             <?php endforeach; ?>
@@ -138,6 +138,7 @@ $tags = $getTags->getTagsAll();
     <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
     <input type="hidden" name="old_image" value="<?= h($product->image) ?>">
     <input type="hidden" name="id" value="<?= h($product_id) ?>">
+    <!-- <input type="hidden" name="tag_id[]" value=""> -->
     <input type="hidden" name="type" value="productupdate">
   </div>
 </form>
