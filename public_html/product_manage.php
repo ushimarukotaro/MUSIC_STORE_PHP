@@ -10,10 +10,21 @@ if (isset($_GET['keyword'])) {
 if (isset($_GET['i_get_c'])) {
   $products = $searchProductsCon->run();
 }
-
+$createTag = new Shop\Controller\CreateTag();  //タグを作る
+$createTag->run();
 ?>
 <div class="title">
   <h1 class="page__ttl">商品管理画面</h1>
+  <div class="form-inline insert__tag">
+    <form action="" id="create_tag" method="post">
+      <span>タグを作る</span>
+      <input type="text" class="form-control" name="tag_name" value="">
+      <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
+      <input type="hidden" name="type" value="create_tag">
+      <input type="button" value="登録" class="btn btn-primary" onclick="document.getElementById('create_tag').submit();">
+      <p class="err"><?= h($createTag->getErrors('tag_name')); ?></p>
+    </form>
+  </div>
 </div>
 <p>更新または削除を行う商品を選択してください。</p>
 <div class="create-or-search">

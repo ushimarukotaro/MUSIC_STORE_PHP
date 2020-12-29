@@ -90,7 +90,7 @@ $tags = $getTags->getTagsAll();
       <tr>
         <th>
           タグ
-          <p style="font-size: 12px;">＊削除したいタグを選択</p>
+          <p style="font-size: 12px;" class="err">＊削除したいタグを選択</p>
         </th>
         <td>
           <div class="form-inline">

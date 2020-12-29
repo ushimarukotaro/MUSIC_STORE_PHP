@@ -242,6 +242,14 @@ class Product extends \Shop\Model {
     return $stmt->fetchAll(\PDO::FETCH_ASSOC);
   }
 
+  //タグ作成
+  public function createTag($values) {
+    $stmt = $this->db->prepare("INSERT INTO tags (tag_name) VALUE (:tag_name)");
+    $stmt->execute([
+      ':tag_name' => $values['tag_name'],
+    ]);
+  }
+  
   //　全タグ取得 
   public function getTagsAll() {
     $stmt = $this->db->query("SELECT * FROM tags");

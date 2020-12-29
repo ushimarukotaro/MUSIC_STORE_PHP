@@ -26,6 +26,7 @@ class ProductSearch extends \Shop\Controller {
     } else {
       $productModel = new \Shop\Model\Product();
       $productData = $productModel->searchProduct($keyword);
+      // var_dump($productData);exit;
       return $productData;
     }
   }

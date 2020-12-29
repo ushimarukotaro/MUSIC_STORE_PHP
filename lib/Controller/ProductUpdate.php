@@ -70,18 +70,13 @@ class ProductUpdate extends \Shop\Controller {
                 ]);
             }
           }
-          $tags = implode(',', $_POST['tag']);
-          $createModel->insertTagsForProduct([
-            'tags' => $tags,
-            'id' => $_POST['id'],
-            ]);
-            $tagsDate = $_POST['tag'];
-          foreach($tagsDate as $tag) {
-            $createModel->insertTags([
-              'tag_id' => $tag,
-              'product_id' => $_POST['id'],
-              ]);
-          }
+          $tagsDate = $_POST['tag'];
+            foreach($tagsDate as $tag) {
+              $createModel->insertTags([
+                'tag_id' => $tag,
+                'product_id' => $_POST['id'],
+                ]);
+            }
         } else {
           $createModel->updatePro([
             'product_name' => $_POST['product_name'],

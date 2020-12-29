@@ -2,7 +2,7 @@
 require_once(__DIR__ . '/header.php');
 $searchProductsCon = new Shop\Controller\ProductSearch();
 $products = $searchProductsCon->run();
-// var_dump($products);
+var_dump($products);
 ?>
 <div class="title">
   <h1 class="page__ttl">商品検索</h1>
@@ -26,7 +26,7 @@ $products = $searchProductsCon->run();
   <ul class="product">
     <?php if ($con >= 1) : ?>
       <?php foreach ($products as $product) : ?>
-        <?php if($product->p_id == $product->p_id) : ?>
+    
         <li>
           <div class="imgarea allimgarea">
             <span class="category_name"><?= h($product->category_name) ?></span>
@@ -40,7 +40,7 @@ $products = $searchProductsCon->run();
           </div>
           <input type="hidden" name="id">
         </li>
-        <?php endif; ?>
+      
       <?php endforeach; ?>
     <?php elseif ($con == 0) : ?>
       <p class="err">該当する商品は見つかりませんでした</p>
