@@ -90,11 +90,8 @@ textarea {
     .header-r {
       display: flex;
       align-items: center;
-      //justify-content: space-between;
     }
     .prof-show {
-      // width: 20%;
-      // margin-right: -50px;
       display: flex;
       align-items: center;
       .name {
@@ -119,6 +116,7 @@ textarea {
 
 //ログイン時のヘッダー
 .header-r {
+  font-family: "M PLUS Rounded 1c", sans-serif;
   position: relative;
   .prof-show a {
     display: flex;
@@ -192,9 +190,6 @@ textarea {
       margin: 0;
       &:hover {
         cursor: pointer;
-        // span {
-        //   border-bottom: 1px solid #fff;
-        // }
       }
     }
     .name:hover {
@@ -213,37 +208,34 @@ textarea {
 }
 
 .nav-left {
+  font-family: "M PLUS Rounded 1c", sans-serif;
   background: rgb(255, 255, 255);
   border: 2px solid #7c7979;
+  border-radius: 8px;
   width: 15%;
-  height: 85%;
+  height: 60%;
   position: fixed;
   text-align: center;
-  margin: 1rem;
+  margin: 14px;
   h3 {
-    border: 2px solid #7c7979;
-    width: 85%;
-    margin: 1rem auto;
-    font-size: 1.25rem;
-    font-weight: bold;
-    padding: 12px;
+    background-color: $mainColor;
+    border-radius: 6px 6px 0 0;
+    color: #fff;
+    width: 100%;
+    margin: 0 auto;
+    font-size: 1rem;
+    font-weight: bolder;
+    padding: 16px;
   }
   .left_ul {
     margin: 0 auto;
     width: 80%;
     text-align: left;
     li {
-      padding: 0.5rem;
+      padding: 0.4rem;
       font-weight: bold;
-    }
-    .imgarea.nav_img {
-      height: 100%;
-      text-align: center;
-      img {
-        width: 100px;
-        height: 100px;
-        object-fit: cover;
-        // margin: 2rem 0;
+      &:first-child {
+        margin-top: 10px;
       }
     }
   }
@@ -277,33 +269,28 @@ textarea {
 }
 
 .page__ttl {
+  font-family: "M PLUS Rounded 1c", sans-serif;
   font-size: 32px;
   letter-spacing: 5px;
   text-align: center;
   margin: 3rem 0;
   padding-bottom: 10px;
-  font-family: "Charm", cursive;
+  // font-family: "Charm", cursive;
   font-weight: 250;
   color: #323232;
-  border-bottom: 2px dotted #777777;
+  border-bottom: 2px solid #777777;
 }
 
 .insert__tag {
   position: relative;
-  border: 1px solid #9e9e9e;
   border-radius: 3px;
   padding: 0 1.5em;
   span {
-    // width: 80px;
-    // height: 50px;
-    position: absolute;
-    top: -20px;
-    left: -40px;
-    background-color: #007bff;
-    border-radius: 30px;
-    color: white;
-    font-size: 10px;
-    padding: 1em;
+    font-size: 14px;
+  }
+  .btn.btn-sm {
+    width: 60px;
+    margin-left: 4px;
   }
 }
 .form {
@@ -366,10 +353,6 @@ textarea {
   }
 }
 
-// .imgarea:empty {
-//   width: 0;
-//   height: 0;
-// }
 
 .btn-gray {
   display: inline-block;
@@ -536,6 +519,7 @@ textarea {
     width: 50%;
     height: 600px;
     border: 2px solid #7c7979;
+    border-radius: 4px;
     .category_name {
       display: inline-block;
       text-align: center;
@@ -565,6 +549,7 @@ textarea {
     height: 600px;
     margin: 0 auto;
     border: 2px solid #7c7979;
+    border-radius: 4px;
     background-color: #0f80fa67;
     .details {
       display: flex;
@@ -610,11 +595,21 @@ textarea {
 //レビューエリア
 .review-area {
   margin-top: 4rem;
+  .review-num {
+    width: 95%;
+    padding: 1em;
+    font-weight: bold;
+    color: #fff;
+    background-color: rgb(189, 126, 248);
+    border-radius: 4px;
+  }
   .review {
     border: 2px solid #7c7979;
-    width: 80%;
+    border-radius: 4px;
+    width: 95%;
     height: 300px;
-    margin-bottom: 2.5rem;
+    // margin: 0 auto;
+    margin-bottom: 3rem;
     .review-user {
       border-bottom: 2px dotted #7c7979;
       font-weight: bold;
@@ -1109,6 +1104,12 @@ textarea {
       left: 14px;
     }
   }
+  .form-inline {
+    margin-bottom: 2em;
+    .custom-control-label {
+      font-size: 1em;
+    }
+  }
 }
 
 .pro_form {
@@ -1137,7 +1138,7 @@ footer {
   color: #fff;
   .copy {
     text-align: center;
-    padding-top: 2rem;
+    padding-top: 4rem;
   }
   .btn-default {
     width: 14rem;

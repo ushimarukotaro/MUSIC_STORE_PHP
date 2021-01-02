@@ -1,6 +1,6 @@
 <?php
 require_once(__DIR__ . '/../config/config.php');
-$r = rand(0,2);
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -85,7 +85,7 @@ $r = rand(0,2);
   <div class="body_wrap">
     <form id="product-category">
       <nav class="nav-left">
-        <h3>ジャンル別</h3>
+        <h3>ジャンルで選ぶ</h3>
         <ul class="left_ul">
           <li><a href="<?= SITE_URL; ?>/product_category.php?id=1" class="item" onclick="document.getElementById('product_category').submit">ギター</a></li>
           <li><a href="<?= SITE_URL; ?>/product_category.php?id=2" class="item" onclick="document.getElementById('product_category').submit">ベース</a></li>
@@ -95,17 +95,6 @@ $r = rand(0,2);
           <li><a href="<?= SITE_URL; ?>/product_category.php?id=6" class="item" onclick="document.getElementById('product_category').submit">アンプ</a></li>
           <li><a href="<?= SITE_URL; ?>/product_category.php?id=7" class="item" onclick="document.getElementById('product_category').submit">エフェクター</a></li>
           <li><a href="<?= SITE_URL; ?>/product_category.php?id=8" class="item" onclick="document.getElementById('product_category').submit">アクセサリー</a></li>
-          <div class="imgarea nav_img">
-            <a href="<?= SITE_URL; ?>/index.php">
-              <?php if ($r == 0) : ?>
-                <img src="./asset/img/animal_music_band.png" alt="">
-              <?php elseif ($r == 1) : ?>
-                <img src="./asset/img/楽器屋.png" alt="">
-              <?php else : ?>
-                <img src="./asset/img/music_band_studio.png" alt="">
-              <?php endif; ?>
-            </a>
-          </div>
         </ul>
       </nav>
     </form>

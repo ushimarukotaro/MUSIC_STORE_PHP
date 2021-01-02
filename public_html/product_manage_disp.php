@@ -115,7 +115,7 @@ $tags = $getTags->getTagsAll();
           <div class="form-inline">
             <?php foreach ($tags as $tag) : ?>
               <div class="custom-control custom-checkbox">
-                <input type="checkbox" name="tag[]" class="custom-control-input" data-tags_id="<?= $tag->id ?>" id="custom-check-<?= $tag->id; ?>" value="<?= $tag->id; ?>">
+                <input type="checkbox" name="tag[]" class="custom-control-input" id="custom-check-<?= $tag->id; ?>" value="<?= $tag->id; ?>">
                 <label class="custom-control-label" for="custom-check-<?= $tag->id; ?>"><?= $tag->tag_name; ?></label>
               </div>
             <?php endforeach; ?>

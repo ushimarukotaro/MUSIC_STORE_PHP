@@ -3,7 +3,7 @@ require_once(__DIR__ . "/header.php");
 $adminCon = new Shop\Controller\UserManage();
 $adminCon->run();
 $products = $adminCon->adminShow();
-$searchProductsCon = new Shop\Controller\ProductSearch();
+$searchProductsCon = new Shop\Controller\ProductSearchManage();
 if (isset($_GET['keyword'])) {
   $products = $searchProductsCon->run();
 }
@@ -21,7 +21,7 @@ $createTag->run();
       <input type="text" class="form-control" name="tag_name" value="">
       <input type="hidden" name="token" value="<?= $_SESSION['token'] ?>">
       <input type="hidden" name="type" value="create_tag">
-      <input type="button" value="登録" class="btn btn-primary" onclick="document.getElementById('create_tag').submit();">
+      <input type="button" value="登録" class="btn btn-primary btn-sm" onclick="document.getElementById('create_tag').submit();">
       <p class="err"><?= h($createTag->getErrors('tag_name')); ?></p>
     </form>
   </div>

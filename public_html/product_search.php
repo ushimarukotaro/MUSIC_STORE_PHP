@@ -2,7 +2,6 @@
 require_once(__DIR__ . '/header.php');
 $searchProductsCon = new Shop\Controller\ProductSearch();
 $products = $searchProductsCon->run();
-var_dump($products);
 ?>
 <div class="title">
   <h1 class="page__ttl">商品検索</h1>

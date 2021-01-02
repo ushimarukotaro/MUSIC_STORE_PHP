@@ -55,7 +55,7 @@ $app->run();
 </div>
 <?php if(isset($reviews)) : ?>
 <div class="review-area">
-  <p>レビュー数：<?= count($reviews); ?>件</p>
+  <p class="review-num">レビュー数：<?= count($reviews); ?>件</p>
   <?php foreach($reviews as $review) : ?>
   <div class="review">
     <div class="review-user">

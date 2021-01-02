@@ -143,6 +143,7 @@ textarea {
 }
 
 .header-r {
+  font-family: "M PLUS Rounded 1c", sans-serif;
   position: relative;
 }
 
@@ -265,22 +266,26 @@ textarea {
 }
 
 .nav-left {
+  font-family: "M PLUS Rounded 1c", sans-serif;
   background: white;
   border: 2px solid #7c7979;
+  border-radius: 8px;
   width: 15%;
-  height: 85%;
+  height: 60%;
   position: fixed;
   text-align: center;
-  margin: 1rem;
+  margin: 14px;
 }
 
 .nav-left h3 {
-  border: 2px solid #7c7979;
-  width: 85%;
-  margin: 1rem auto;
-  font-size: 1.25rem;
-  font-weight: bold;
-  padding: 12px;
+  background-color: #007bffe8;
+  border-radius: 6px 6px 0 0;
+  color: #fff;
+  width: 100%;
+  margin: 0 auto;
+  font-size: 1rem;
+  font-weight: bolder;
+  padding: 16px;
 }
 
 .nav-left .left_ul {
@@ -290,20 +295,12 @@ textarea {
 }
 
 .nav-left .left_ul li {
-  padding: 0.5rem;
+  padding: 0.4rem;
   font-weight: bold;
 }
 
-.nav-left .left_ul .imgarea.nav_img {
-  height: 100%;
-  text-align: center;
-}
-
-.nav-left .left_ul .imgarea.nav_img img {
-  width: 100px;
-  height: 100px;
-  -o-object-fit: cover;
-     object-fit: cover;
+.nav-left .left_ul li:first-child {
+  margin-top: 10px;
 }
 
 .wrapper {
@@ -345,33 +342,30 @@ textarea {
 }
 
 .page__ttl {
+  font-family: "M PLUS Rounded 1c", sans-serif;
   font-size: 32px;
   letter-spacing: 5px;
   text-align: center;
   margin: 3rem 0;
   padding-bottom: 10px;
-  font-family: "Charm", cursive;
   font-weight: 250;
   color: #323232;
-  border-bottom: 2px dotted #777777;
+  border-bottom: 2px solid #777777;
 }
 
 .insert__tag {
   position: relative;
-  border: 1px solid #9e9e9e;
   border-radius: 3px;
   padding: 0 1.5em;
 }
 
 .insert__tag span {
-  position: absolute;
-  top: -20px;
-  left: -40px;
-  background-color: #007bff;
-  border-radius: 30px;
-  color: white;
-  font-size: 10px;
-  padding: 1em;
+  font-size: 14px;
+}
+
+.insert__tag .btn.btn-sm {
+  width: 60px;
+  margin-left: 4px;
 }
 
 .form {
@@ -630,6 +624,7 @@ textarea {
   width: 50%;
   height: 600px;
   border: 2px solid #7c7979;
+  border-radius: 4px;
 }
 
 .product-area .product-image .category_name {
@@ -664,6 +659,7 @@ textarea {
   height: 600px;
   margin: 0 auto;
   border: 2px solid #7c7979;
+  border-radius: 4px;
   background-color: #0f80fa67;
 }
 
@@ -721,11 +717,21 @@ textarea {
   margin-top: 4rem;
 }
 
+.review-area .review-num {
+  width: 95%;
+  padding: 1em;
+  font-weight: bold;
+  color: #fff;
+  background-color: #bd7ef8;
+  border-radius: 4px;
+}
+
 .review-area .review {
   border: 2px solid #7c7979;
-  width: 80%;
+  border-radius: 4px;
+  width: 95%;
   height: 300px;
-  margin-bottom: 2.5rem;
+  margin-bottom: 3rem;
 }
 
 .review-area .review .review-user {
@@ -1297,6 +1303,14 @@ textarea {
   left: 14px;
 }
 
+.pro_update .form-inline {
+  margin-bottom: 2em;
+}
+
+.pro_update .form-inline .custom-control-label {
+  font-size: 1em;
+}
+
 .pro_form .btn-area {
   width: 1000px;
   text-align: center;
@@ -1323,7 +1337,7 @@ footer {
 
 footer .copy {
   text-align: center;
-  padding-top: 2rem;
+  padding-top: 4rem;
 }
 
 footer .btn-default {

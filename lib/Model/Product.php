@@ -137,8 +137,14 @@ class Product extends \Shop\Model {
 
     //　検索
   public function searchProduct($keyword) {
-    // $stmt = $this->db->prepare("SELECT p.id,p.product_name,p.maker,p.price,p.image,p.tags,p.delflag,p.created,c.category_name FROM products AS p INNER JOIN categories AS c ON p.category_id = c.id WHERE CONCAT(p.product_name,p.maker,c.category_name,ifnull(p.tags,'')) collate utf8_unicode_ci LIKE :product_name AND delflag = 0");
     $stmt = $this->db->prepare("SELECT p.id AS p_id,tags.tag_name,p.product_name,p.maker,p.price,p.image,c.category_name,p.delflag,p.created FROM (tags INNER JOIN tags_to_products AS ttp ON tags.id = ttp.tag_id) INNER JOIN products AS p ON ttp.product_id = p.id INNER JOIN categories AS c ON c.id = p.category_id WHERE CONCAT(p.product_name,p.maker,ifnull(tags.tag_name,'')) collate utf8_unicode_ci LIKE :product_name AND delflag = 0");
+    $stmt->execute([':product_name' => '%'.$keyword.'%']);
+    return $stmt->fetchAll(\PDO::FETCH_OBJ);
+  }
+  
+  //　検索（管理者ページ用）
+  public function searchProductManage($keyword) {
+    $stmt = $this->db->prepare("SELECT p.id,p.product_name,p.maker,p.price,p.image,p.delflag,p.created,c.category_name FROM products AS p INNER JOIN categories AS c ON p.category_id = c.id WHERE CONCAT(p.product_name,p.maker,c.category_name) collate utf8_unicode_ci LIKE :product_name");
     $stmt->execute([':product_name' => '%'.$keyword.'%']);
     return $stmt->fetchAll(\PDO::FETCH_OBJ);
   }
