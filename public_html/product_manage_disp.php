@@ -4,7 +4,7 @@ $adminCon = new Shop\Controller\UserManage();
 //$adminCon->run();
 $product_id = $_GET['product_id'];
 $product = $adminCon->adminDispShow($product_id);
-$app = new Shop\Controller\ProductCreate();
+$app = new Shop\Controller\ProductUpdate();
 $app->run();
 $categories = $app->getCategories();
 
@@ -16,10 +16,11 @@ $tags = $getTags->getTagsAll();
 <div class="title">
   <h1 class="page__ttl">商品詳細変更</h1>
 </div>
-<form id="product_disp_form" action="product_manage_edit_done.php" method="post" class="create-form" enctype="multipart/form-data">
-  <div class="err-area">
+<form id="product_disp_form" action="" method="post" class="create-form" enctype="multipart/form-data">
+  <div class="err-area" style="text-align:center;">
     <p class="err"><?= h($app->getErrors('maker')) ?></p>
     <p class="err"><?= h($app->getErrors('product_name')) ?></p>
+    <p class="err"><?= h($app->getErrors('price')) ?></p>
   </div>
   <table class="create-table">
     <tbody>
@@ -31,7 +32,7 @@ $tags = $getTags->getTagsAll();
           <div class="imgarea">
             <label>
               <div class="imgfile">
-                <img src="./gazou/<?= h($product->image) ?>" alt="">
+              <img src="<?= isset($product->image) ? './gazou/' . $product->image : './asset/img/noimage.jpg' ?>" alt="">
               </div>
               <span class="btn-gray file-btn">
                 画像を選択してください
@@ -66,6 +67,7 @@ $tags = $getTags->getTagsAll();
               <option value="<?= $category->id ?>" <?= $category->id == $product->id ? 'selected' : ''; ?>><?= $category->category_name ?></option>
             <?php endforeach; ?>
           </select>
+          <p class="err"><?= h($app->getErrors('category_id')) ?></p>
         </td>
       </tr>
       <tr>
@@ -133,12 +135,11 @@ $tags = $getTags->getTagsAll();
     </tbody>
   </table>
   <div class="manage-btn-area">
-    <input type="submit" class="btn btn-primary" value="更新">
+    <button onclick="document.getElementById('product_disp_form').submit();" class="btn btn-primary">更新</button>
     <input type="button" class="btn btn-outline-primary" onclick="history.back()" value="戻る">
     <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
     <input type="hidden" name="old_image" value="<?= h($product->image) ?>">
     <input type="hidden" name="id" value="<?= h($product_id) ?>">
-    <!-- <input type="hidden" name="tag_id[]" value=""> -->
     <input type="hidden" name="type" value="productupdate">
   </div>
 </form>

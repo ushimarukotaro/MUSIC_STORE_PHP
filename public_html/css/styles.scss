@@ -395,14 +395,9 @@ textarea {
     padding: 0;
     font-weight: bold;
   }
-  .search-btn {
-    padding: 5px 1rem;
-    border: 2px solid #323232;
-    border-radius: 4px;
-    &:hover {
-      cursor: pointer;
-      background-color: #797979;
-    }
+  .btn.search-btn {
+    width: 50px;
+    margin: 0;
   }
 }
 
@@ -650,6 +645,8 @@ textarea {
   width: 90%;
   margin: 2rem auto;
   border: 2px solid #7c7979;
+  // border-collapse: separate;
+  // border-radius: 10px;
   tr {
     border-bottom: 1px dotted #7c7979;
     td {

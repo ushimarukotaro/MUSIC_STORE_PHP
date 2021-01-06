@@ -46,17 +46,17 @@ $createTag->run();
   </div>
   <form id="search" action="product_manage.php" method="get" class="form-group form-search">
     <div class="form-group">
-      <input type="text" name="keyword" class="form-control" placeholder="　絞り込み" value="<?= isset($searchProductsCon->getValues()->keyword) ? h($searchProductsCon->getValues()->keyword) : ''; ?>">
+      <input type="text" name="keyword" class="form-control" placeholder="絞り込み" value="<?= isset($searchProductsCon->getValues()->keyword) ? h($searchProductsCon->getValues()->keyword) : ''; ?>">
     </div>
-    <p class="err"><?= h($adminCon->getErrors('keyword')); ?></p>
     <div class="form-group">
-      <button type="submit" value="" class="search-btn"><i class="fa fa-search" aria-hidden="true"></i></button>
+      <button type="submit" value="" class="btn btn-secondary search-btn"><i class="fa fa-search" aria-hidden="true"></i></button>
       <input type="hidden" name="type" value="product_search">
     </div>
   </form>
 </div>
+<p class="err" style="text-align:right;margin: 0 3em;"><?= h($searchProductsCon->getErrors('keyword')); ?></p>
 <form action="">
-  <table id="fav-table" class="admin-table table">
+  <table id="fav-table" class="admin-table table table-hover">
     <thead>
       <tr class="table-title" style="background: 4fc0f5cc;">
         <th></th>
@@ -77,7 +77,8 @@ $createTag->run();
           </td>
           <td>
             <label for="pro_id<?= h($product->id); ?>">
-              <img src="./gazou/<?= h($product->image) ?>" alt="">
+              <img src="<?= isset($product->image) ? './gazou/' . $product->image : './asset/img/noimage.jpg' ?>" alt="">
+            
             </label>
           </td>
           <td>

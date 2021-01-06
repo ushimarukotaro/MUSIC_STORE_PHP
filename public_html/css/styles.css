@@ -480,15 +480,9 @@ textarea {
   font-weight: bold;
 }
 
-.form-search .search-btn {
-  padding: 5px 1rem;
-  border: 2px solid #323232;
-  border-radius: 4px;
-}
-
-.form-search .search-btn:hover {
-  cursor: pointer;
-  background-color: #797979;
+.form-search .btn.search-btn {
+  width: 50px;
+  margin: 0;
 }
 
 .mypage-form .form-group {

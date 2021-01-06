@@ -2,10 +2,8 @@
 
 namespace Shop\Controller;
 
-class ProductCreate extends \Shop\Controller
-{
-  public function run()
-  {
+class ProductCreate extends \Shop\Controller {
+  public function run() {
     if ($this->isAdminLoggedIn()) {
       if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $this->postProcess();
@@ -16,8 +14,7 @@ class ProductCreate extends \Shop\Controller
     }
   }
 
-  private function postProcess()
-  {
+  private function postProcess() {
     try {
       $this->validate();
     } catch (\Shop\Exception\EmptyPost $e) {
@@ -56,6 +53,14 @@ class ProductCreate extends \Shop\Controller
           ]);
         } else {
           $pro_img = NULL;
+          $product = $createModel->createProduct([
+            'product_name' => $_POST['product_name'],
+            'maker' => $_POST['maker'],
+            'category_id' => $_POST['category_id'],
+            'price' => $_POST['price'],
+            'details' => $_POST['details'],
+            'image' => $pro_img,
+          ]);
         }
       } catch (\Shop\Exception\DuplicateEmail $e) {
         $this->setErrors('email', $e->getMessage());
@@ -66,16 +71,14 @@ class ProductCreate extends \Shop\Controller
     }
   }
 
-  public function getCategories()
-  {
+  public function getCategories() {
     $categories = new \Shop\Model\Product();
     $res = $categories->getCategories();
     return $res;
   }
 
 
-  private function validate()
-  {
+  private function validate() {
     // $validate = new \Shop\Controller\Validate();
     // $validate->tokenCheck($_POST['token']);
     // if ($validate->emptyCheck($_POST['product_name'])) {

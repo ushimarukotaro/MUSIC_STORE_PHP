@@ -19,7 +19,7 @@ $categories = $app->getCategories();
               <input type="file" name="image" class="form" style="display:none" accept="image/*">
             </span>
             <div class="imgfile">
-              <img src="<?= isset($app->getValues()->image) ? './gazou/' . h($app->getValues()->image) : './asset/img/noimage.png'; ?>" alt="">
+              <img src="<?= isset($app->getValues()->image) ? './gazou/' . h($app->getValues()->image) : './asset/img/noimage.jpg'; ?>" alt="">
             </div>
           </label>
         </div>

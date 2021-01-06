@@ -12,7 +12,7 @@ $products = $searchProductsCon->run();
     <p class="err"><?= h($searchProductsCon->getErrors('keyword')); ?></p>
   </div>
   <div class="form-group">
-    <button type="submit" value="" class="search-btn"><i class="fa fa-search" aria-hidden="true"></i></button>
+    <button type="submit" value="" class="btn btn-secondary search-btn"><i class="fa fa-search" aria-hidden="true"></i></button>
     <input type="hidden" name="type" value="product_search">
   </div>
 </form>

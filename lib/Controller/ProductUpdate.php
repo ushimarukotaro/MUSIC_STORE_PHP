@@ -15,9 +15,9 @@ class ProductUpdate extends \Shop\Controller {
     try {
       $this->validate();
     } catch (\Shop\Exception\EmptyPost $e) {
-      $this->setErrors('product_name', $e->getMessage());
-    } catch (\Shop\Exception\EmptyPost $e) {
       $this->setErrors('maker', $e->getMessage());
+    } catch (\Shop\Exception\EmptyPost $e) {
+      $this->setErrors('product_name', $e->getMessage());
     } catch (\Shop\Exception\UnSelected $e) {
       $this->setErrors('category_id', $e->getMessage());
     } catch (\Shop\Exception\InvalidPrice $e) {
@@ -27,8 +27,8 @@ class ProductUpdate extends \Shop\Controller {
     } catch (\Shop\Exception\InvalidDetails $e) {
       $this->setErrors('details', $e->getMessage());
     }
-    $this->setValues('product_name', $_POST['product_name']);
     $this->setValues('maker', $_POST['maker']);
+    $this->setValues('product_name', $_POST['product_name']);
     $this->setValues('category_id', $_POST['category_id']);
     $this->setValues('price', $_POST['price']);
     $this->setValues('delflag', $_POST['delflag']);
@@ -98,11 +98,6 @@ class ProductUpdate extends \Shop\Controller {
                 ]);
             }
           }
-          // $tags = implode(',', $_POST['tag']);
-          // $createModel->insertTagsForProduct([
-          //   'tags' => $tags,
-          //   'id' => $_POST['id'],
-          //   ]);
             $tagsDate = $_POST['tag'];
             foreach($tagsDate as $tag) {
               $createModel->insertTags([
@@ -133,13 +128,35 @@ class ProductUpdate extends \Shop\Controller {
     }
   }
 
+  public function getCategories() {
+    $categories = new \Shop\Model\Product();
+    $res = $categories->getCategories();
+    return $res;
+  }
+
   private function validate() {
     $validate = new \Shop\Controller\Validate();
     $validate->tokenCheck($_POST['token']);
     // $validate->unauthorizedCheck([$_POST['email'], $_POST['username']]);
-    // if ($validate->emptycheck($_POST['maker'],$_POST['product_name'],$_POST['price'])) {
-    //   throw new \Shop\Exception\EmptyPost("未入力の項目があります!");
+    if ($validate->emptycheck($_POST['maker'],$_POST['product_name'],$_POST['price'])) {
+      throw new \Shop\Exception\EmptyPost("未入力の項目があります!");
+    }
+    // if($_POST['maker'] === '') {
+    //   throw new \Shop\Exception\EmptyPost('メーカーが未入力です');
     // }
-    
+    // if($_POST['product_name'] === '') {
+    //   throw new \Shop\Exception\EmptyPost('商品名が未入力です');
+    // }
+    if(isset($tagsDate)) {
+      $getTags = new Shop\Model\Product();
+      $tagsToProducts = $getTags->getTagsToProduct($_POST['id']);
+      foreach($tagsDate as $tag) {
+        foreach($tagsToProducts as $ttp) {
+          if($tag->id == $ttp->tag_id) {
+            throw new \Shop\Exception\InvalidTags("既に登録済みのタグです！");
+          }
+        }
+      }
+    }
   }
 }
