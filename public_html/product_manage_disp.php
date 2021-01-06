@@ -21,6 +21,7 @@ $tags = $getTags->getTagsAll();
     <p class="err"><?= h($app->getErrors('maker')) ?></p>
     <p class="err"><?= h($app->getErrors('product_name')) ?></p>
     <p class="err"><?= h($app->getErrors('price')) ?></p>
+    <p class="err"><?= h($app->getErrors('tags')) ?></p>
   </div>
   <table class="create-table">
     <tbody>

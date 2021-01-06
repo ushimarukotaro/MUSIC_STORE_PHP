@@ -138,15 +138,18 @@ class ProductUpdate extends \Shop\Controller {
     $validate = new \Shop\Controller\Validate();
     $validate->tokenCheck($_POST['token']);
     // $validate->unauthorizedCheck([$_POST['email'], $_POST['username']]);
-    if ($validate->emptycheck($_POST['maker'],$_POST['product_name'],$_POST['price'])) {
-      throw new \Shop\Exception\EmptyPost("未入力の項目があります!");
+    // if ($validate->emptycheck($_POST['maker'],$_POST['product_name'],$_POST['price'])) {
+    //   throw new \Shop\Exception\EmptyPost("未入力の項目があります!");
+    // }
+    if($_POST['maker'] === '') {
+      throw new \Shop\Exception\EmptyPost('メーカーが未入力です');
     }
-    // if($_POST['maker'] === '') {
-    //   throw new \Shop\Exception\EmptyPost('メーカーが未入力です');
-    // }
-    // if($_POST['product_name'] === '') {
-    //   throw new \Shop\Exception\EmptyPost('商品名が未入力です');
-    // }
+    if($_POST['product_name'] === '') {
+      throw new \Shop\Exception\EmptyPost('商品名が未入力です');
+    }
+    if($_POST['price'] === '') {
+      throw new \Shop\Exception\EmptyPost('値段が未入力です');
+    }
     if(isset($tagsDate)) {
       $getTags = new Shop\Model\Product();
       $tagsToProducts = $getTags->getTagsToProduct($_POST['id']);

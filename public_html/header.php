@@ -51,13 +51,14 @@ require_once(__DIR__ . '/../config/config.php');
               <li><a href="<?= SITE_URL; ?>/mypage.php">
                   <span class="name init-bottom"><?= h($_SESSION['me']->username); ?></span></a>
                 <ul class="prof-dropdown">
+                  <li><a href="<?= SITE_URL; ?>/mypage.php" class="name">マイページ</a>
                   <li><a href="<?= SITE_URL; ?>/product_favorite.php" class="name">欲しい物リスト</a></li>
                   <li class="cart-icon"><a href="<?= SITE_URL; ?>/cart_list.php" class="name cart__num">カート<i class="fas fa-shopping-cart"></i></a><span class="count-cart <?= !isset($_SESSION['cart']) ? 'not_display' : ''; ?>"><?= isset($_SESSION['cart']) ? count($_SESSION['cart']) : ''; ?></span></li>
                   <li><a href="<?= SITE_URL ?>/purchase_history.php" class="name">購入履歴</a></li>
                   <form action="logout.php" method="post" id="logout">
                     <li><label>
                         <span class="name">ログアウト</span>
-                        <input type="submit" value="" style="display: none;">
+                        <input type="submit" style="display: none;">
                       </label>
                     </li>
                     <?php if ($_SESSION['me']->authority === '99') : ?>
