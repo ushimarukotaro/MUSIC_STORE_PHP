@@ -29,7 +29,7 @@ $products = $searchProductsCon->run();
         <li>
           <div class="imgarea allimgarea">
             <span class="category_name"><?= h($product->category_name) ?></span>
-            <a href="<?= SITE_URL ?>/product_disp.php?id=<?= h($product->id) ?>" class="item" onclick="document.getElementById('product_disp').submit"><img src="./gazou/<?= $product->image ?>"></a>
+            <a href="<?= SITE_URL ?>/product_disp.php?id=<?= h($product->p_id) ?>" class="item" onclick="document.getElementById('product_disp').submit"><img src="./gazou/<?= $product->image ?>"></a>
           </div>
           <div class="details">
             <div><span class="pro_maker"><?= h($product->maker) ?></span></div>
