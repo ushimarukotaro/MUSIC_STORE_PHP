@@ -271,7 +271,6 @@ textarea {
   border: 2px solid #7c7979;
   border-radius: 8px;
   width: 15%;
-  height: 60%;
   position: fixed;
   text-align: center;
   margin: 14px;
@@ -301,6 +300,10 @@ textarea {
 
 .nav-left .left_ul li:first-child {
   margin-top: 10px;
+}
+
+.nav-left .left_ul li:last-child {
+  margin-bottom: 10px;
 }
 
 .wrapper {
