@@ -9,7 +9,7 @@ function h($s){
 function urlFilter() {
   $current_uri =  $_SERVER["REQUEST_URI"];
   $file_name = basename($current_uri);
-  if(strpos($file_name,'login.php') !== false || strpos($file_name,'signup.php') !== false || strpos($file_name,'index.php') !== false || strpos($file_name,'public_html') !== false) {
+  if(strpos($file_name,'login.php') !== false || strpos($file_name,'signup.php') !== false || strpos($file_name,'index.php') !== false || strpos($file_name,'public_html') !== false || strpos($file_name,'index.php') !== false || strpos($file_name,'product_all.php') !== false) {
     // URL内のファイル名がlogin.php、signup.php、index.php(public_html)のとき
   }
   else {

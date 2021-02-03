@@ -17,8 +17,8 @@ $histories = $showHistories->getHistories($_SESSION['me']->id);
         <th class="purchase-day t_head" colspan="3">
           <div style="display:flex; justify-content: space-between">
             <div>
-              <span>購入日：<?= h(substr($history->h_created, 0, 11)) ?></span>
-              <span>　　購入数：<?= h($history->h_id) ?>点</span>
+              <span>購入日：<?= h(substr($history->g_created, 0, 11)) ?></span>
+              <span>　　購入数：<?= h($history->count_id) ?>点</span>
               <!-- <span class="total_price">　　合計金額：¥</span> -->
             </div>
             <div>
@@ -36,7 +36,7 @@ $histories = $showHistories->getHistories($_SESSION['me']->id);
         </th>
       </tr>
       <?php foreach ($products as $product) : ?>
-        <?php if ($history->h_created == $product->h_created) : ?>
+        <?php if ($history->g_created == $product->h_created) : ?>
           <tr>
             <td class="img-area">
               <form id="product_disp" method="get">

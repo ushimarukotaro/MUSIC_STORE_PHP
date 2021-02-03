@@ -195,7 +195,8 @@ class Product extends \Shop\Model {
 
   //購入履歴数と日付取得
   public function getHistories() {
-    $stmt = $this->db->prepare("SELECT COUNT(h.id) AS h_id,h.id AS ID,h.created AS h_created,num FROM histories AS h WHERE h.user_id = :id GROUP BY h.created ORDER BY h.created DESC LIMIT 20");
+    // $stmt = $this->db->prepare("SELECT COUNT(h.id) AS h_id,h.id AS ID,h.created AS h_created,num FROM histories AS h WHERE h.user_id = :id GROUP BY h.created ORDER BY h.created DESC LIMIT 20");
+    $stmt = $this->db->prepare("SELECT * FROM (SELECT COUNT(id) AS count_id,created AS g_created FROM histories WHERE user_id = :id GROUP BY created) AS s1 ORDER BY g_created DESC LIMIT 20");
     $stmt->execute([
       ':id' => $_SESSION['me']->id,
     ]);

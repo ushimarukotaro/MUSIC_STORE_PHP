@@ -6,6 +6,6 @@
   require_once(__DIR__ .'/../lib/Controller/functions.php');
   require_once(__DIR__ . '/autoload.php');
   session_start();
-  // urlFilter();
+  urlFilter();
 
 
