@@ -563,12 +563,12 @@ textarea {
   position: absolute;
   top: 2px;
   left: 2px;
-  font-size: 2px;
+  font-size: 12px;
   font-weight: bold;
   color: #fff;
   text-align: center;
   line-height: 40px;
-  width: 80px;
+  width: 100px;
   height: 40px;
   background-color: #007bffe8;
   border-radius: 40px;

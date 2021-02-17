@@ -45,7 +45,6 @@ if (isset($_GET['i_sort'])) {
         <div><span class="pro_price">¥<?= h(number_format($product->price)) ?>(税抜き)</span></div>
         <div><span class="pro_price_taxin">¥<?= h(number_format(floor($product->price * 1.10))) ?>(税込み)</span></div>
       </div>
-      <input type="hidden" name="id">
     </li>
     <?php endforeach; ?>
   </ul>

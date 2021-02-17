@@ -55,7 +55,7 @@ $createTag->run();
   </form>
 </div>
 <p class="err" style="text-align:right;margin: 0 3em;"><?= h($searchProductsCon->getErrors('keyword')); ?></p>
-<form action="">
+<form action="product_manage_disp.php">
   <table id="fav-table" class="admin-table table table-hover">
     <thead>
       <tr class="table-title" style="background: 4fc0f5cc;">
@@ -107,11 +107,10 @@ $createTag->run();
     </tbody>
   </table>
   <p class="err"></p>
-  <input type="submit" formaction="product_manage_disp.php" name="update" value="編集" class="btn btn-primary">
+  <button type="submit" name="update" class="btn btn-primary">更新</button>
   <input type="submit" formaction="product_delete_confirm.php" name="delete" value="削除" class="btn btn-danger">
   <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
-  <input type="hidden" name="id" value="<?= h($_product->id); ?>">
-  <input type="hidden" name="category_id" value="<?= h($_product->category_id); ?>">
+
 </form>
 
 <?php

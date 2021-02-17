@@ -2,16 +2,24 @@
 
 namespace Shop\Controller;
 
-class ProductUpdate extends \Shop\Controller {
-  public function run() {
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['type'] === 'productupdate') {
-      $this->updateProduct();
-    } elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['type'] === 'imgdelete') {
-      $this->imgDelete();
+class ProductUpdate extends \Shop\Controller
+{
+  public function run()
+  {
+    if ($this->isAdminLoggedIn()) {
+      if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['type'] === 'productupdate') {
+        $this->updateProduct();
+      } elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['type'] === 'imgdelete') {
+        $this->imgDelete();
+      }
+    } else {
+      header('Location: ' . SITE_URL . '/product_all.php');
+      exit();
     }
   }
 
-  protected function updateProduct() {
+  protected function updateProduct()
+  {
     try {
       $this->validate();
     } catch (\Shop\Exception\EmptyPost $e) {
@@ -61,22 +69,22 @@ class ProductUpdate extends \Shop\Controller {
             'id' => $_POST['id']
           ]);
           $pro_img = $pro_img['name'];
-          if(isset($_POST['tag_delete'])) {
+          if (isset($_POST['tag_delete'])) {
             $tag_delete = $_POST['tag_delete'];
-            foreach($tag_delete as $val) {
+            foreach ($tag_delete as $val) {
               $createModel->deleteTags([
                 'tag_id' => $val['tag_id'],
                 'product_id' => $_POST['id'],
-                ]);
+              ]);
             }
           }
           $tagsDate = $_POST['tag'];
-            foreach($tagsDate as $tag) {
-              $createModel->insertTags([
-                'tag_id' => $tag,
-                'product_id' => $_POST['id'],
-                ]);
-            }
+          foreach ($tagsDate as $tag) {
+            $createModel->insertTags([
+              'tag_id' => $tag,
+              'product_id' => $_POST['id'],
+            ]);
+          }
         } else {
           $createModel->updatePro([
             'product_name' => $_POST['product_name'],
@@ -89,22 +97,22 @@ class ProductUpdate extends \Shop\Controller {
             'id' => $_POST['id']
           ]);
           $pro_img = $old_img;
-          if(isset($_POST['tag_delete'])) {
+          if (isset($_POST['tag_delete'])) {
             $tag_delete = $_POST['tag_delete'];
-            foreach($tag_delete as $val) {
+            foreach ($tag_delete as $val) {
               $createModel->deleteTags([
                 'tag_id' => $val['tag_id'],
                 'product_id' => $_POST['id'],
-                ]);
+              ]);
             }
           }
-            $tagsDate = $_POST['tag'];
-            foreach($tagsDate as $tag) {
-              $createModel->insertTags([
-                'tag_id' => $tag,
-                'product_id' => $_POST['id'],
-                ]);
-            }
+          $tagsDate = $_POST['tag'];
+          foreach ($tagsDate as $tag) {
+            $createModel->insertTags([
+              'tag_id' => $tag,
+              'product_id' => $_POST['id'],
+            ]);
+          }
         }
       } catch (\Shop\Exception\DuplicateEmail $e) {
         $this->setErrors('email', $e->getMessage());
@@ -115,7 +123,8 @@ class ProductUpdate extends \Shop\Controller {
     exit();
   }
 
-  protected function imgDelete() {
+  protected function imgDelete()
+  {
     $pro_img = $_FILES['image'];
     $old_img = $_POST['old_image'];
     if ($old_img !== '') {
@@ -128,34 +137,36 @@ class ProductUpdate extends \Shop\Controller {
     }
   }
 
-  public function getCategories() {
+  public function getCategories()
+  {
     $categories = new \Shop\Model\Product();
     $res = $categories->getCategories();
     return $res;
   }
 
-  private function validate() {
+  private function validate()
+  {
     $validate = new \Shop\Controller\Validate();
     $validate->tokenCheck($_POST['token']);
     // $validate->unauthorizedCheck([$_POST['email'], $_POST['username']]);
     // if ($validate->emptycheck($_POST['maker'],$_POST['product_name'],$_POST['price'])) {
     //   throw new \Shop\Exception\EmptyPost("未入力の項目があります!");
     // }
-    if($_POST['maker'] === '') {
+    if ($_POST['maker'] === '') {
       throw new \Shop\Exception\EmptyPost('メーカーが未入力です');
     }
-    if($_POST['product_name'] === '') {
+    if ($_POST['product_name'] === '') {
       throw new \Shop\Exception\EmptyPost('商品名が未入力です');
     }
-    if($_POST['price'] === '') {
+    if ($_POST['price'] === '') {
       throw new \Shop\Exception\EmptyPost('値段が未入力です');
     }
-    if(isset($tagsDate)) {
+    if (isset($tagsDate)) {
       $getTags = new Shop\Model\Product();
       $tagsToProducts = $getTags->getTagsToProduct($_POST['id']);
-      foreach($tagsDate as $tag) {
-        foreach($tagsToProducts as $ttp) {
-          if($tag->id == $ttp->tag_id) {
+      foreach ($tagsDate as $tag) {
+        foreach ($tagsToProducts as $ttp) {
+          if ($tag->id == $ttp->tag_id) {
             throw new \Shop\Exception\InvalidTags("既に登録済みのタグです！");
           }
         }

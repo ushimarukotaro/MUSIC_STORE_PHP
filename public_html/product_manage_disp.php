@@ -81,7 +81,7 @@ $tags = $getTags->getTagsAll();
       </tr>
       <tr>
         <th>
-          削除フラグ
+          表示切り替え
         </th>
         <td>
           <select class="select form-control" name="delflag">
@@ -137,7 +137,8 @@ $tags = $getTags->getTagsAll();
   </table>
   <div class="manage-btn-area">
     <button onclick="document.getElementById('product_disp_form').submit();" class="btn btn-primary">更新</button>
-    <input type="button" class="btn btn-outline-primary" onclick="history.back()" value="戻る">
+    <!-- <input type="button" class="btn btn-outline-primary" onclick="history.back()" value="戻る"> -->
+    <a href="product_manage.php" class="btn btn-outline-primary">戻る</a>
     <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
     <input type="hidden" name="old_image" value="<?= h($product->image) ?>">
     <input type="hidden" name="id" value="<?= h($product_id) ?>">

@@ -9,7 +9,7 @@ class ProductCreate extends \Shop\Controller {
         $this->postProcess();
       }
     } else {
-      header('Location: ' . SITE_URL . '/product_create.php');
+      header('Location: ' . SITE_URL . '/product_all.php');
       exit();
     }
   }
